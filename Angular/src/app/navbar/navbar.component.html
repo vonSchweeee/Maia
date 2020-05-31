@@ -1,0 +1,15 @@
+<mat-toolbar color="accent" class="navbar-maia">
+  <mat-toolbar-row>
+    <button mat-icon-button class="btn-menu">
+      <mat-icon class="disable-select">menu</mat-icon>
+    </button>
+    <h1>Maia</h1>
+    <div style="flex: 1;"></div>
+    <div>
+      <a mat-button [routerLink]="['/feed']" routerLinkActive="active"> Feed </a>
+      <a mat-button [routerLink]="['/letras']"> Letras </a>
+      <a mat-button [routerLink]="['/partituras']"> Partituras </a>
+      <a mat-button [routerLink]="['/tabs']"> Tablaturas </a>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

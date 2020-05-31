@@ -279,3 +279,5 @@ Thumbs.db
 
 #Yarn
 yarn.lock
+
+appsettings.Development.json

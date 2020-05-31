@@ -1,0 +1,30 @@
+.card-post {
+  min-width: 150px;
+  max-width: 650px;
+  min-height: 375px;
+  width: 90%;
+}
+
+.col-bs {
+  justify-content: center;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid #0008;
+}
+
+hr {
+  margin-bottom: 0;
+}
+
+.fab {
+  margin-left: 8px;
+}
+
+.btn-heart {
+  color: '#D21'
+}

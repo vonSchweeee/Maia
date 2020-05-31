@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Maia.Models
 {
@@ -18,8 +19,13 @@ namespace Maia.Models
         [Required]
         [MinLength(6)]
         [DataType(DataType.Password)]
+        [JsonIgnore]
         public string Senha { get; set; }
 
+        [JsonIgnore]
+        [Range(typeof(string), "adm", "user")]
+        public string Role { get; set; }
+        
         public string UrlImagem { get; set; }
     }
 }
