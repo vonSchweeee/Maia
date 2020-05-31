@@ -10,6 +10,6 @@ namespace Maia.Models
         public bool Single { get; set; }
         public DateTime DataLanc { get; set; }
         public int ArtistaId { get; set; }
-        public int AlbumId { get; set; }
+        public int? AlbumId { get; set; }
     }
 }

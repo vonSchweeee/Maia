@@ -28,3 +28,38 @@ hr {
 .btn-heart {
   color: '#D21'
 }
+
+.left-content {
+  float: left;
+  margin-left: 3px;
+}
+
+.datetime {
+  font-size: 11px;
+}
+
+
+.post-info {
+  padding-top: 3px;
+}
+
+.mat-card-subtitle {
+  margin-bottom: 3px;
+}
+
+.mat-card-title {
+  margin-bottom: 0;
+}
+
+.username {
+  color: #000;
+  font-weight: bold;
+}
+
+h6 {
+  margin: 0 0 6px;
+}
+
+.mat-mini-fab {
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.1), 0px 5px 8px 0px rgba(0, 0, 0, 0.1), 0px 1px 9px 0px rgba(0, 0, 0, 0.1);
+}

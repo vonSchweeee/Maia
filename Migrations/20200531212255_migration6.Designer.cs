@@ -3,14 +3,16 @@ using System;
 using Maia.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Maia.Migrations
 {
     [DbContext(typeof(MaiaContext))]
-    partial class MaiaContextModelSnapshot : ModelSnapshot
+    [Migration("20200531212255_migration6")]
+    partial class migration6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,8 +74,6 @@ namespace Maia.Migrations
 
                     b.HasIndex("PostId");
 
-                    b.HasIndex("UsuarioId");
-
                     b.ToTable("Comentarios");
                 });
 
@@ -125,9 +125,6 @@ namespace Maia.Migrations
                     b.Property<DateTime>("DataPub")
                         .HasColumnType("datetime");
 
-                    b.Property<long?>("MusicaId")
-                        .HasColumnType("bigint");
-
                     b.Property<string>("Tags")
                         .HasColumnType("text");
 
@@ -138,10 +135,6 @@ namespace Maia.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("PostId");
-
-                    b.HasIndex("AlbumId");
-
-                    b.HasIndex("MusicaId");
 
                     b.HasIndex("UsuarioId");
 
@@ -166,8 +159,6 @@ namespace Maia.Migrations
                     b.HasKey("RespostaId");
 
                     b.HasIndex("ComentarioId");
-
-                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Respostas");
                 });
@@ -203,7 +194,7 @@ namespace Maia.Migrations
 
             modelBuilder.Entity("Maia.Models.Album", b =>
                 {
-                    b.HasOne("Maia.Models.Artista", "Artista")
+                    b.HasOne("Maia.Models.Artista", null)
                         .WithMany("Albuns")
                         .HasForeignKey("ArtistaId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -212,15 +203,9 @@ namespace Maia.Migrations
 
             modelBuilder.Entity("Maia.Models.Comentario", b =>
                 {
-                    b.HasOne("Maia.Models.Post", "Post")
+                    b.HasOne("Maia.Models.Post", null)
                         .WithMany("Comentarios")
                         .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Maia.Models.Usuario", "Usuario")
-                        .WithMany()
-                        .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -240,14 +225,6 @@ namespace Maia.Migrations
 
             modelBuilder.Entity("Maia.Models.Post", b =>
                 {
-                    b.HasOne("Maia.Models.Album", "Album")
-                        .WithMany()
-                        .HasForeignKey("AlbumId");
-
-                    b.HasOne("Maia.Models.Musica", "Musica")
-                        .WithMany()
-                        .HasForeignKey("MusicaId");
-
                     b.HasOne("Maia.Models.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
@@ -257,15 +234,9 @@ namespace Maia.Migrations
 
             modelBuilder.Entity("Maia.Models.Resposta", b =>
                 {
-                    b.HasOne("Maia.Models.Comentario", "Comentario")
+                    b.HasOne("Maia.Models.Comentario", null)
                         .WithMany("Respostas")
                         .HasForeignKey("ComentarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Maia.Models.Usuario", "Usuario")
-                        .WithMany()
-                        .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
