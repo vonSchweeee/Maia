@@ -1,8 +1,11 @@
 .card-post {
   min-width: 150px;
   max-width: 650px;
-  min-height: 375px;
+  min-height: 100px;
+  max-height: 600px;
+  height: 100%;
   width: 90%;
+  margin-bottom: 22px;
 }
 
 .col-bs {
@@ -19,6 +22,7 @@
 
 hr {
   margin-bottom: 0;
+  float: left;
 }
 
 .fab {
@@ -36,6 +40,11 @@ hr {
 
 .datetime {
   font-size: 11px;
+}
+
+.mat-card-content {
+  margin-bottom: 9px;
+  margin-top: 3px;
 }
 
 

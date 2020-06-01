@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -13,6 +13,7 @@ import { LoginComponent } from './login/login.component';
 import { MaterialModule } from './material.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RegistroComponent } from './registro/registro.component';
+import { AuthInterceptorService } from './shared/auth/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { RegistroComponent } from './registro/registro.component';
     BrowserAnimationsModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

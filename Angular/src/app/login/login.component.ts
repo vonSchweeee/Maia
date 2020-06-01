@@ -22,6 +22,7 @@ export class LoginComponent implements AfterViewInit {
 
   onLogin(form: NgForm) {
     const {email, senha} = form.value;
+    console.log(form.value);
     this.authService.login(email, senha).subscribe();
   }
 

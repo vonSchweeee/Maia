@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import moment from 'moment';
+
+import { Post } from '../post.model';
 
 @Component({
   selector: 'app-post',
@@ -9,6 +11,7 @@ import moment from 'moment';
 export class PostComponent implements OnInit {
 
   dataPost = moment().format('HH:mm');
+  @Input() post: Post;
 
   constructor() { }
 

@@ -76,6 +76,7 @@ export class AuthService {
     //     errorMessage = 'This password is not correct.';
     //     break;
     // }
+    console.log(error);
     return throwError('Um erro ocorreu.');
   }
 

@@ -1,4 +1,4 @@
-namespace Maia.Models
+namespace Maia.Models.DTO
 {
     public class UsuarioDTO
     {

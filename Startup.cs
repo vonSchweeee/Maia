@@ -29,7 +29,9 @@ namespace Maia
             services.AddDbContext<MaiaContext>(opt => opt.UseMySQL(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<MaiaContext, MaiaContext>();
             services.AddCors();
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddJsonOptions(options => {
+                options.JsonSerializerOptions.IgnoreNullValues = true;
+            });
 
             var key = Encoding.ASCII.GetBytes(Configuration.GetSection("Jwt").GetValue<string>("Key"));
             services.AddAuthentication(x => 
@@ -80,10 +82,14 @@ namespace Maia
             {
                 app.UseSpaStaticFiles();
             }
+
             
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseRouting();
+            
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
