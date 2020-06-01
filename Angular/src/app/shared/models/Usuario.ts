@@ -1,9 +1,24 @@
 export class Usuario {
+  private _token: string;
+  private _tokenExp: Date;
   constructor(
     public email: string,
     public nome: string,
-    public senha: string,
     public urlImagem?: string,
-    public usuarioId?: number,
+    public usuarioId?: number
     ) { }
+
+  set token(jwt: string) {
+    this._token = jwt;
+    const tokenInfo = JSON.parse(atob(jwt.split('.')[1]));
+    this._tokenExp = new Date(+tokenInfo.exp * 1000);
+    console.log(this._token, this._tokenExp);
+  }
+
+  get token() {
+    if (new Date() > this._tokenExp) {
+      return null;
+    }
+    return this._token;
+  }
 }

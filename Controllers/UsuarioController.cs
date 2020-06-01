@@ -11,7 +11,6 @@ using Microsoft.EntityFrameworkCore;
 namespace Maia.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
     public class UsuarioController : ControllerBase
     {
         private readonly ITokenService _tokenService;
@@ -22,7 +21,7 @@ namespace Maia.Controllers
         }
 
         [HttpGet]
-        [Route("")]
+        [Route("usuario")]
         public async Task<ActionResult<List<Usuario>>> Get([FromServices] MaiaContext context)
         {
             return await context.Usuarios.ToListAsync();

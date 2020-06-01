@@ -1,7 +1,12 @@
 .material-card {
-  height: 98%;
-  width: 97%;
+  height: 100%;
+  width: 85%;
+  background-color: #FAFAFA;
+  margin-top: 8px;
+  float: right;
 }
+
+
 
 .logo {
   width: 40%;
@@ -42,5 +47,34 @@
 }
 
 .content {
-  background-color: #FF07;
+  background-color: #D9C100;
+}
+
+.row {
+  justify-content: flex-end;
+  min-height: 98vh;
+}
+
+.container {
+  justify-content: flex-end;
+}
+
+.form-divider {
+  min-height: 2%;
+}
+
+@media (min-width: 1200px) and (max-width: 1360px) {
+  .material-card {
+    width: 100%;
+  }
+}
+
+@media (max-width: 650px) {
+  .material-card {
+    height: 100%;
+    width: 100%;
+    background-color: #FAFAFA;
+    margin-bottom: 2px;
+    float: initial;
+  }
 }

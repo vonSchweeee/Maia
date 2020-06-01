@@ -10,6 +10,18 @@
       <a mat-button [routerLink]="['/letras']"> Letras </a>
       <a mat-button [routerLink]="['/partituras']"> Partituras </a>
       <a mat-button [routerLink]="['/tabs']"> Tablaturas </a>
+      <button type="button" mat-icon-button *ngIf="! usuario.urlImagem" class="btn-usuario" [matMenuTriggerFor]="userMenu">
+        <mat-icon class="user-icon">person</mat-icon>
+      </button>
+      <button type="button" mat-icon-button *ngIf="usuario.urlImagem" class="btn-usuario" [matMenuTriggerFor]="userMenu">
+        <img [src]="usuario.urlImagem" class="user-avatar">
+      </button>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
+
+
+<mat-menu #userMenu="matMenu">
+  <p disabled>{{ usuario.nome }}</p>
+  <button mat-menu-item type="button" (click)="onLogout()">Sair</button>
+</mat-menu>

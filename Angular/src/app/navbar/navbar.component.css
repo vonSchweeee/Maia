@@ -1,5 +1,5 @@
 .active {
-  background-color: #0002;
+  background-color: #0003;
 }
 
 .navbar-maia {
@@ -10,4 +10,23 @@
 
 .btn-menu {
   margin-right: 10px;
+}
+
+.btn-usuario {
+  border: 0.8px solid #0006;
+}
+
+.user-icon {
+  font-size: 30px;
+  margin-right: 7px;
+  margin-bottom: 4px;
+}
+
+.user-avatar {
+  border-radius: 50%;
+  object-fit: cover;
+  max-height: 40px;
+  max-width: 40px;
+  margin-bottom: 2px;
+  margin-right: 2px;
 }

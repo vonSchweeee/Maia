@@ -14,7 +14,7 @@ namespace Maia.Models
         public int UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
         public long? MusicaId { get; set; }
-        public Musica? Musica { get; set;}
+        public Musica Musica { get; set;}
         public int? AlbumId { get; set;}
         public Album Album { get; set; }
         public List<Comentario> Comentarios { get; set;}
