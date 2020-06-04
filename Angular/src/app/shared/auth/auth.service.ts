@@ -30,7 +30,7 @@ export class AuthService {
   login(email: string, senha: string) {
     return this.http.post<ILoginResponse>(baseUrl + 'login', {email, senha})
       .pipe(catchError(this.handleError),
-      tap(res => this.handleAuthentication(res)));
+      tap(res => this.handleAuthentication(res, false)));
   }
 
   autoLogin() {
@@ -53,9 +53,9 @@ export class AuthService {
   }
 
   logout() {
-    console.log('saiu');
     this.usuarioSubj.next(null);
     this._usuario = null;
+    localStorage.removeItem('usuario');
     this.router.navigate(['/login']);
   }
 
@@ -80,22 +80,30 @@ export class AuthService {
     return throwError('Um erro ocorreu.');
   }
 
-  private handleAuthentication(response: ILoginResponse) {
+  private handleAuthentication(response: ILoginResponse, redirect: boolean) {
     const {usuarioId, email, nome, urlImagem} = response.usuario;
     const token = response.token;
     const usuario = new Usuario(email, nome, urlImagem, usuarioId);
     usuario.token = token;
     this.usuarioSubj.next(usuario);
     localStorage.setItem('usuario', JSON.stringify(usuario));
-    this.router.navigate(['/feed']);
+    if (redirect) {
+      this.router.navigate(['/feed']);
+    }
   }
 
   get usuario() {
-    return new Usuario(
-      this._usuario.email,
-      this._usuario.nome,
-      this._usuario.urlImagem,
-    );
+
+    if (this._usuario) {
+      return new Usuario(
+        this._usuario.email,
+        this._usuario.nome,
+        this._usuario.urlImagem,
+      );
+    }
+    else {
+      return null;
+    }
   }
 
 }

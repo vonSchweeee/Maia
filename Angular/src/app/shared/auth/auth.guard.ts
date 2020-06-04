@@ -17,11 +17,13 @@ export class AuthGuard implements CanActivate {
       if (isAuth) {
         console.log('tem usuario hmmm');
         if (route.url[0].path === 'login') {
+          console.log('redirect pro feed');
           return this.router.createUrlTree(['/feed']);
         }
         return isAuth;
       }
       if (route.url[0].path !== 'login') {
+        console.log('redirect pro login');
         return this.router.createUrlTree(['/login']);
       }
       return true;

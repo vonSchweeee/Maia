@@ -1,11 +1,16 @@
 <mat-toolbar color="accent" class="navbar-maia">
   <mat-toolbar-row>
-    <button mat-icon-button class="btn-menu">
+    <button mat-icon-button class="btn-menu" *ngIf="mobileView">
       <mat-icon class="disable-select">menu</mat-icon>
     </button>
     <h1>Maia</h1>
     <div style="flex: 1;"></div>
-    <div>
+    <input class="input-pesquisa" #inputPesquisa *ngIf="searching"
+      placeholder="Insira uma #tag ou procure por um usuário." [(ngModel)]="pesquisa"/>
+    <button type="button" mat-icon-button aria-label="search" (click)="onSearch()">
+      <mat-icon>search</mat-icon>
+    </button>
+    <div *ngIf="! mobileView">
       <a mat-button [routerLink]="['/feed']" routerLinkActive="active"> Feed </a>
       <a mat-button [routerLink]="['/letras']"> Letras </a>
       <a mat-button [routerLink]="['/partituras']"> Partituras </a>
@@ -22,6 +27,6 @@
 
 
 <mat-menu #userMenu="matMenu">
-  <p disabled>{{ usuario.nome }}</p>
-  <button mat-menu-item type="button" (click)="onLogout()">Sair</button>
+  <button mat-menu-item type="button" disabled> {{ usuario.nome }}</button>
+  <button mat-menu-item type="button" (click)="onLogout()" tabindex="-1">Sair</button>
 </mat-menu>

@@ -12,10 +12,8 @@ export class AuthInterceptorService implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     return this.authService.usuarioSubj.pipe(take(1), exhaustMap(usuario => {
       if (! usuario) {
-        console.log('no user');
         return next.handle(req);
       }
-      console.log('interceptado');
       const modifiedRequest = req.clone({headers: new HttpHeaders().append('Authorization', 'Bearer ' + usuario.token)});
       return next.handle(modifiedRequest);
     }));

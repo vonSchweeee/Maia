@@ -63,6 +63,12 @@
   min-height: 2%;
 }
 
+.mat-progress-spinner {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+}
+
 @media (min-width: 1200px) and (max-width: 1360px) {
   .material-card {
     width: 100%;

@@ -12,7 +12,6 @@ export class Usuario {
     this._token = jwt;
     const tokenInfo = JSON.parse(atob(jwt.split('.')[1]));
     this._tokenExp = new Date(+tokenInfo.exp * 1000);
-    console.log(this._token, this._tokenExp);
   }
 
   get token() {

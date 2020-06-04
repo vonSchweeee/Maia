@@ -1,3 +1,10 @@
+h1 {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
 .active {
   background-color: #0003;
 }
@@ -29,4 +36,14 @@
   max-width: 40px;
   margin-bottom: 2px;
   margin-right: 2px;
+}
+
+.input-pesquisa {
+  border-radius: 15px;
+  border: none;
+  margin-top: 3px;
+  max-width: 500px;
+  min-width: 80px;
+  width: 70%;
+  padding-left: 10px;
 }

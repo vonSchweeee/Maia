@@ -20,9 +20,10 @@
             <div style="display: flex; flex-direction: row;">
               <div style="flex: 1;"></div>
               <!-- <button mat-raised-button color="accent" class="disable-select signin-button">Entrar</button> -->
-              <button type="submit" mat-raised-button color="accent" class="disable-select signin-button">Entrar</button>
+              <button type="submit" mat-raised-button color="accent" class="disable-select signin-button" [disabled]="loading">Entrar</button>
               <div style="flex: 1;"></div>
             </div>
+            <mat-spinner *ngIf="loading" [color]="'accent'" [diameter]="60"></mat-spinner>
           </form>
         </div>
       </mat-card>

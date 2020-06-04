@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { FeedService } from './feed.service';
@@ -9,14 +9,14 @@ import { Post } from './post.model';
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.css']
 })
-export class FeedComponent implements OnInit, OnDestroy {
+export class FeedComponent implements AfterViewInit, OnDestroy {
 
   constructor(private feedService: FeedService) { }
 
   posts: Post[];
   postsSub: Subscription;
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.feedService.postsSubj.subscribe(posts => this.posts = posts);
     this.feedService.fetchPosts();
   }
