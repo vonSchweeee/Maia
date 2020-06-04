@@ -13,12 +13,12 @@ using Microsoft.EntityFrameworkCore;
 namespace Maia.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("[controller]s")]
     public class PostController : ControllerBase
     {
 
         [HttpGet]
-        [Route("{PostId}")]
+        [Route("id/{PostId}")]
         [AllowAnonymous]
         public async Task<ActionResult<Post>> Get([FromRoute] int PostId, [FromServices] MaiaContext context)
         {
@@ -45,7 +45,7 @@ namespace Maia.Controllers
                 context.Add(post);
                 if(await context.SaveChangesAsync() > 0)
                 {
-                    return Created($"/post/{post.PostId}", post);
+                    return Created($"/posts/{post.PostId}", post);
                 }
             }
             catch(Exception)
@@ -67,6 +67,22 @@ namespace Maia.Controllers
             try
             {
                 return await context.Posts.Where(p => p.UsuarioId == UsuarioId).ToListAsync();
+            }
+            catch(Exception)
+            {
+                return this.StatusCode(
+                    StatusCodes.Status500InternalServerError, "Falha no banco de dados"
+                );
+            }
+        }
+
+        [HttpGet]
+        [Route("tag/{tag}")]
+        public async Task<ActionResult<List<Post>>> GetByTag([FromRoute] string tag, [FromServices] MaiaContext context)
+        {
+            try
+            {
+                return await context.Posts.FromSqlRaw($"SELECT * FROM maia.posts WHERE FIND_IN_SET('{tag}', Tags)").ToListAsync();
             }
             catch(Exception)
             {

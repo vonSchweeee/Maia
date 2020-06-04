@@ -21,8 +21,8 @@ namespace Maia.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            var separator = new []{';'};
-            var valueConverter = new ValueConverter<List<string>, string>(v => string.Join(';', v), v => v.Split(separator).ToList());
+            var separator = new []{','};
+            var valueConverter = new ValueConverter<List<string>, string>(v => string.Join(',', v), v => v.Split(separator).ToList());
             modelBuilder.Entity<Post>().Property(nameof(Post.Tags)).HasConversion(valueConverter);
         }
         
