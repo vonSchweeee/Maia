@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 import { baseUrl } from '../shared/settings/settings';
 import { Post } from './post.model';
@@ -10,22 +11,34 @@ import { Post } from './post.model';
 })
 export class FeedService {
 
-  postsSubj = new Subject<Post[]>();
+  postsSubj = new BehaviorSubject<Post[]>(null);
 
   constructor(private http: HttpClient) { }
 
   fetchPosts() {
-    this.http.get<Post[]>(baseUrl + 'posts/all').subscribe(posts => {
-      this.postsSubj.next(posts);
-    }, error => console.log(error));
+    return this.http.get<Post[]>(baseUrl + 'posts/all')
+      .pipe(tap(posts => {
+        this.postsSubj.next(posts);
+      }));
   }
 
-  fetchPost(id: number) {
-    return this.http.get<Post>(baseUrl + `posts/id/${id}`);
+  fetchPost(postId: number): Observable<Post> {
+    return this.http.get<Post>(baseUrl + `posts/id/${postId}`);
   }
 
   fetchPostsByTag(tag: string) {
-    console.log(baseUrl + `posts/tag/${tag}`);
     return this.http.get<Post[]>(baseUrl + `posts/tag/${tag}`);
+  }
+
+  makePost(post: Post) {
+    return this.http.post<Post>(baseUrl + `posts`, post);
+  }
+
+  deletePost(postId: number) {
+    console.log(baseUrl + `posts/id/${postId}`);
+    return this.http.delete<void>(baseUrl + `posts/id/${postId}`)
+      .pipe(tap(() => {
+        this.postsSubj.next(this.postsSubj.value.filter(post => post.postId !== postId));
+      }));
   }
 }

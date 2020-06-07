@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Maia.Data;
 using Maia.Models;
@@ -18,13 +19,13 @@ namespace Maia.Controllers
     {
 
         [HttpGet]
-        [Route("id/{PostId}")]
+        [Route("id/{postId}")]
         [AllowAnonymous]
-        public async Task<ActionResult<Post>> Get([FromRoute] int PostId, [FromServices] MaiaContext context)
+        public async Task<ActionResult<Post>> Get([FromRoute] int postId, [FromServices] MaiaContext context)
         {
             try
             {
-                return await context.Posts.Include(p => p.Usuario).Where(p => p.PostId == PostId).FirstOrDefaultAsync();
+                return await context.Posts.Include(p => p.Usuario).Where(p => p.PostId == postId).FirstOrDefaultAsync();
             }
             catch(Exception)
             {
@@ -58,10 +59,32 @@ namespace Maia.Controllers
             return BadRequest();
         }
 
+        [HttpDelete]
+        [Route("id/{postId}")]
+        [Authorize]
+        public async Task<ActionResult<string>> Delete([FromRoute] int postId, [FromServices] MaiaContext context)
+        {
+            var usuarioId = int.Parse(
+                HttpContext.User.Claims.Where(c => c.Type == ClaimTypes.Sid).FirstOrDefault().Value
+            );
+            var post = await context.Posts.Where(p => p.PostId == postId).FirstOrDefaultAsync();
+            if (post != null)
+            {
+                if (post.UsuarioId == usuarioId)
+                {
+                    context.Posts.Remove(post);
+                    await context.SaveChangesAsync();
+                    return Ok();
+                }
+                return Forbid();
+            }
+            return NoContent();
+        }
+
 
         [HttpGet]
         [Route("usuario/{UsuarioId}")]
-        [AllowAnonymous]
+        [Authorize]
         public async Task<ActionResult<List<Post>>> GetByUsuarioId([FromRoute] int UsuarioId, [FromServices] MaiaContext context)
         {
             try
@@ -78,11 +101,16 @@ namespace Maia.Controllers
 
         [HttpGet]
         [Route("tag/{tag}")]
-        public async Task<ActionResult<List<Post>>> GetByTag([FromRoute] string tag, [FromServices] MaiaContext context)
+        public async Task<ActionResult<List<Post>>> GetByTag([FromQuery] PageParameters pageParameters, [FromRoute] string tag, [FromServices] MaiaContext context)
         {
             try
             {
-                return await context.Posts.FromSqlRaw($"SELECT * FROM maia.posts WHERE FIND_IN_SET('{tag}', Tags)").ToListAsync();
+                return await context.Posts
+                    .FromSqlRaw($"SELECT * FROM maia.posts WHERE FIND_IN_SET('{tag}', Tags)")
+                    .OrderByDescending(p => p.DataPub)
+                    .Skip((pageParameters.Page - 1) * pageParameters.Size)
+                    .Take(pageParameters.Size)
+                    .ToListAsync();
             }
             catch(Exception)
             {
@@ -95,11 +123,18 @@ namespace Maia.Controllers
         [HttpGet]
         [Route("all")]
         [Authorize]
-        public async Task<ActionResult<List<Post>>> GetAll([FromServices] MaiaContext context)
+        public async Task<ActionResult<List<Post>>> GetAll([FromQuery] PageParameters pageParameters, [FromServices] MaiaContext context)
         {
             try
             {
-                return await context.Posts.Include(x => x.Usuario).ToListAsync();
+                int size = pageParameters.Size;
+                int page = pageParameters.Page;
+                
+                return await context.Posts.Include(p => p.Usuario)
+                    .OrderByDescending(p => p.DataPub)
+                    .Skip((pageParameters.Page - 1) * pageParameters.Size)
+                    .Take(pageParameters.Size)
+                    .ToListAsync();
             }
             catch(Exception)
             {

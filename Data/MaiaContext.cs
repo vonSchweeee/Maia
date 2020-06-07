@@ -15,6 +15,7 @@ namespace Maia.Data
         public DbSet<Album> Albums {get; set;}
         public DbSet<Musica> Musicas { get; set; }
         public DbSet<Post> Posts { get; set; }
+        public DbSet<Favorito> Favoritos { get; set; }
         public DbSet<Comentario> Comentarios { get; set; }
         public DbSet<Resposta> Respostas { get; set; }
 

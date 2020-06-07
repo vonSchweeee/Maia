@@ -29,7 +29,8 @@ namespace Maia.Services
                 Subject = new ClaimsIdentity(new Claim[]
                 {
                     new Claim(ClaimTypes.Name, usuario.Nome.ToString()),
-                    new Claim(ClaimTypes.Role, usuario.Role.ToString())
+                    new Claim(ClaimTypes.Role, usuario.Role.ToString()),
+                    new Claim(ClaimTypes.Sid, usuario.UsuarioId.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddHours(2),
                 SigningCredentials = new SigningCredentials(

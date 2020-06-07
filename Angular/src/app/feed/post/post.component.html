@@ -1,39 +1,73 @@
 <div class="row col-xs-12 col-bs">
   <mat-card class="card-post">
     <div style="flex-direction: row;">
-      <h6 *ngFor="let tag of post.tags" style="float: right; margin-right: 3px;">#{{tag}}</h6>
+      <button type="button" style="float: right; box-shadow: none;"
+        class="fab-post-action" mat-mini-fab color="basic" [matMenuTriggerFor]="userMenu">
+        <mat-icon>expand_more</mat-icon>
+      </button>
+      <h5 *ngFor="let tag of post.tags" class="tag-text">#{{tag}} </h5>
       <mat-card-subtitle>
-        <img [src]="post.usuario.urlImagem" style="float: left;" class="avatar">
+        <img [src]="post && post.usuario && post.usuario.urlImagem" style="float: left;" class="avatar">
         <div class="post-info">
           <div class="left-content username">
-            {{ post.usuario.nome }}
+            {{ post.usuario && post.usuario.nome }}
           </div>
           <br>
           <div class="left-content datetime">
-            {{ post.dataPub | date: 'HH:mm'}}
+            {{ post.dataPub && post.dataPub | date: 'HH:mm'}}
           </div>
         </div>
         <br>
       </mat-card-subtitle>
     </div>
     <mat-card-title>
-      {{post.titulo}}
+      {{post && post.titulo}}
     </mat-card-title>
     <mat-card-content>
-      {{ post.texto }}
+      {{post && post.texto }}
     </mat-card-content>
     <!-- A quantidade ideal de caracteres é por volta de 140 ^ -->
     <mat-divider></mat-divider>
+      <div class="display-flex-row space-between">
+        <div class="display-flex-row">
+          <mat-icon class="icon-favorites">favorite</mat-icon>
+          <h5 class="favorite-count">5</h5>
+        </div>
+        <div class="display-flex-row">
+          <mat-icon class="icon-comments">chat</mat-icon>
+          <h5 class="comment-count">15</h5>
+        </div>
+      </div>
+    <mat-divider></mat-divider>
     <mat-card-actions>
-      <button type="button" mat-mini-fab class="fab">
-        <mat-icon class="btn-heart">favorite_border</mat-icon>
-      </button>
-      <button type="button" mat-mini-fab class="fab" style="background-color: #F005;">
-        <mat-icon>arrow_downwards</mat-icon>
-      </button>
-      <button type="button" mat-mini-fab class="fab" color="basic">
-        <mat-icon>chat</mat-icon>
-      </button>
+      <div class="display-flex-row actions-card">
+        <div class="display-flex-row">
+          <button type="button" mat-mini-fab class="fab">
+            <mat-icon class="btn-heart">favorite_border</mat-icon>
+          </button>
+          <h3>Favoritar</h3>
+        </div>
+
+        <div class="divider-like-comments"></div>
+        <!-- <button type="button" mat-mini-fab class="fab" style="background-color: #F005;">
+          <mat-icon>arrow_downwards</mat-icon>
+        </button> -->
+        <div class="display-flex-row">
+          <button type="button" mat-mini-fab class="fab" color="basic">
+            <mat-icon>chat</mat-icon>
+          </button>
+
+          <h3>Comentar</h3>
+        </div>
+      </div>
     </mat-card-actions>
+    <mat-divider></mat-divider>
+    <app-comment></app-comment>
   </mat-card>
 </div>
+
+
+<mat-menu #userMenu="matMenu">
+  <button mat-menu-item type="button">Editar</button>
+  <button mat-menu-item type="button" (click)="onDelete()">Excluir</button>
+</mat-menu>

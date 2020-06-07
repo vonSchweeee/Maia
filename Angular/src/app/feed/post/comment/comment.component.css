@@ -1,0 +1,44 @@
+.mat-card-subtitle {
+  margin-left: 5px;
+  margin-top: 5px;
+  border-radius: 5px;
+}
+
+.less-size {
+  transform: scale(0.9);
+}
+
+
+.left-content {
+  float: left;
+  margin-left: 3px;
+}
+
+.comment-user {
+  color: #000;
+  font-weight: bolder;
+  padding-top: 5px;
+  margin-right: 5px;
+}
+
+.comment-text {
+  color: #111;
+  padding-top: 5px;
+}
+
+.post-info {
+  padding-top: 3px;
+}
+
+.mat-card-subtitle {
+  margin-bottom: 3px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid #0009;
+  cursor: pointer;
+}

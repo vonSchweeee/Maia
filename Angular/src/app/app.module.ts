@@ -8,6 +8,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FeedComponent } from './feed/feed.component';
 import { PostScreenComponent } from './feed/post-screen/post-screen.component';
+import { PostWriterComponent } from './feed/post-writer/post-writer.component';
+import { CommentComponent } from './feed/post/comment/comment.component';
 import { PostComponent } from './feed/post/post.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
@@ -28,7 +30,9 @@ import { AuthInterceptorService } from './shared/auth/auth-interceptor.service';
       NavbarComponent,
       PostComponent,
       PostScreenComponent,
-      SearchComponent
+      SearchComponent,
+      PostWriterComponent,
+      CommentComponent
    ],
    imports: [
       BrowserModule,
@@ -37,7 +41,7 @@ import { AuthInterceptorService } from './shared/auth/auth-interceptor.service';
       ReactiveFormsModule,
       AppRoutingModule,
       BrowserAnimationsModule,
-      MaterialModule
+      MaterialModule,
    ],
    providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
    bootstrap: [

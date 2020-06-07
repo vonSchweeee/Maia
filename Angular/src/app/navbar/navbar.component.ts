@@ -59,4 +59,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     }
   }
 
+  onCancelSearch() {
+    this.searching = false;
+  }
+
 }

@@ -1,0 +1,42 @@
+<div class="row col-xs-12 col-bs">
+  <mat-card class="card-post">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+      <div style="display: flex;">
+        <div style="display: flex; flex: 1;"></div>
+          <textarea type="text" #inputNewPost
+            class="input-post"
+            placeholder="Escreva um post novo..."
+            ngModel name="texto" required
+            [ngClass]="{'input-texto-focus': editing, 'input-form-post': editing}"
+          >
+          </textarea>
+          <div style="display: flex; flex: 1;"></div>
+        </div>
+        <div *ngIf="editing">
+          <input
+            class="input-titulo-post"
+            placeholder="Título"
+            ngModel name="titulo"
+            [ngClass]="{'input-form-post': editing}">
+          <input
+            class="input-tags-post"
+            placeholder="Tag"
+            ngModel name="tag"
+            >
+          <button type="button" mat-icon-button (click)="onAddTag(f)">
+            <mat-icon class="add-icon">add_circle</mat-icon>
+          </button>
+        </div>
+      <mat-divider></mat-divider>
+      <mat-card-actions>
+        <div style="display: flex; flex: 1;">
+          <h5 *ngFor="let tag of tags">#{{tag}}&nbsp;</h5>
+          <div style="flex: 1;"></div>
+          <button type="submit" mat-raised-button color="primary" class="fab" [disabled]="f.invalid || loading">
+            Publicar
+          </button>
+        </div>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>

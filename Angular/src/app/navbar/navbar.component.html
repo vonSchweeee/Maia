@@ -6,8 +6,11 @@
     <h1>Maia</h1>
     <div style="flex: 1;"></div>
     <input class="input-pesquisa" #inputPesquisa *ngIf="searching"
-      placeholder="Insira uma #tag ou procure por um usuário." [(ngModel)]="pesquisa"/>
-    <button type="button" mat-icon-button aria-label="search" (click)="onSearch()">
+      placeholder="Insira uma #tag ou procure por um usuário." [(ngModel)]="pesquisa">
+    <button type="button" mat-icon-button aria-label="cancelar" *ngIf="searching" (click)="onCancelSearch()">
+      <mat-icon>cancel</mat-icon>
+    </button>
+    <button type="button" mat-icon-button aria-label="pesquisar" (click)="onSearch()">
       <mat-icon>search</mat-icon>
     </button>
     <div *ngIf="! mobileView">

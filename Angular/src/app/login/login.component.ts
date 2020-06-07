@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     this.userSub = this.authService.usuarioSubj.subscribe(usuario => {
       if (usuario) {
-        this.openSnackBar(`Seja bem-vindo, ${usuario.nome}!`, 'Ok.');
+        this.openSnackBar(`Seja bem-vindo, ${usuario.nome}!`, 'Ok.', 1000);
       }
     });
   }
@@ -45,15 +45,16 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
         this.loading = false;
       }, 1000);
     }, erro => {
+      this.openSnackBar(erro, 'Ok', 3000);
       setTimeout(() => {
         this.loading = false;
-      }, 1000);
+      }, 200);
     });
   }
 
-  openSnackBar(message: string, action: string) {
+  openSnackBar(message: string, action: string, duration: number) {
     this.snackBar.open(message, action, {
-      duration: 1000
+      duration
     });
     setTimeout(() => {
       this.router.navigate(['/feed']);

@@ -25,7 +25,10 @@ export class AuthService {
   private _usuario: Usuario;
   usuarioSubj = new BehaviorSubject<Usuario>(null);
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router
+    ) { }
 
   login(email: string, senha: string) {
     return this.http.post<ILoginResponse>(baseUrl + 'login', {email, senha})
@@ -60,24 +63,15 @@ export class AuthService {
   }
 
   private handleError(error: HttpErrorResponse) {
-    // console.log(error);
-    // let errorMessage = 'An error ocurred.';
-    // if (! error.error || ! error.error.error) {
-    //   return throwError(errorMessage);
-    // }
-    // switch (error.error.error.message) {
-    //   case 'EMAIL_EXISTS':
-    //     errorMessage = 'This email already exists.';
-    //     break;
-    //   case 'EMAIL_NOT_FOUND':
-    //     errorMessage = 'This email does not exist.';
-    //     break;
-    //   case 'INVALID_PASSWORD':
-    //     errorMessage = 'This password is not correct.';
-    //     break;
-    // }
     console.log(error);
-    return throwError('Um erro ocorreu.');
+    let errorMessage = 'Ocorreu um erro.';
+    if (! error.error) {
+      return throwError(errorMessage);
+    }
+    else {
+      errorMessage = error.error;
+      return throwError(errorMessage);
+    }
   }
 
   private handleAuthentication(response: ILoginResponse, redirect: boolean) {
