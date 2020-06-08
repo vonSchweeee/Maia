@@ -27,6 +27,17 @@ namespace Maia.Data
             var valueConverter = new ValueConverter<List<string>, string>(v => string.Join(',', v), v => v.Split(separator).ToList());
             modelBuilder.Entity<Post>().Property(nameof(Post.Tags)).HasConversion(valueConverter);
             modelBuilder.Entity<Post>().Property(nameof(Avaliacao.Tags)).HasConversion(valueConverter);
+
+            modelBuilder.Entity<ArtistaMusica>()
+                .HasKey(am => new { am.ArtistaId, am.MusicaId});
+            modelBuilder.Entity<ArtistaMusica>()
+                .HasOne(am => am.Artista)
+                .WithMany(a => a.ArtistasMusicas)
+                .HasForeignKey(am => am.ArtistaId);
+            modelBuilder.Entity<ArtistaMusica>()
+                .HasOne(am => am.Musica)
+                .WithMany(m => m.ArtistasMusicas)
+                .HasForeignKey(am => am.MusicaId);
         }
         
     }

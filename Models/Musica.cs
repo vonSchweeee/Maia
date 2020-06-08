@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Maia.Models
 {
@@ -9,7 +10,7 @@ namespace Maia.Models
         public string Letra { get; set; }
         public bool Single { get; set; }
         public DateTime DataLanc { get; set; }
-        public int ArtistaId { get; set; }
+        public ICollection<ArtistaMusica> ArtistasMusicas { get; set; }
         public int? AlbumId { get; set; }
     }
 }

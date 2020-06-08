@@ -3,14 +3,16 @@ using System;
 using Maia.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Maia.Migrations
 {
     [DbContext(typeof(MaiaContext))]
-    partial class MaiaContextModelSnapshot : ModelSnapshot
+    [Migration("20200608025908_migration1")]
+    partial class migration1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -77,10 +79,6 @@ namespace Maia.Migrations
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<int>("PostId")
                         .HasColumnType("int");
 
@@ -97,8 +95,6 @@ namespace Maia.Migrations
                     b.HasIndex("UsuarioId");
 
                     b.ToTable("Comentarios");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Comentario");
                 });
 
             modelBuilder.Entity("Maia.Models.Favorito", b =>
@@ -194,6 +190,33 @@ namespace Maia.Migrations
                     b.HasDiscriminator<string>("Discriminator").HasValue("Post");
                 });
 
+            modelBuilder.Entity("Maia.Models.Resposta", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit");
+
+                    b.Property<long>("ComentarioId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Texto")
+                        .HasColumnType("text");
+
+                    b.Property<int>("UsuarioId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ComentarioId");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("Respostas");
+                });
+
             modelBuilder.Entity("Maia.Models.Usuario", b =>
                 {
                     b.Property<int>("Id")
@@ -224,18 +247,6 @@ namespace Maia.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Usuarios");
-                });
-
-            modelBuilder.Entity("Maia.Models.Resposta", b =>
-                {
-                    b.HasBaseType("Maia.Models.Comentario");
-
-                    b.Property<long>("ComentarioId")
-                        .HasColumnType("bigint");
-
-                    b.HasIndex("ComentarioId");
-
-                    b.HasDiscriminator().HasValue("Resposta");
                 });
 
             modelBuilder.Entity("Maia.Models.Avaliacao", b =>
@@ -327,6 +338,12 @@ namespace Maia.Migrations
                     b.HasOne("Maia.Models.Comentario", "Comentario")
                         .WithMany("Respostas")
                         .HasForeignKey("ComentarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Maia.Models.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
