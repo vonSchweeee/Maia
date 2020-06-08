@@ -19,7 +19,7 @@ namespace Maia.Migrations
 
             modelBuilder.Entity("Maia.Models.Album", b =>
                 {
-                    b.Property<int>("AlbumId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -29,7 +29,7 @@ namespace Maia.Migrations
                     b.Property<string>("Titulo")
                         .HasColumnType("text");
 
-                    b.HasKey("AlbumId");
+                    b.HasKey("Id");
 
                     b.HasIndex("ArtistaId");
 
@@ -38,7 +38,7 @@ namespace Maia.Migrations
 
             modelBuilder.Entity("Maia.Models.Artista", b =>
                 {
-                    b.Property<int>("ArtistaId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -48,16 +48,19 @@ namespace Maia.Migrations
                     b.Property<string>("UrlImagem")
                         .HasColumnType("text");
 
-                    b.HasKey("ArtistaId");
+                    b.HasKey("Id");
 
                     b.ToTable("Artistas");
                 });
 
             modelBuilder.Entity("Maia.Models.Comentario", b =>
                 {
-                    b.Property<long>("ComentarioId")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit");
 
                     b.Property<int>("PostId")
                         .HasColumnType("int");
@@ -68,7 +71,7 @@ namespace Maia.Migrations
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int");
 
-                    b.HasKey("ComentarioId");
+                    b.HasKey("Id");
 
                     b.HasIndex("PostId");
 
@@ -79,7 +82,7 @@ namespace Maia.Migrations
 
             modelBuilder.Entity("Maia.Models.Favorito", b =>
                 {
-                    b.Property<long>("FavoritoId")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
@@ -92,7 +95,7 @@ namespace Maia.Migrations
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int");
 
-                    b.HasKey("FavoritoId");
+                    b.HasKey("Id");
 
                     b.HasIndex("PostId");
 
@@ -101,7 +104,7 @@ namespace Maia.Migrations
 
             modelBuilder.Entity("Maia.Models.Musica", b =>
                 {
-                    b.Property<long>("MusicaId")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
@@ -123,7 +126,7 @@ namespace Maia.Migrations
                     b.Property<string>("Titulo")
                         .HasColumnType("text");
 
-                    b.HasKey("MusicaId");
+                    b.HasKey("Id");
 
                     b.HasIndex("AlbumId");
 
@@ -134,21 +137,19 @@ namespace Maia.Migrations
 
             modelBuilder.Entity("Maia.Models.Post", b =>
                 {
-                    b.Property<int>("PostId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("AlbumId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Avaliacao")
+                    b.Property<bool>("Ativo")
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("DataPub")
                         .HasColumnType("datetime");
 
-                    b.Property<long?>("MusicaId")
-                        .HasColumnType("bigint");
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<int>("QuantCmt")
                         .HasColumnType("int");
@@ -168,22 +169,23 @@ namespace Maia.Migrations
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int");
 
-                    b.HasKey("PostId");
-
-                    b.HasIndex("AlbumId");
-
-                    b.HasIndex("MusicaId");
+                    b.HasKey("Id");
 
                     b.HasIndex("UsuarioId");
 
                     b.ToTable("Posts");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Post");
                 });
 
             modelBuilder.Entity("Maia.Models.Resposta", b =>
                 {
-                    b.Property<long>("RespostaId")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit");
 
                     b.Property<long>("ComentarioId")
                         .HasColumnType("bigint");
@@ -194,7 +196,7 @@ namespace Maia.Migrations
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int");
 
-                    b.HasKey("RespostaId");
+                    b.HasKey("Id");
 
                     b.HasIndex("ComentarioId");
 
@@ -205,9 +207,12 @@ namespace Maia.Migrations
 
             modelBuilder.Entity("Maia.Models.Usuario", b =>
                 {
-                    b.Property<int>("UsuarioId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -227,9 +232,29 @@ namespace Maia.Migrations
                     b.Property<string>("UrlImagem")
                         .HasColumnType("text");
 
-                    b.HasKey("UsuarioId");
+                    b.HasKey("Id");
 
                     b.ToTable("Usuarios");
+                });
+
+            modelBuilder.Entity("Maia.Models.Avaliacao", b =>
+                {
+                    b.HasBaseType("Maia.Models.Post");
+
+                    b.Property<int?>("AlbumId")
+                        .HasColumnType("int");
+
+                    b.Property<long?>("MusicaId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("Nota")
+                        .HasColumnType("int");
+
+                    b.HasIndex("AlbumId");
+
+                    b.HasIndex("MusicaId");
+
+                    b.HasDiscriminator().HasValue("Avaliacao");
                 });
 
             modelBuilder.Entity("Maia.Models.Album", b =>
@@ -280,14 +305,6 @@ namespace Maia.Migrations
 
             modelBuilder.Entity("Maia.Models.Post", b =>
                 {
-                    b.HasOne("Maia.Models.Album", "Album")
-                        .WithMany()
-                        .HasForeignKey("AlbumId");
-
-                    b.HasOne("Maia.Models.Musica", "Musica")
-                        .WithMany()
-                        .HasForeignKey("MusicaId");
-
                     b.HasOne("Maia.Models.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
@@ -308,6 +325,17 @@ namespace Maia.Migrations
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Maia.Models.Avaliacao", b =>
+                {
+                    b.HasOne("Maia.Models.Album", "Album")
+                        .WithMany()
+                        .HasForeignKey("AlbumId");
+
+                    b.HasOne("Maia.Models.Musica", "Musica")
+                        .WithMany()
+                        .HasForeignKey("MusicaId");
                 });
 #pragma warning restore 612, 618
         }

@@ -39,7 +39,7 @@ namespace Maia.Controllers
             {
                 context.Usuarios.Add(model);
                 var res = await context.SaveChangesAsync();
-                return Created($"/usuario/${model.UsuarioId}", model);
+                return Created($"/usuario/${model.Id}", model);
             }
             else
             {

@@ -30,7 +30,7 @@ namespace Maia.Services
                 {
                     new Claim(ClaimTypes.Name, usuario.Nome.ToString()),
                     new Claim(ClaimTypes.Role, usuario.Role.ToString()),
-                    new Claim(ClaimTypes.Sid, usuario.UsuarioId.ToString())
+                    new Claim(ClaimTypes.Sid, usuario.Id.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddHours(2),
                 SigningCredentials = new SigningCredentials(

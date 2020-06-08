@@ -5,7 +5,7 @@ namespace Maia.Models
 {
     public class Avaliacao : Post
     {
-        public Avaliacao(string texto, string titulo, bool avaliacao, List<string> tags, int usuarioId) : base(texto, titulo, avaliacao, tags, usuarioId) {}
+        public Avaliacao(string texto, string titulo, List<string> tags, int usuarioId) : base(texto, titulo, tags, usuarioId) {}
         [Range(0, 10)]
         public int Nota { get; set; }
         public long? MusicaId { get; set; }

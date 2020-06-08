@@ -25,7 +25,7 @@ namespace Maia.Controllers
         {
             try
             {
-                return await context.Posts.Include(p => p.Usuario).Where(p => p.PostId == postId).FirstOrDefaultAsync();
+                return await context.Posts.Include(p => p.Usuario).Where(p => p.Id == postId).FirstOrDefaultAsync();
             }
             catch(Exception)
             {
@@ -46,7 +46,7 @@ namespace Maia.Controllers
                 context.Add(post);
                 if(await context.SaveChangesAsync() > 0)
                 {
-                    return Created($"/posts/{post.PostId}", post);
+                    return Created($"/posts/{post.Id}", post);
                 }
             }
             catch(Exception)
@@ -67,7 +67,7 @@ namespace Maia.Controllers
             var usuarioId = int.Parse(
                 HttpContext.User.Claims.Where(c => c.Type == ClaimTypes.Sid).FirstOrDefault().Value
             );
-            var post = await context.Posts.Where(p => p.PostId == postId).FirstOrDefaultAsync();
+            var post = await context.Posts.Where(p => p.Id == postId).FirstOrDefaultAsync();
             if (post != null)
             {
                 if (post.UsuarioId == usuarioId)

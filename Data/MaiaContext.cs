@@ -15,6 +15,7 @@ namespace Maia.Data
         public DbSet<Album> Albums {get; set;}
         public DbSet<Musica> Musicas { get; set; }
         public DbSet<Post> Posts { get; set; }
+        public DbSet<Avaliacao> Avaliacoes { get; set; }
         public DbSet<Favorito> Favoritos { get; set; }
         public DbSet<Comentario> Comentarios { get; set; }
         public DbSet<Resposta> Respostas { get; set; }
@@ -25,6 +26,7 @@ namespace Maia.Data
             var separator = new []{','};
             var valueConverter = new ValueConverter<List<string>, string>(v => string.Join(',', v), v => v.Split(separator).ToList());
             modelBuilder.Entity<Post>().Property(nameof(Post.Tags)).HasConversion(valueConverter);
+            modelBuilder.Entity<Post>().Property(nameof(Avaliacao.Tags)).HasConversion(valueConverter);
         }
         
     }

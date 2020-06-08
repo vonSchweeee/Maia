@@ -8,7 +8,6 @@ namespace Maia.Models.DTO
         [Required]
         public string Texto {get; set;}
         public string Titulo { get; set; }
-        public bool Avaliacao { get; set; }
         public List<string> Tags { get; set; }
 
         [Required]
@@ -16,7 +15,7 @@ namespace Maia.Models.DTO
 
         public Post ToPost()
         {
-            return new Post(Texto, Titulo, Avaliacao, Tags, UsuarioId);
+            return new Post(Texto, Titulo, Tags, UsuarioId);
         }
     }
 }

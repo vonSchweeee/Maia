@@ -21,7 +21,7 @@ namespace Maia.Models
         public List<Favorito> Favoritos { get; set; }
         public List<Comentario> Comentarios { get; set;}
 
-        public Post(string texto, string titulo, bool avaliacao, List<string> tags, int usuarioId)
+        public Post(string texto, string titulo, List<string> tags, int usuarioId)
         {
             this.Texto = texto;
             this.Titulo = titulo;
@@ -31,5 +31,4 @@ namespace Maia.Models
             this.Ativo = true;
         }
     }
-
 }
