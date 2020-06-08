@@ -13,12 +13,10 @@ namespace Maia.Models.DTO
 
         [Required]
         public int UsuarioId { get; set; }
-        public long? MusicaId { get; set; }
-        public int? AlbumId { get; set; }
 
         public Post ToPost()
         {
-            return new Post(Texto, Titulo, Avaliacao, Tags, UsuarioId, MusicaId, AlbumId);
+            return new Post(Texto, Titulo, Avaliacao, Tags, UsuarioId);
         }
     }
 }

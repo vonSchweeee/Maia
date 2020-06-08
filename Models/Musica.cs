@@ -4,7 +4,7 @@ namespace Maia.Models
 {
     public class Musica
     {
-        public long MusicaId { get; set; }
+        public long Id { get; set; }
         public string Titulo { get; set; }
         public string Letra { get; set; }
         public bool Single { get; set; }

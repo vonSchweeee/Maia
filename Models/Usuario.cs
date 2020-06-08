@@ -6,7 +6,7 @@ namespace Maia.Models
     public class Usuario
     {
         [Key]
-        public int UsuarioId { get; set; }
+        public int Id { get; set; }        
 
         [Required]
         [EmailAddress]
@@ -27,5 +27,8 @@ namespace Maia.Models
         public string Role { get; set; }
         
         public string UrlImagem { get; set; }
+
+        [JsonIgnore]
+        public bool Ativo { get; set; }
     }
 }
