@@ -1,10 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 import { baseUrl } from '../shared/settings/settings';
 import { Post } from './post.model';
+import {Comentario} from './comentario.model';
+import {Usuario} from "../shared/models/Usuario";
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +14,7 @@ import { Post } from './post.model';
 export class FeedService {
 
   postsSubj = new BehaviorSubject<Post[]>(null);
+  commentEditSubj: Subject<any> = new Subject();
 
   constructor(private http: HttpClient) { }
 
@@ -35,10 +38,23 @@ export class FeedService {
   }
 
   deletePost(postId: number) {
-    console.log(baseUrl + `posts/id/${postId}`);
     return this.http.delete<void>(baseUrl + `posts/id/${postId}`)
       .pipe(tap(() => {
-        this.postsSubj.next(this.postsSubj.value.filter(post => post.postId !== postId));
+        this.postsSubj.next(this.postsSubj.value.filter(post => post.id !== postId));
+      }));
+  }
+
+  makeComment(comentario: Comentario, usuario: Usuario) {
+    return this.http.post<Comentario>(baseUrl + `comentarios`, comentario)
+      .pipe(tap(res => {
+        const postsAtualizado = this.postsSubj.value;
+        postsAtualizado.map(post => {
+          res.usuario = usuario;
+          if (post.id === comentario.postId)
+            post.comentarios.push(res);
+        });
+        this.commentEditSubj.next('aa');
+        this.postsSubj.next(postsAtualizado);
       }));
   }
 }

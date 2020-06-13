@@ -18,6 +18,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { RegistroComponent } from './registro/registro.component';
 import { SearchComponent } from './search/search.component';
 import { AuthInterceptorService } from './shared/auth/auth-interceptor.service';
+import {CommentFormComponent} from "./feed/post/comment-form/comment-form.component";
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { AuthInterceptorService } from './shared/auth/auth-interceptor.service';
       PostScreenComponent,
       SearchComponent,
       PostWriterComponent,
-      CommentComponent
+      CommentComponent,
+     CommentFormComponent
    ],
    imports: [
       BrowserModule,

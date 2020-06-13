@@ -36,20 +36,22 @@ export class PostWriterComponent implements OnInit {
     const texto = form.value.texto;
     const titulo = form.value.titulo;
     const usuario = this.authService.usuarioSubj.value;
-    const post = new Post(titulo, texto, false, this.tags, usuario.usuarioId);
-    console.log(post);
-    this.feedService.makePost(post).subscribe(post => {
-      this.loading = false;
-      const newPosts = this.feedService.postsSubj.value;
-      post.usuario = usuario;
-      newPosts.unshift(post);
-      this.feedService.postsSubj.next(newPosts);
-      form.reset();
-      this.tags = [];
-    },
-    erro => {
-      this.loading = false;
-    });
+    if (usuario && usuario.id) {
+      const post = new Post(titulo, texto, this.tags, usuario.id);
+      this.feedService.makePost(post).subscribe(post => {
+        this.loading = false;
+        const newPosts = this.feedService.postsSubj.value;
+        post.Usuario = usuario;
+        newPosts.unshift(post);
+        this.feedService.postsSubj.next(newPosts);
+        form.reset();
+        this.tags = [];
+      },
+      erro => {
+        this.loading = false;
+      });
+    }
+    else throw new Error('Não há usuário!');
   }
 
   onAddTag(form: NgForm) {

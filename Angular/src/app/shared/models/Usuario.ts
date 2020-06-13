@@ -5,7 +5,7 @@ export class Usuario {
     public email: string,
     public nome: string,
     public urlImagem?: string,
-    public usuarioId?: number
+    public id?: number
     ) { }
 
   set token(jwt: string) {

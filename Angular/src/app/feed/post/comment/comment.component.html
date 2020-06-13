@@ -1,11 +1,13 @@
 <mat-card-subtitle>
-  <img src="https://lh3.googleusercontent.com/a-/AOh14GiQWLUM2NwaUhGuh2Hhb3SNXpHzBJFvUVH-QNZiLw=s360-c" style="float: left;" class="avatar less-size">
+  <img [src]="comentario && comentario.usuario && comentario.usuario.urlImagem ? comentario.usuario.urlImagem
+  : 'assets/img/user-default.png'" [ngStyle]="{'border': comentario.usuario.urlImagem ? 'initial' : 'none'}"
+       style="float: left;" class="avatar less-size">
   <div class="post-info">
     <div class="left-content comment-user">
-      Clebso
+      {{ comentario.usuario.nome }}
     </div>
     <div class="comment-text ">
-      Muito legal!
+      {{ comentario.texto }}
     </div>
   </div>
 </mat-card-subtitle>

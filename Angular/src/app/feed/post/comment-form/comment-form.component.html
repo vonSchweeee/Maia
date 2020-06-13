@@ -1,0 +1,8 @@
+<mat-divider></mat-divider>
+<form class="wrapper" ngForm #f="ngForm" (ngSubmit)="onSubmit(f)">
+  <mat-form-field>
+    <textarea ngModel required rows="1" placeholder="Escreva seu comentário..."
+              matInput autofocus #inputComment name="comentario"></textarea>
+  </mat-form-field>
+  <button mat-raised-button type="submit" color="accent" class="btn-comentar">Comentar</button>
+</form>

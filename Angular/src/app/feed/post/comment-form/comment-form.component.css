@@ -1,0 +1,33 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  justify-content: space-around;
+}
+
+.mat-form-field {
+  flex: 1;
+  margin-left: 8px;
+  margin-right: 10px;
+  margin-top: 8px;
+  margin-bottom: -8px;
+}
+
+.btn-comentar {
+  height: 35px;
+  width: 15%;
+  justify-self: end;
+  text-align: center;
+  align-self: center;
+}
+
+@media (max-width: 769px) {
+  .btn-comentar {
+    width: 20%;
+  }
+}
+
+textarea {
+  resize: none;
+  height: 40px;
+}

@@ -9,7 +9,7 @@ import { baseUrl } from '../settings/settings';
 
 interface ILoginResponse {
   usuario: {
-    usuarioId: number,
+    id: number,
     email: string,
     nome: string,
     urlImagem?: string
@@ -46,7 +46,7 @@ export class AuthService {
       return;
     }
 
-    const usuario: Usuario = new Usuario(dadosUsuario.email, dadosUsuario.nome, dadosUsuario.urlImagem, dadosUsuario.usuarioId);
+    const usuario: Usuario = new Usuario(dadosUsuario.email, dadosUsuario.nome, dadosUsuario.urlImagem, dadosUsuario.id);
     usuario.token = dadosUsuario._token;
 
     if (usuario.token) {
@@ -75,9 +75,9 @@ export class AuthService {
   }
 
   private handleAuthentication(response: ILoginResponse, redirect: boolean) {
-    const {usuarioId, email, nome, urlImagem} = response.usuario;
+    const {id, email, nome, urlImagem} = response.usuario;
     const token = response.token;
-    const usuario = new Usuario(email, nome, urlImagem, usuarioId);
+    const usuario = new Usuario(email, nome, urlImagem, id);
     usuario.token = token;
     this.usuarioSubj.next(usuario);
     localStorage.setItem('usuario', JSON.stringify(usuario));
@@ -93,6 +93,7 @@ export class AuthService {
         this._usuario.email,
         this._usuario.nome,
         this._usuario.urlImagem,
+        this._usuario.id
       );
     }
     else {

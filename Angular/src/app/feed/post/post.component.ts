@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import moment from 'moment';
 
 import { FeedService } from '../feed.service';
 import { Post } from '../post.model';
+import {Subject, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-post',
@@ -11,16 +12,21 @@ import { Post } from '../post.model';
 })
 export class PostComponent implements OnInit {
 
-  dataPost = moment().format('HH:mm');
   @Input() post: Post;
-
+  commentMode = false;
+  commentEditModeSubs: Subscription;
   constructor(private feedService: FeedService) { }
 
   ngOnInit(): void {
+    this.commentEditModeSubs = this.feedService.commentEditSubj.subscribe(() => this.onHandleComment());
   }
 
   onDelete() {
-    this.feedService.deletePost(this.post.postId).subscribe(() => console.log('deletado'));
+    this.feedService.deletePost(this.post.id).subscribe(() => console.log('deletado'));
+  }
+
+  onHandleComment() {
+    this.commentMode = !this.commentMode;
   }
 
 }

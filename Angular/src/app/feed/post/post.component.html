@@ -7,7 +7,9 @@
       </button>
       <h5 *ngFor="let tag of post.tags" class="tag-text">#{{tag}} </h5>
       <mat-card-subtitle>
-        <img [src]="post && post.usuario && post.usuario.urlImagem" style="float: left;" class="avatar">
+        <img [src]="post && post.usuario && post.usuario.urlImagem ? post.usuario.urlImagem
+            : 'assets/img/user-default.png'" [ngStyle]="{'border': post.usuario.urlImagem ? 'initial' : 'none'}"
+             style="float: left;" class="avatar less-size">
         <div class="post-info">
           <div class="left-content username">
             {{ post.usuario && post.usuario.nome }}
@@ -53,7 +55,7 @@
           <mat-icon>arrow_downwards</mat-icon>
         </button> -->
         <div class="display-flex-row">
-          <button type="button" mat-mini-fab class="fab" color="basic">
+          <button type="button" mat-mini-fab class="fab" color="basic" (click)="onHandleComment()">
             <mat-icon>chat</mat-icon>
           </button>
 
@@ -62,7 +64,11 @@
       </div>
     </mat-card-actions>
     <mat-divider></mat-divider>
-    <app-comment></app-comment>
+    <div *ngFor="let comentario of post.comentarios" style="display: flex; flex-direction: column">
+      <app-comment [comentario]="comentario" ></app-comment>
+      <mat-divider style="opacity: 0.5;"></mat-divider>
+    </div>
+    <app-comment-form [idPost]="post.id" *ngIf="commentMode"></app-comment-form>
   </mat-card>
 </div>
 
