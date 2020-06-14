@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Maia.Models.DTO;
 
 namespace Maia.Models
 {
@@ -15,13 +16,16 @@ namespace Maia.Models
         public int PostId { get; set; }
         [JsonIgnore]
         public bool Ativo { get; set; } = true;
+        
         public List<Resposta> Respostas { get; set; }
 
-        public Comentario(string texto, int usuarioId, int postId)
+        public Comentario() { }
+
+        public Comentario(ComentarioDTO dto)
         {
-            this.Texto = texto;
-            this.UsuarioId = usuarioId;
-            this.PostId = postId;
+            this.UsuarioId = dto.UsuarioId;
+            this.PostId = dto.PostId;
+            this.Texto = dto.Texto;
         }
     }
 }

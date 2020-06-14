@@ -13,7 +13,9 @@ export class Post {
     public musicaId?: number,
     public albumId?: number,
     public id?: number,
-    public quantCmt?: number
+    public quantCmt?: number,
+    public quantFav?: number,
+    public favoritado?: boolean
   ) { }
 
   set Usuario(usuario: Usuario)

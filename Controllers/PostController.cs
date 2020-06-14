@@ -130,16 +130,30 @@ namespace Maia.Controllers
             {
                 int size = pageParameters.Size;
                 int page = pageParameters.Page;
+
+                var usuarioId = int.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Sid)?.Value);
                 
-                return await context.Posts
+                var posts = await context.Posts
                     .Include(p => p.Usuario)
                     .OrderByDescending(p => p.DataPub)
                     .Skip((pageParameters.Page - 1) * pageParameters.Size)
                     .Take(pageParameters.Size)
                     .ToListAsync();
+
+                for (int i = 0; i < posts.Count; i++)
+                {
+                    var like = await context.Favoritos.FirstOrDefaultAsync(
+                        f => f.UsuarioId == usuarioId && f.PostId == posts[i].Id && f.Ativo
+                        );
+                    if (like != null)
+                        posts[i].Favoritado = true;
+                }
+
+                return posts;
             }
-            catch(Exception)
+            catch(Exception e)
             {
+                Console.WriteLine(e);
                 return this.StatusCode(
                     StatusCodes.Status500InternalServerError, "Falha no banco de dados"
                 );

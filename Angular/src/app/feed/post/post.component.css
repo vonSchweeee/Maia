@@ -43,6 +43,14 @@ hr {
   margin-left: 3px;
 }
 
+.public-icon {
+  font-size: 15px;
+  padding: 0;
+  align-self: flex-start;
+  justify-self: flex-start;
+  margin: 0 0 0 3px;
+}
+
 .datetime {
   font-size: 11px;
 }

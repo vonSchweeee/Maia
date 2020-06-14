@@ -45,16 +45,17 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
         this.loading = false;
       }, 1000);
     }, erro => {
-      this.openSnackBar(erro, 'Ok', 3000);
+      this.openSnackBar(erro, 'Ok', 3000, true);
       setTimeout(() => {
         this.loading = false;
       }, 200);
     });
   }
 
-  openSnackBar(message: string, action: string, duration: number) {
+  openSnackBar(message: string, action: string, duration: number, error: boolean = false) {
     this.snackBar.open(message, action, {
-      duration
+      duration,
+      panelClass: [error ? 'snackbar-error' : 'snackbar-success']
     });
     setTimeout(() => {
       this.router.navigate(['/feed']);

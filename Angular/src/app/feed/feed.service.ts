@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -7,6 +7,7 @@ import { baseUrl } from '../shared/settings/settings';
 import { Post } from './post.model';
 import {Comentario} from './comentario.model';
 import {Usuario} from "../shared/models/Usuario";
+import {AuthService} from "../shared/auth/auth.service";
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class FeedService {
   postsSubj = new BehaviorSubject<Post[]>(null);
   commentEditSubj: Subject<any> = new Subject();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   fetchPosts() {
     return this.http.get<Post[]>(baseUrl + 'posts/all')
@@ -56,5 +57,53 @@ export class FeedService {
         this.commentEditSubj.next('aa');
         this.postsSubj.next(postsAtualizado);
       }));
+  }
+
+  desfavoritar(postId: number) {
+
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: {
+        postId,
+        usuarioId: this.authService.usuarioSubj.value.id
+      },
+    };
+
+    const posts = this.postsSubj.value;
+
+    posts.forEach((post, index) => {
+      if (post.id === postId) {
+        posts[index].favoritado = false;
+        posts[index].quantFav--;
+      }
+      return;
+    });
+
+    this.postsSubj.next(posts);
+
+    this.http.delete(baseUrl + 'favoritos', options).subscribe();
+  }
+
+  favoritar(postId: number) {
+    const posts = this.postsSubj.value;
+
+    const body = {
+      postId,
+      usuarioId: this.authService.usuarioSubj.value.id
+    };
+
+    posts.forEach((post, index) => {
+      if (post.id === postId) {
+        posts[index].favoritado = true;
+        posts[index].quantFav++;
+      }
+      return;
+    });
+
+    this.postsSubj.next(posts);
+
+    this.http.post(baseUrl + 'favoritos', body).subscribe();
   }
 }

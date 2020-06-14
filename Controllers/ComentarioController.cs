@@ -27,7 +27,7 @@ namespace Maia.Controllers
             }
             try
             {
-                var comentario = new Comentario(model.Texto, model.UsuarioId, model.PostId);
+                var comentario = model.ToComentario();
                 context.Add(comentario);
                 var post = context.Posts.FirstOrDefault(p => p.Id == comentario.PostId);
                 post.QuantCmt = post.QuantCmt + 1;

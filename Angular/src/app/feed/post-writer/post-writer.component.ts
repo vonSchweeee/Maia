@@ -36,6 +36,8 @@ export class PostWriterComponent implements OnInit {
     const texto = form.value.texto;
     const titulo = form.value.titulo;
     const usuario = this.authService.usuarioSubj.value;
+    if (! this.tags.length || ! this.tags[0])
+      this.tags = undefined;
     if (usuario && usuario.id) {
       const post = new Post(titulo, texto, this.tags, usuario.id);
       this.feedService.makePost(post).subscribe(post => {

@@ -6,21 +6,24 @@
         <mat-icon>expand_more</mat-icon>
       </button>
       <h5 *ngFor="let tag of post.tags" class="tag-text">#{{tag}} </h5>
-      <mat-card-subtitle>
+      <mat-card-subtitle style="display: flex; flex: 1;">
         <img [src]="post && post.usuario && post.usuario.urlImagem ? post.usuario.urlImagem
-            : 'assets/img/user-default.png'" [ngStyle]="{'border': post && post.usuario &&
-             post.usuario.urlImagem ? 'initial' : 'none'}"
-             style="float: left;" class="avatar less-size">
-        <div class="post-info">
-          <div class="left-content username">
+          : 'assets/img/user-default.png'" [ngStyle]="{'border': post && post.usuario &&
+           post.usuario.urlImagem ? 'initial' : 'none'}"
+             style="justify-self: flex-start;" class="avatar less-size">
+        <div style="display: flex; flex: 1; flex-direction: column">
+          <div class="username">
             {{ post.usuario && post.usuario.nome }}
           </div>
-          <br>
-          <div class="left-content datetime">
-            {{ post.dataPub && post.dataPub | date: 'HH:mm'}}
+          <div class="datetime" style="display: flex; flex-direction: row;">
+            <div>
+              {{ post.dataPub && post.dataPub | date: 'HH:mm'}}
+            </div>
+            <div>
+              <mat-icon class="public-icon">public</mat-icon>
+            </div>
           </div>
         </div>
-        <br>
       </mat-card-subtitle>
     </div>
     <mat-card-title>
@@ -34,7 +37,7 @@
       <div class="display-flex-row">
         <div class="display-flex-row">
           <mat-icon class="icon-favorites">favorite</mat-icon>
-          <h5 class="favorite-count">5</h5>
+          <h5 class="favorite-count">{{post.quantFav}}</h5>
         </div>
         <div class="display-flex-row">
           <mat-icon class="icon-comments">chat</mat-icon>
@@ -45,8 +48,8 @@
     <mat-card-actions>
       <div class="display-flex-row actions-card">
         <div class="display-flex-row">
-          <button type="button" mat-mini-fab class="fab" style="outline: none">
-            <mat-icon class="btn-heart">favorite_border</mat-icon>
+          <button type="button" mat-mini-fab class="fab" style="outline: none" (click)="handleFavorite()">
+            <mat-icon class="btn-heart">{{ post.favoritado ? 'favorite' : 'favorite_border' }}</mat-icon>
           </button>
           <h3>Favoritar</h3>
         </div>

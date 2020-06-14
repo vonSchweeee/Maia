@@ -29,4 +29,12 @@ export class PostComponent implements OnInit {
     this.commentMode = !this.commentMode;
   }
 
+  handleFavorite() {
+    if (this.post.favoritado) {
+      this.feedService.desfavoritar(this.post.id);
+    }
+    else {
+      this.feedService.favoritar(this.post.id);
+    }
+  }
 }

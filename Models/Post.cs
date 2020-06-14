@@ -18,11 +18,12 @@ namespace Maia.Models
         [Required]
         public int UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
+        [NotMapped] public bool Favoritado { get; set; }
         [JsonIgnore]
         public bool Ativo { get; set; } = true;
         public List<Favorito> Favoritos { get; set; }
         public List<Comentario> Comentarios { get; set;}
-
+        
         public Post(string texto, string titulo, List<string> tags, int usuarioId)
         {
             this.Texto = texto;
@@ -33,9 +34,6 @@ namespace Maia.Models
             this.Ativo = true;
         }
 
-        public Post()
-        {
-            
-        }
+        public Post() { }
     }
 }

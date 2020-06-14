@@ -10,5 +10,11 @@ namespace Maia.Models.DTO
         public int UsuarioId { get; set; }
         [Required]
         public int PostId { get; set; }
+
+
+        public Comentario ToComentario()
+        {
+            return new Comentario();
+        }
     }
 }
