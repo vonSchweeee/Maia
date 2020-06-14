@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
+using Maia.Models.Interfaces;
 
 namespace Maia.Models
 {
-    public class Post
+    public class Post : IEntidade<int>
     {   
         public int Id { get; set; }
         public string Titulo { get; set; }
@@ -18,9 +20,11 @@ namespace Maia.Models
         [Required]
         public int UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
-        [NotMapped] public bool Favoritado { get; set; }
+        [NotMapped] 
+        public bool Favoritado { get; set; }
         [JsonIgnore]
-        public bool Ativo { get; set; } = true;
+        [DefaultValue(true)]
+        public bool Ativo { get; set; }
         public List<Favorito> Favoritos { get; set; }
         public List<Comentario> Comentarios { get; set;}
         

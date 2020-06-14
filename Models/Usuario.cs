@@ -1,11 +1,13 @@
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 using Maia.Models.DTO;
+using Maia.Models.Interfaces;
 
 namespace Maia.Models
 {
     
-    public class Usuario
+    public class Usuario : IEntidade<int>
     {
         [Key]
         public int Id { get; set; }        
@@ -30,6 +32,7 @@ namespace Maia.Models
         public string UrlImagem { get; set; }
 
         [JsonIgnore]
+        [DefaultValue(true)]
         public bool Ativo { get; set; } = true;
 
         public Usuario(string email, string senha, string nome)

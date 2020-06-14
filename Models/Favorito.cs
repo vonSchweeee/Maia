@@ -1,8 +1,11 @@
+using System.ComponentModel;
 using Maia.Models.DTO;
+using Maia.Models.Interfaces;
+using System.Text.Json.Serialization;
 
 namespace Maia.Models
 {
-    public class Favorito
+    public class Favorito : IEntidade<long>
     {
         public long Id { get; set; }
         public int UsuarioId { get; set; }
@@ -11,7 +14,9 @@ namespace Maia.Models
         // public Post Post { get; set; }
         public long? ComentarioId { get; set; }
 
-        public bool Ativo { get; set; } = true;
+        [JsonIgnore]
+        [DefaultValue(true)]
+        public bool Ativo { get; set; }
         
         public Favorito() { }
 
