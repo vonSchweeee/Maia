@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { SearchResolverService } from './search/search-resolver.service';
 import { SearchComponent } from './search/search.component';
 import { AuthGuard } from './shared/auth/auth.guard';
+import {LetrasComponent} from './letras/letras.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent, canActivate: [AuthGuard]},
@@ -15,6 +16,9 @@ const routes: Routes = [
   {path: 'posts', canActivate: [AuthGuard], children: [
     {path: 'tag/:id', component: SearchComponent, resolve: { posts: SearchResolverService }},
     {path: ':id', component: PostScreenComponent, resolve: { post: PostResolverService }},
+  ]},
+  {path: 'letras', canActivate: [AuthGuard], children: [
+    {path: '', component: LetrasComponent}
   ]},
   {path: '**', redirectTo: 'login'}
 ];

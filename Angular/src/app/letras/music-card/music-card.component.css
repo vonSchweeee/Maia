@@ -1,0 +1,21 @@
+.mat-card {
+  width: 260px;
+  height: 300px;
+  border-radius: 8px;
+  text-shadow: 1px 1px 3px #FFF4;
+}
+
+.flex-column {
+  display: flex;
+  flex: 1;
+}
+
+img {
+  object-fit: contain;
+  max-width: 185px;
+  max-height: 185px;
+  border-radius: 12px;
+  box-shadow: 3px 3px 3px 2px #0007;
+  align-self: center;
+  pointer-events: none;
+}

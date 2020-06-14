@@ -19,6 +19,8 @@ import { RegistroComponent } from './registro/registro.component';
 import { SearchComponent } from './search/search.component';
 import { AuthInterceptorService } from './shared/auth/auth-interceptor.service';
 import {CommentFormComponent} from "./feed/post/comment-form/comment-form.component";
+import {LetrasComponent} from "./letras/letras.component";
+import {MusicCardComponent} from './letras/music-card/music-card.component';
 
 
 @NgModule({
@@ -34,7 +36,9 @@ import {CommentFormComponent} from "./feed/post/comment-form/comment-form.compon
       SearchComponent,
       PostWriterComponent,
       CommentComponent,
-     CommentFormComponent
+      CommentFormComponent,
+      LetrasComponent,
+      MusicCardComponent
    ],
    imports: [
       BrowserModule,

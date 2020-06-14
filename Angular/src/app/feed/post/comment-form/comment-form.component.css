@@ -31,22 +31,17 @@
 textarea {
   width: 82%;
   min-height: 30px;
-  border: 1px solid #f1f1f1;
+  border: 1px solid #cfcfcf;
   border-top-right-radius: 15px;
   border-top-left-radius: 15px;
   padding-left: 8px;
-  transform-origin: 80% left;
-  -webkit-transition: .5s ease-in-out;
-  -moz-transition: .5s ease-in-out;
-  -o-transition: .5s ease-in-out;
-  transition: .5s ease-in-out;
   resize: none;
   background-color: #fdfdfd;
 }
 
 textarea.input-texto {
   height: 60px;
-  border-radius: 15px;
+  border-radius: 13px;
 }
 
 .mat-divider-horizontal {
