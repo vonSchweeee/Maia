@@ -3,6 +3,8 @@
   flex-direction: row;
   flex: 1;
   justify-content: space-around;
+  margin-top: 15px;
+  align-items: center;
 }
 
 .mat-form-field {
@@ -26,8 +28,32 @@
     width: 20%;
   }
 }
-
 textarea {
+  width: 82%;
+  min-height: 30px;
+  border: 1px solid #f1f1f1;
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+  padding-left: 8px;
+  transform-origin: 80% left;
+  -webkit-transition: .5s ease-in-out;
+  -moz-transition: .5s ease-in-out;
+  -o-transition: .5s ease-in-out;
+  transition: .5s ease-in-out;
   resize: none;
-  height: 40px;
+  background-color: #fdfdfd;
+}
+
+textarea.input-texto {
+  height: 60px;
+  border-radius: 15px;
+}
+
+.mat-divider-horizontal {
+  left: initial;
+  width: 94%;
+}
+
+.ng-invalid.ng-touched {
+  border-color: #ff223388;
 }

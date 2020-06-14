@@ -33,13 +33,14 @@ namespace Maia.Controllers
         [HttpPost]
         [Route("registro")]
         [AllowAnonymous]
-        public async Task<ActionResult<Usuario>> Post([FromServices] MaiaContext context, [FromBody] Usuario model)
+        public async Task<ActionResult<Usuario>> Post([FromServices] MaiaContext context, [FromBody] UsuarioDTO model)
         {
             if(ModelState.IsValid)
             {
-                context.Usuarios.Add(model);
+                var usuario = new Usuario(model.Email, model.Senha, model.Nome);
+                context.Usuarios.Add(usuario);
                 var res = await context.SaveChangesAsync();
-                return Created($"/usuario/${model.Id}", model);
+                return Created($"/usuario/{usuario.Id}", usuario);
             }
             else
             {

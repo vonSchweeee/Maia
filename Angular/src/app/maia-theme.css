@@ -2505,3 +2505,7 @@ td.mat-footer-cell {
 .mat-simple-snackbar-action {
   color: #ffd740;
 }
+
+* {
+  outline: none;
+}

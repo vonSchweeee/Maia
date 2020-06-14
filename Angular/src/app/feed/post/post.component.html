@@ -1,14 +1,15 @@
 <div class="row col-xs-12 col-bs">
   <mat-card class="card-post">
     <div style="flex-direction: row;">
-      <button type="button" style="float: right; box-shadow: none;"
+      <button type="button" style="float: right; box-shadow: none; outline: none;"
         class="fab-post-action" mat-mini-fab color="basic" [matMenuTriggerFor]="userMenu">
         <mat-icon>expand_more</mat-icon>
       </button>
       <h5 *ngFor="let tag of post.tags" class="tag-text">#{{tag}} </h5>
       <mat-card-subtitle>
         <img [src]="post && post.usuario && post.usuario.urlImagem ? post.usuario.urlImagem
-            : 'assets/img/user-default.png'" [ngStyle]="{'border': post.usuario.urlImagem ? 'initial' : 'none'}"
+            : 'assets/img/user-default.png'" [ngStyle]="{'border': post && post.usuario &&
+             post.usuario.urlImagem ? 'initial' : 'none'}"
              style="float: left;" class="avatar less-size">
         <div class="post-info">
           <div class="left-content username">
@@ -30,21 +31,21 @@
     </mat-card-content>
     <!-- A quantidade ideal de caracteres é por volta de 140 ^ -->
     <mat-divider></mat-divider>
-      <div class="display-flex-row space-between">
+      <div class="display-flex-row">
         <div class="display-flex-row">
           <mat-icon class="icon-favorites">favorite</mat-icon>
           <h5 class="favorite-count">5</h5>
         </div>
         <div class="display-flex-row">
           <mat-icon class="icon-comments">chat</mat-icon>
-          <h5 class="comment-count">15</h5>
+          <h5 class="comment-count">{{post.quantCmt}}</h5>
         </div>
       </div>
     <mat-divider></mat-divider>
     <mat-card-actions>
       <div class="display-flex-row actions-card">
         <div class="display-flex-row">
-          <button type="button" mat-mini-fab class="fab">
+          <button type="button" mat-mini-fab class="fab" style="outline: none">
             <mat-icon class="btn-heart">favorite_border</mat-icon>
           </button>
           <h3>Favoritar</h3>
@@ -55,7 +56,7 @@
           <mat-icon>arrow_downwards</mat-icon>
         </button> -->
         <div class="display-flex-row">
-          <button type="button" mat-mini-fab class="fab" color="basic" (click)="onHandleComment()">
+          <button type="button" mat-mini-fab class="fab" color="basic" (click)="onHandleComment()" style="outline: none">
             <mat-icon>chat</mat-icon>
           </button>
 
@@ -63,17 +64,17 @@
         </div>
       </div>
     </mat-card-actions>
-    <mat-divider></mat-divider>
-    <div *ngFor="let comentario of post.comentarios" style="display: flex; flex-direction: column">
-      <app-comment [comentario]="comentario" ></app-comment>
-      <mat-divider style="opacity: 0.5;"></mat-divider>
-    </div>
+<!--    <mat-divider></mat-divider>-->
+<!--    <div *ngFor="let comentario of post.comentarios" style="display: flex; flex-direction: column">-->
+<!--      <app-comment [comentario]="comentario" ></app-comment>-->
+<!--      <mat-divider style="opacity: 0.5;"></mat-divider>-->
+<!--    </div>-->
     <app-comment-form [idPost]="post.id" *ngIf="commentMode"></app-comment-form>
   </mat-card>
 </div>
 
 
 <mat-menu #userMenu="matMenu">
-  <button mat-menu-item type="button">Editar</button>
-  <button mat-menu-item type="button" (click)="onDelete()">Excluir</button>
+  <button mat-menu-item type="button" style="outline: none">Editar</button>
+  <button mat-menu-item type="button" (click)="onDelete()" style="outline: none">Excluir</button>
 </mat-menu>

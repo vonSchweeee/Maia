@@ -11,3 +11,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 body {
   background-color: #222;
 }
+
+* {
+  outline: none;
+}
+
+button {
+  outline: none;
+}

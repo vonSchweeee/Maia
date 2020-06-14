@@ -1,8 +1,10 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using Maia.Models.DTO;
 
 namespace Maia.Models
 {
+    
     public class Usuario
     {
         [Key]
@@ -22,13 +24,19 @@ namespace Maia.Models
         [JsonIgnore]
         public string Senha { get; set; }
 
-        [JsonIgnore]
         [Range(typeof(string), "adm", "user")]
-        public string Role { get; set; }
+        public string Role { get; set; } = "user";
         
         public string UrlImagem { get; set; }
 
         [JsonIgnore]
-        public bool Ativo { get; set; }
+        public bool Ativo { get; set; } = true;
+
+        public Usuario(string email, string senha, string nome)
+        {
+            this.Email = email;
+            this.Nome = nome;
+            this.Senha = senha;
+        }
     }
 }

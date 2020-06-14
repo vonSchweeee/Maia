@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
@@ -14,10 +15,11 @@ namespace Maia.Models
         public int QuantCmt { get; set; } = 0;
         public DateTime DataPub { get; set; }
         public List<string> Tags {get; set; }
+        [Required]
         public int UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
         [JsonIgnore]
-        public bool Ativo { get; set; }
+        public bool Ativo { get; set; } = true;
         public List<Favorito> Favoritos { get; set; }
         public List<Comentario> Comentarios { get; set;}
 
@@ -29,6 +31,11 @@ namespace Maia.Models
             this.UsuarioId = usuarioId;
             this.DataPub = DateTime.Now;
             this.Ativo = true;
+        }
+
+        public Post()
+        {
+            
         }
     }
 }

@@ -40,21 +40,22 @@ namespace Maia.Controllers
         [Authorize]
         public async Task<ActionResult> Post([FromBody] PostDTO model, [FromServices] MaiaContext context)
         {
-            try 
-            {
-                var post = model.ToPost();
-                context.Add(post);
-                if(await context.SaveChangesAsync() > 0)
+            if(ModelState.IsValid)
+                try 
                 {
-                    return Created($"/posts/{post.Id}", post);
+                    var post = model.ToPost();
+                    context.Add(post);
+                    if(await context.SaveChangesAsync() > 0)
+                    {
+                        return Created($"/posts/{post.Id}", post);
+                    }
                 }
-            }
-            catch(Exception)
-            {
-                return this.StatusCode(
-                    StatusCodes.Status500InternalServerError, "Falha no banco de dados"
-                );
-            }
+                catch(Exception)
+                {
+                    return this.StatusCode(
+                        StatusCodes.Status500InternalServerError, "Falha no banco de dados"
+                    );
+                }
 
             return BadRequest();
         }
@@ -130,7 +131,8 @@ namespace Maia.Controllers
                 int size = pageParameters.Size;
                 int page = pageParameters.Page;
                 
-                return await context.Posts.Include(p => p.Usuario)
+                return await context.Posts
+                    .Include(p => p.Usuario)
                     .OrderByDescending(p => p.DataPub)
                     .Skip((pageParameters.Page - 1) * pageParameters.Size)
                     .Take(pageParameters.Size)

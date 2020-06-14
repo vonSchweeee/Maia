@@ -1,4 +1,4 @@
-<mat-toolbar color="accent" class="navbar-maia">
+<mat-toolbar class="navbar-maia">
   <mat-toolbar-row>
     <button mat-icon-button class="btn-menu" *ngIf="mobileView">
       <mat-icon class="disable-select">menu</mat-icon>
@@ -7,10 +7,10 @@
     <div style="flex: 1;"></div>
     <input class="input-pesquisa" #inputPesquisa *ngIf="searching"
       placeholder="Insira uma #tag ou procure por um usuário." [(ngModel)]="pesquisa">
-    <button type="button" mat-icon-button aria-label="cancelar" *ngIf="searching" (click)="onCancelSearch()">
+    <button type="button" mat-icon-button aria-label="cancelar" *ngIf="searching" (click)="onCancelSearch()" style="outline: none">
       <mat-icon>cancel</mat-icon>
     </button>
-    <button type="button" mat-icon-button aria-label="pesquisar" (click)="onSearch()">
+    <button type="button" mat-icon-button aria-label="pesquisar" (click)="onSearch()" style="outline: none">
       <mat-icon>search</mat-icon>
     </button>
     <div *ngIf="! mobileView">
@@ -18,10 +18,10 @@
       <a mat-button [routerLink]="['/letras']"> Letras </a>
       <a mat-button [routerLink]="['/partituras']"> Partituras </a>
       <a mat-button [routerLink]="['/tabs']"> Tablaturas </a>
-      <button type="button" mat-icon-button *ngIf="! usuario.urlImagem" class="btn-usuario" [matMenuTriggerFor]="userMenu">
+      <button type="button" mat-icon-button *ngIf="! usuario.urlImagem" style="outline: none" class="btn-usuario" [matMenuTriggerFor]="userMenu">
         <mat-icon class="user-icon">person</mat-icon>
       </button>
-      <button type="button" mat-icon-button *ngIf="usuario.urlImagem" class="btn-usuario" [matMenuTriggerFor]="userMenu">
+      <button type="button" mat-icon-button *ngIf="usuario.urlImagem" style="outline: none" class="btn-usuario" [matMenuTriggerFor]="userMenu">
         <img [src]="usuario.urlImagem" class="user-avatar">
       </button>
     </div>
@@ -30,6 +30,6 @@
 
 
 <mat-menu #userMenu="matMenu">
-  <button mat-menu-item type="button" disabled> {{ usuario.nome }}</button>
-  <button mat-menu-item type="button" (click)="onLogout()" tabindex="-1">Sair</button>
+  <button mat-menu-item type="button" style="outline: none; cursor: default; background-color: initial;"> {{ usuario.nome }}</button>
+  <button mat-menu-item type="button" style="outline: none" (click)="onLogout()" tabindex="-1">Sair</button>
 </mat-menu>

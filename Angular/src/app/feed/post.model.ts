@@ -13,6 +13,7 @@ export class Post {
     public musicaId?: number,
     public albumId?: number,
     public id?: number,
+    public quantCmt?: number
   ) { }
 
   set Usuario(usuario: Usuario)
