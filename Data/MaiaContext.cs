@@ -19,6 +19,9 @@ namespace Maia.Data
         public DbSet<Favorito> Favoritos { get; set; }
         public DbSet<Comentario> Comentarios { get; set; }
         public DbSet<Resposta> Respostas { get; set; }
+        public DbSet<Partitura> Partituras { get; set; }
+        public DbSet<Tab> Tabs { get; set; }
+        public DbSet<Letra> Letras { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

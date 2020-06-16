@@ -12,7 +12,8 @@ interface ILoginResponse {
     id: number,
     email: string,
     nome: string,
-    urlImagem?: string
+    urlImagem?: string,
+    role: 'admin' | 'user'
   };
   token: string;
 }
@@ -46,7 +47,9 @@ export class AuthService {
       return;
     }
 
-    const usuario: Usuario = new Usuario(dadosUsuario.email, dadosUsuario.nome, dadosUsuario.urlImagem, dadosUsuario.id);
+    const usuario: Usuario = new Usuario(
+      dadosUsuario.email, dadosUsuario.nome, dadosUsuario.urlImagem, dadosUsuario.id, dadosUsuario.role
+    );
     usuario.token = dadosUsuario._token;
 
     if (usuario.token) {
@@ -75,9 +78,9 @@ export class AuthService {
   }
 
   private handleAuthentication(response: ILoginResponse, redirect: boolean) {
-    const {id, email, nome, urlImagem} = response.usuario;
+    const {id, email, nome, urlImagem, role} = response.usuario;
     const token = response.token;
-    const usuario = new Usuario(email, nome, urlImagem, id);
+    const usuario = new Usuario(email, nome, urlImagem, id, role);
     usuario.token = token;
     this.usuarioSubj.next(usuario);
     localStorage.setItem('usuario', JSON.stringify(usuario));

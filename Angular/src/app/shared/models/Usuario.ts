@@ -5,7 +5,8 @@ export class Usuario {
     public email: string,
     public nome: string,
     public urlImagem?: string,
-    public id?: number
+    public id?: number,
+    public role?: 'admin' | 'user'
     ) { }
 
   set token(jwt: string) {
