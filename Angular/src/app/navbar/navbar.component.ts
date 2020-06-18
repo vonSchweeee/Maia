@@ -17,8 +17,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
   mobileView = false;
   searching = false;
   pesquisa = '';
+  admin = false;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) {
+    this.admin = authService.usuarioSubj.value.isAdm;
+  }
 
   ngOnInit() {
     this.usuarioSub = this.authService.usuarioSubj

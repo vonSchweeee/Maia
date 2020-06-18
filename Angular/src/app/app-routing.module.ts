@@ -9,6 +9,18 @@ import { SearchResolverService } from './search/search-resolver.service';
 import { SearchComponent } from './search/search.component';
 import { AuthGuard } from './shared/auth/auth.guard';
 import {LetrasComponent} from './letras/letras.component';
+import {AdminGuard} from './shared/auth/admin.guard';
+import {AdminComponent} from './admin/admin.component';
+import {AdminDashboardComponent} from './admin/admin-dashboard/admin-dashboard.component';
+import {MusicasManagementComponent} from './admin/musicas-management/musicas-management.component';
+import {ArtistasManagementComponent} from './admin/artistas-management/artistas-management.component';
+import {AlbunsManagementComponent} from './admin/albuns-management/albuns-management.component';
+import {ListaArtistaManagementComponent} from './admin/artistas-management/lista-artista-management/lista-artista-management.component';
+import {AddArtistaComponent} from './admin/artistas-management/add-artista/add-artista.component';
+import {ListaMusicaManagementComponent} from './admin/musicas-management/lista-musica-management/lista-musica-management.component';
+import {AddMusicaComponent} from './admin/musicas-management/add-musica/add-musica.component';
+import {ListaAlbumManagementComponent} from './admin/albuns-management/lista-album-management/lista-album-management.component';
+import {AddAlbumComponent} from './admin/albuns-management/add-album/add-album.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent, canActivate: [AuthGuard]},
@@ -19,6 +31,21 @@ const routes: Routes = [
   ]},
   {path: 'letras', canActivate: [AuthGuard], children: [
     {path: '', component: LetrasComponent}
+  ]},
+  {path: 'admin', canActivate: [AdminGuard], component: AdminComponent, children: [
+      {path: 'dashboard', component: AdminDashboardComponent},
+      {path: 'artistas', component: ArtistasManagementComponent, children: [
+          {path: 'lista', component: ListaArtistaManagementComponent},
+          {path: 'add', component: AddArtistaComponent}
+        ]},
+      {path: 'albuns', component: AlbunsManagementComponent, children: [
+          {path: 'lista', component: ListaAlbumManagementComponent},
+          {path: 'add', component: AddAlbumComponent}
+        ]},
+      {path: 'musicas', component: MusicasManagementComponent, children: [
+          {path: 'lista', component: ListaMusicaManagementComponent},
+          {path: 'add', component: AddMusicaComponent}
+        ]},
   ]},
   {path: '**', redirectTo: 'login'}
 ];

@@ -6,7 +6,7 @@ export class Usuario {
     public nome: string,
     public urlImagem?: string,
     public id?: number,
-    public role?: 'admin' | 'user'
+    public role?: 'adm' | 'user'
     ) { }
 
   set token(jwt: string) {
@@ -21,4 +21,12 @@ export class Usuario {
     }
     return this._token;
   }
+
+  get isAdm() {
+    if (this.role === 'adm')
+      return true;
+    else
+      return false;
+  }
+
 }

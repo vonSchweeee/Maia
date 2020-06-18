@@ -14,6 +14,7 @@
       <mat-icon>search</mat-icon>
     </button>
     <div *ngIf="! mobileView">
+      <a mat-button [routerLink]="['/admin/dashboard']" routerLinkActive="active" *ngIf="admin"> Admin </a>
       <a mat-button [routerLink]="['/feed']" routerLinkActive="active"> Feed </a>
       <a mat-button [routerLink]="['/letras']" routerLinkActive="active"> Letras </a>
       <a mat-button [routerLink]="['/partituras']" routerLinkActive="active"> Partituras </a>

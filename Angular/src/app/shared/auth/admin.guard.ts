@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+﻿import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
@@ -6,7 +6,7 @@ import { map, take } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 
 @Injectable({providedIn: 'root'})
-export class AuthGuard implements CanActivate {
+export class AdminGuard implements CanActivate {
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -14,9 +14,9 @@ export class AuthGuard implements CanActivate {
     boolean | UrlTree | Promise<boolean | UrlTree> | Observable<boolean | UrlTree> {
     return this.authService.usuarioSubj.pipe(take(1), map(usuario => {
       const isAuth = !!usuario;
+      const isAdm = usuario.isAdm;
       if (isAuth) {
         if (route.url[0].path === 'login') {
-          console.log('redirect pro feed');
           return this.router.createUrlTree(['/feed']);
         }
         return isAuth;
@@ -24,7 +24,10 @@ export class AuthGuard implements CanActivate {
       if (route.url[0].path !== 'login') {
         return this.router.createUrlTree(['/login']);
       }
-      return true;
+      if (isAdm)
+        return true;
+      else
+        return this.router.createUrlTree(['/feed']);
     }));
   }
 }

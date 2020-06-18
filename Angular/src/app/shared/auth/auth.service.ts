@@ -13,7 +13,7 @@ interface ILoginResponse {
     email: string,
     nome: string,
     urlImagem?: string,
-    role: 'admin' | 'user'
+    role: 'adm' | 'user'
   };
   token: string;
 }
