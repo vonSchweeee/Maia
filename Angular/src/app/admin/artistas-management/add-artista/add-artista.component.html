@@ -1,1 +1,26 @@
-<p>add-artista works!</p>
+<div class="container-fluid">
+  <div class="col-xs-12">
+    <h1>Adicionar Artista</h1>
+    <div class="content">
+      <mat-card>
+        <form #f="ngForm" >
+          <div class="display-flex-column">
+            <mat-form-field appearance="outline">
+              <mat-label>Nome</mat-label>
+              <input id="input-nome" matInput name="nome">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Biografia</mat-label>
+              <textarea id="input-biografia" matInput name="biografia" style="resize: none;
+              min-height: 100px;"></textarea>
+            </mat-form-field>
+            <button mat-raised-button color="accent" type="button" class="btn-img">
+              Adicionar Imagem
+            </button>
+            <button class="btn-submit" type="submit" mat-raised-button color="primary">Salvar</button>
+          </div>
+        </form>
+      </mat-card>
+    </div>
+  </div>
+</div>

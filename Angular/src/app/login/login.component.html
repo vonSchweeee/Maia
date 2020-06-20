@@ -23,6 +23,9 @@
               <button type="submit" mat-raised-button color="accent" class="disable-select signin-button" [disabled]="loading || loginForm.invalid">Entrar</button>
               <div style="flex: 1;"></div>
             </div>
+            <h4>
+              Não possui uma conta? <a routerLink="/registro">Cadastre-se.</a>
+            </h4>
             <mat-spinner *ngIf="loading" [color]="'accent'" [diameter]="60"></mat-spinner>
           </form>
         </div>

@@ -21,6 +21,7 @@ import {ListaMusicaManagementComponent} from './admin/musicas-management/lista-m
 import {AddMusicaComponent} from './admin/musicas-management/add-musica/add-musica.component';
 import {ListaAlbumManagementComponent} from './admin/albuns-management/lista-album-management/lista-album-management.component';
 import {AddAlbumComponent} from './admin/albuns-management/add-album/add-album.component';
+import {RegistroComponent} from "./registro/registro.component";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent, canActivate: [AuthGuard]},
@@ -33,8 +34,10 @@ const routes: Routes = [
     {path: '', component: LetrasComponent}
   ]},
   {path: 'admin', canActivate: [AdminGuard], component: AdminComponent, children: [
+      {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
       {path: 'dashboard', component: AdminDashboardComponent},
-      {path: 'artistas', component: ArtistasManagementComponent, children: [
+      {path: 'artistas', children: [
+          {path: '', component: ArtistasManagementComponent},
           {path: 'lista', component: ListaArtistaManagementComponent},
           {path: 'add', component: AddArtistaComponent}
         ]},
@@ -47,6 +50,7 @@ const routes: Routes = [
           {path: 'add', component: AddMusicaComponent}
         ]},
   ]},
+  {path: 'registro', component: RegistroComponent},
   {path: '**', redirectTo: 'login'}
 ];
 

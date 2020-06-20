@@ -1,0 +1,90 @@
+.card-root {
+  flex-direction: column;
+  display: flex;
+  flex-grow: 1;
+}
+
+.container-fluid {
+  margin-top: 15px;
+}
+
+h1 {
+  color: #FFF;
+  text-align: center;
+}
+
+.content {
+  margin-left: 15px;
+  margin-right: 15px;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}
+
+.mat-card {
+  min-width: 330px;
+  min-height: 330px;
+  max-height: 500px;
+  max-width: 750px;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  text-shadow: 1px 1px 3px #FFF4;
+}
+
+.flex-column {
+  display: flex;
+  flex: 1;
+  align-items: center;
+}
+
+img {
+  object-fit: contain;
+  max-width: 260px;
+  max-height: 260px;
+  border-radius: 12px;
+  box-shadow: 3px 3px 3px 2px #0007;
+  align-self: center;
+  pointer-events: none;
+}
+
+a {
+  margin-bottom: 15px;
+}
+
+@media (max-width: 1370px) {
+  .content {
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+  }
+}
+
+.mat-form-field {
+  cursor: text;
+  width: 100%;
+}
+
+.btn-submit {
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px;
+  margin-top: 25px;
+}
+
+.display-flex-column {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+button {
+  outline: none;
+
+}
+
+.btn-img {
+  margin-right: auto;
+  width: 180px;
+  margin-top: 5px;
+}

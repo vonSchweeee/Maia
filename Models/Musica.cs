@@ -16,7 +16,7 @@ namespace Maia.Models
         public string Titulo { get; set; }
         public string Letra { get; set; }
         public bool Single { get; set; }
-        public string? urlImagem { get; set;}
+        public string urlImagem { get; set;}
         public DateTime DataLanc { get; set; }
         public ICollection<ArtistaMusica> ArtistasMusicas { get; set; }
         public int? AlbumId { get; set; }
