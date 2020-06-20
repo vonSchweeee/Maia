@@ -1,0 +1,12 @@
+<div class="container-fluid">
+  <div class="col-xs-12">
+    <div class="content">
+      <img *ngIf="artista && artista.urlImagem" [src]="artista.urlImagem">
+      <h2>{{ artista.nome }}</h2>
+      <p>{{ artista.biografia }}</p>
+      <button (click)="onConfirm()" class="btn-submit" mat-raised-button color="primary">
+        Confirmar
+      </button>
+    </div>
+  </div>
+</div>

@@ -281,3 +281,5 @@ Thumbs.db
 yarn.lock
 
 appsettings.Development.json
+
+.vscode

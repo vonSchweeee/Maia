@@ -22,9 +22,9 @@ namespace Maia.Models
         public Usuario Usuario { get; set; }
         [NotMapped] 
         public bool Favoritado { get; set; }
-        [JsonIgnore]
-        [DefaultValue(true)]
-        public bool Ativo { get; set; }
+        [JsonIgnore] 
+        [DefaultValue(true)] 
+        public bool Ativo { get; set; } = true;
         public List<Favorito> Favoritos { get; set; }
         public List<Comentario> Comentarios { get; set;}
         

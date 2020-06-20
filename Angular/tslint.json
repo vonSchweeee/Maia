@@ -1,6 +1,7 @@
 {
   "extends": "tslint:recommended",
   "rules": {
+    "no-trailing-whitespace": false,
     "align": {
       "options": [
         "parameters",
@@ -76,10 +77,7 @@
       true,
       "as-needed"
     ],
-    "quotemark": [
-      true,
-      "single"
-    ],
+    "quotemark": false,
     "semicolon": {
       "options": [
         "always"

@@ -8,9 +8,9 @@ namespace Maia.Models
     public class Album : IEntidade<int>
     {
         public int Id { get; set; }
-        [JsonIgnore]
-        [DefaultValue(true)]
-        public bool Ativo { get; set; }
+        [JsonIgnore] 
+        [DefaultValue(true)] 
+        public bool Ativo { get; set; } = true;
         public string Titulo { get; set; }
         public int ArtistaId { get; set; }
         public string urlImagem { get; set; }

@@ -26,7 +26,8 @@ namespace Maia
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {   
-            services.AddDbContext<MaiaContext>(opt => opt.UseMySQL(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<MaiaContext>(opt => opt.UseMySQL
+                (Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<MaiaContext, MaiaContext>();
             services.AddCors();
             services.AddControllersWithViews().AddJsonOptions(options => {

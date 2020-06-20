@@ -11,9 +11,9 @@ namespace Maia.Models
     {
         public long Id { get; set; }
         
-        [JsonIgnore]
-        [DefaultValue(true)]
-        public bool Ativo { get; set; }
+        [JsonIgnore] 
+        [DefaultValue(true)] 
+        public bool Ativo { get; set; } = true;
         public string Texto { get; set; }
         [Required]
         public int UsuarioId { get; set;}

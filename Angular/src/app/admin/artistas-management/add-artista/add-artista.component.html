@@ -3,24 +3,36 @@
     <h1>Adicionar Artista</h1>
     <div class="content">
       <mat-card>
-        <form #f="ngForm" >
+        <form #f="ngForm" (ngSubmit)="onSubmit(f)">
           <div class="display-flex-column">
             <mat-form-field appearance="outline">
               <mat-label>Nome</mat-label>
-              <input id="input-nome" matInput name="nome">
+              <input id="input-nome" matInput name="nome" ngModel required>
             </mat-form-field>
             <mat-form-field appearance="outline">
               <mat-label>Biografia</mat-label>
-              <textarea id="input-biografia" matInput name="biografia" style="resize: none;
-              min-height: 100px;"></textarea>
+              <textarea id="input-biografia" matInput name="biografia" ngModel
+                style="resize: none; min-height: 100px;"></textarea>
             </mat-form-field>
-            <button mat-raised-button color="accent" type="button" class="btn-img">
-              Adicionar Imagem
-            </button>
-            <button class="btn-submit" type="submit" mat-raised-button color="primary">Salvar</button>
+            <div class="flex-row">
+              <label for="input-img">
+
+                <button type="button" (click)="inputFile.click()" mat-raised-button color="accent" type="button" class="btn-img">
+                  Adicionar Imagem *
+                </button>
+
+
+              </label>
+              <p class="p-check" *ngIf="image">✔</p>
+            </div>
+            <input #inputFile type="file" id="input-img" accept="image/png, image/jpeg"
+              (change)="processFile(inputFile)">
+            <button class="btn-submit" type="submit" mat-raised-button color="primary" [disabled]="f.invalid || ! image || loading">Salvar</button>
           </div>
         </form>
       </mat-card>
+
+      <!-- <img *ngIf="image" [src]="image.src"> -->
     </div>
   </div>
 </div>

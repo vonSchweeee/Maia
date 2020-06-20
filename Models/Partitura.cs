@@ -9,9 +9,9 @@ namespace Maia.Models
     {
         public long Id { get; set; }
         
-        [JsonIgnore]
-        [DefaultValue(true)]
-        public bool Ativo { get; set; }
+        [JsonIgnore] 
+        [DefaultValue(true)] 
+        public bool Ativo { get; set; } = true;
         [Required]
         public long MusicaId { get; set; }
         public Musica Musica { get; set; }

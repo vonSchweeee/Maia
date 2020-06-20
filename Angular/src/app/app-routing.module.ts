@@ -52,8 +52,7 @@ const routes: Routes = [
   ]},
   {path: 'registro', component: RegistroComponent},
   {path: '**', redirectTo: 'login'}
-];
-
+]
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

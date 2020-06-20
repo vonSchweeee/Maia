@@ -14,9 +14,9 @@ namespace Maia.Models
         // public Post Post { get; set; }
         public long? ComentarioId { get; set; }
 
-        [JsonIgnore]
-        [DefaultValue(true)]
-        public bool Ativo { get; set; }
+        [JsonIgnore] 
+        [DefaultValue(true)] 
+        public bool Ativo { get; set; } = true;
         
         public Favorito() { }
 
