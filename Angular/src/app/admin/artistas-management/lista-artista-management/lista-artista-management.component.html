@@ -1,13 +1,28 @@
 <div class="container-fluid">
   <div class="col-xs-12">
     <div class="root-content">
-      <h1>Lista de Artistas</h1>
-      <a mat-icon-button>
-        <mat-icon>search</mat-icon>
-      </a>
-      <div class="content">
-
+      <div class="title">
+        <h1>Lista de Artistas</h1>
+<!--        <div class="search-section">-->
+<!--          <input placeholder="Procurar por nome..." class="input-pesquisa">-->
+<!--          <a mat-icon-button class="btn-pesquisa">-->
+<!--            <mat-icon style="max-width: 24px; max-height: 24px; height: 24px; width: 24px;">search</mat-icon>-->
+<!--          </a>-->
+<!--        </div>-->
       </div>
+      <div class="lista-artistas">
+        <div class="item-artista" *ngFor="let artista of artistas">
+          <mat-card>
+            <div class="card-row">
+              <img class="img-artista" [src]="artista.urlImagem">
+              <div class="card-column">
+                <mat-card-title>{{ artista.nome }}</mat-card-title>
+                <mat-card-subtitle>{{ artista.biografia }}</mat-card-subtitle>
+              </div>
+            </div>
+          </mat-card>
+        </div>
       </div>
+    </div>
   </div>
 </div>

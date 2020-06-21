@@ -1,3 +1,26 @@
+.root-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.title {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+}
+
+.search-section {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  background-color: #fafafa;
+  border-radius: 50px;
+  max-width: 500px;
+  margin-left: 24px;
+  max-height: 30px;
+  margin-bottom: 3px;
+}
 
 .container-fluid {
   margin-top: 15px;
@@ -5,4 +28,55 @@
 
 h1 {
   color: #FFF;
+  margin-bottom: 0;
+  font-size: 30px;
+  align-self: flex-end;
+}
+
+.input-pesquisa {
+  border: none;
+  border-radius: 55px;
+  padding-left: 10px;
+  width: 100%;
+}
+
+.btn-pesquisa {
+  background-color: #0002;
+  max-width: 30px; max-height: 30px; height: 30px; width: 30px;
+}
+
+.item-artista {
+  margin-bottom: 15px;
+}
+
+.lista-artistas {
+  margin-top: 30px;
+  align-self: center;
+  max-width: 550px;
+  min-width: 100px;
+  width: 100%;
+}
+
+.card-column {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: center;
+  margin-left: 20px;
+  margin-top: 15px;
+}
+
+.card-row {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  align-items: center;
+}
+
+.img-artista {
+  max-width: 80px;
+  max-height: 80px;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
 }

@@ -15,4 +15,7 @@ export class AdminService {
     return this.http.post<Artista>(baseUrl + "artistas", artista);
   }
 
+  fetchArtistas() {
+    return this.http.get<Artista[]>(baseUrl + "artistas");
+  }
 }
