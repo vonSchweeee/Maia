@@ -1,1 +1,40 @@
+<div class="container-fluid">
+  <div class="col-xs-12">
+    <h1>Adicionar Álbum</h1>
+    <div class="content">
+      <mat-card>
+        <form #f="ngForm">
+          <div class="display-flex-column">
+            <mat-form-field appearance="outline">
+              <mat-label>Título</mat-label>
+              <input id="input-nome" matInput name="nome" ngModel required>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Biografia</mat-label>
+              <textarea id="input-biografia" matInput name="biografia" ngModel
+                        style="resize: none; min-height: 100px;"></textarea>
+            </mat-form-field>
+            <div class="flex-row">
+              <label for="input-img">
+
+                <button type="button" (click)="inputFile.click()" mat-raised-button color="accent" type="button" class="btn-img">
+                  Capa do Álbum *
+                </button>
+
+
+              </label>
+              <p class="p-check" *ngIf="image">✔</p>
+            </div>
+            <input #inputFile type="file" id="input-img" accept="image/png, image/jpeg"
+                   (change)="processFile(inputFile)"
+            >
+            <button class="btn-submit" type="submit" mat-raised-button color="primary" [disabled]="f.invalid || ! image || loading">Salvar</button>
+          </div>
+        </form>
+      </mat-card>
+
+      <!-- <img *ngIf="image" [src]="image.src"> -->
+    </div>
+  </div>
+</div>
 <p>add-album works!</p>

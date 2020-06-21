@@ -41,11 +41,13 @@ const routes: Routes = [
           {path: 'lista', component: ListaArtistaManagementComponent},
           {path: 'add', component: AddArtistaComponent}
         ]},
-      {path: 'albuns', component: AlbunsManagementComponent, children: [
+      {path: 'albuns', children: [
+          {path: '', component: AlbunsManagementComponent},
           {path: 'lista', component: ListaAlbumManagementComponent},
           {path: 'add', component: AddAlbumComponent}
         ]},
-      {path: 'musicas', component: MusicasManagementComponent, children: [
+      {path: 'musicas', children: [
+          {path: '', component: MusicasManagementComponent},
           {path: 'lista', component: ListaMusicaManagementComponent},
           {path: 'add', component: AddMusicaComponent}
         ]},

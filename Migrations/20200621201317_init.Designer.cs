@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Maia.Migrations
 {
     [DbContext(typeof(MaiaContext))]
-    [Migration("20200616233229_migration6")]
-    partial class migration6
+    [Migration("20200621201317_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,13 +29,23 @@ namespace Maia.Migrations
                         .HasColumnType("int");
 
                     b.Property<bool>("Ativo")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<byte>("MediaNota")
+                        .HasColumnType("tinyint unsigned");
+
+                    b.Property<int>("QuantAcessos")
+                        .HasColumnType("int");
+
+                    b.Property<int>("QuantAvaliacoes")
+                        .HasColumnType("int");
 
                     b.Property<string>("Titulo")
-                        .HasColumnType("text");
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("urlImagem")
-                        .HasColumnType("text");
+                    b.Property<string>("UrlImagem")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("Id");
 
@@ -51,16 +61,19 @@ namespace Maia.Migrations
                         .HasColumnType("int");
 
                     b.Property<bool>("Ativo")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Biografia")
-                        .HasColumnType("text");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Nome")
-                        .HasColumnType("text");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("QuantAcessos")
+                        .HasColumnType("int");
 
                     b.Property<string>("UrlImagem")
-                        .HasColumnType("text");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("Id");
 
@@ -89,17 +102,17 @@ namespace Maia.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<bool>("Ativo")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Discriminator")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<int>("PostId")
                         .HasColumnType("int");
 
                     b.Property<string>("Texto")
-                        .HasColumnType("text");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int");
@@ -122,7 +135,7 @@ namespace Maia.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<bool>("Ativo")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<long?>("ComentarioId")
                         .HasColumnType("bigint");
@@ -147,21 +160,24 @@ namespace Maia.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<bool>("Ativo")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Idioma")
-                        .HasColumnType("varchar(5)")
+                        .HasColumnType("varchar(5) CHARACTER SET utf8mb4")
                         .HasMaxLength(5);
 
                     b.Property<long>("MusicaId")
                         .HasColumnType("bigint");
 
+                    b.Property<int>("QuantAcessos")
+                        .HasColumnType("int");
+
                     b.Property<string>("Texto")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("TextoHtml")
-                        .HasColumnType("text");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int");
@@ -185,22 +201,35 @@ namespace Maia.Migrations
                         .HasColumnType("int");
 
                     b.Property<bool>("Ativo")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<DateTime>("DataLanc")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<string>("Letra")
-                        .HasColumnType("text");
+                    b.Property<TimeSpan>("Duracao")
+                        .HasColumnType("time(6)");
+
+                    b.Property<int?>("Faixa")
+                        .HasColumnType("int");
+
+                    b.Property<byte>("MediaNota")
+                        .HasColumnType("tinyint unsigned");
+
+                    b.Property<int>("QuantAcessos")
+                        .HasColumnType("int");
+
+                    b.Property<int>("QuantAvaliacoes")
+                        .HasColumnType("int");
 
                     b.Property<bool>("Single")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Titulo")
-                        .HasColumnType("text");
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("urlImagem")
-                        .HasColumnType("text");
+                    b.Property<string>("UrlImagem")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("Id");
 
@@ -216,14 +245,17 @@ namespace Maia.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<bool>("Ativo")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<long>("MusicaId")
                         .HasColumnType("bigint");
 
+                    b.Property<int>("QuantAcessos")
+                        .HasColumnType("int");
+
                     b.Property<string>("UrlPdf")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int");
@@ -244,14 +276,14 @@ namespace Maia.Migrations
                         .HasColumnType("int");
 
                     b.Property<bool>("Ativo")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<DateTime>("DataPub")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Discriminator")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<int>("QuantCmt")
                         .HasColumnType("int");
@@ -260,13 +292,13 @@ namespace Maia.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Tags")
-                        .HasColumnType("text");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Texto")
-                        .HasColumnType("text");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Titulo")
-                        .HasColumnType("text");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int");
@@ -287,16 +319,19 @@ namespace Maia.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<bool>("Ativo")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<long>("MusicaId")
                         .HasColumnType("bigint");
 
+                    b.Property<int>("QuantAcessos")
+                        .HasColumnType("int");
+
                     b.Property<string>("Texto")
-                        .HasColumnType("text");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("TextoHtml")
-                        .HasColumnType("text");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int");
@@ -317,25 +352,25 @@ namespace Maia.Migrations
                         .HasColumnType("int");
 
                     b.Property<bool>("Ativo")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Role")
-                        .HasColumnType("text");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Senha")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("UrlImagem")
-                        .HasColumnType("text");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("Id");
 
@@ -364,8 +399,8 @@ namespace Maia.Migrations
                     b.Property<long?>("MusicaId")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("Nota")
-                        .HasColumnType("int");
+                    b.Property<byte>("Nota")
+                        .HasColumnType("tinyint unsigned");
 
                     b.HasIndex("AlbumId");
 

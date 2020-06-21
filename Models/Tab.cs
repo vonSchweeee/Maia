@@ -22,5 +22,8 @@ namespace Maia.Models
         
         public string Texto { get; set; }
         public string TextoHtml { get; set; }
+        
+        [JsonIgnore] 
+        public int QuantAcessos { get; set; } = 0;
     }
 }

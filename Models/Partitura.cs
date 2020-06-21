@@ -21,5 +21,8 @@ namespace Maia.Models
         
         [Required]
         public string UrlPdf { get; set; }
+        
+        [JsonIgnore] 
+        public int QuantAcessos { get; set; } = 0;
     }
 }

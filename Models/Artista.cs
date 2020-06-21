@@ -16,6 +16,11 @@ namespace Maia.Models
         public string Nome { get; set; }
         public string Biografia { get; set; }
         public string UrlImagem { get; set; }
+        
+        
+        [JsonIgnore] 
+        public int QuantAcessos { get; set; } = 0;
+        
         public ICollection<ArtistaMusica> ArtistasMusicas { get; set; }
         public List<Album> Albuns { get; set; }
         
