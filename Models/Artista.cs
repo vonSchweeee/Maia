@@ -17,7 +17,8 @@ namespace Maia.Models
         public string Biografia { get; set; }
         public string UrlImagem { get; set; }
         
-        
+        public string UrlSpotify { get; set; }
+
         [JsonIgnore] 
         public int QuantAcessos { get; set; } = 0;
         

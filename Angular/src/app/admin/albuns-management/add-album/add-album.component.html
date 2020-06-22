@@ -7,12 +7,11 @@
           <div class="display-flex-column">
             <mat-form-field appearance="outline">
               <mat-label>Título</mat-label>
-              <input id="input-nome" matInput name="nome" ngModel required>
+              <input id="input-titulo" matInput name="titulo" ngModel required>
             </mat-form-field>
             <mat-form-field appearance="outline">
-              <mat-label>Biografia</mat-label>
-              <textarea id="input-biografia" matInput name="biografia" ngModel
-                        style="resize: none; min-height: 100px;"></textarea>
+              <mat-label>Artista *</mat-label>
+              <input id="input-artista" matInput name="artista" [(ngModel)]="artista.nome" (input)="onArtistaTxtChange()">
             </mat-form-field>
             <div class="flex-row">
               <label for="input-img">

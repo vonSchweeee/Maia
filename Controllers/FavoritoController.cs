@@ -5,6 +5,7 @@ using Maia.Data;
 using Maia.Models.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Maia.Controllers
 {
@@ -19,7 +20,15 @@ namespace Maia.Controllers
             try
             {
                 var favorito = model.ToFavorito();
-                context.Favoritos.Add(favorito);
+                var favoritoAntigo = await context.Favoritos
+                    .Where(f => f.PostId == favorito.PostId && f.UsuarioId == favorito.UsuarioId)
+                    .FirstOrDefaultAsync();
+                
+                if (favoritoAntigo != null)
+                    favoritoAntigo.Ativo = true;
+                else
+                    context.Favoritos.Add(favorito);
+                
                 var post = context.Posts.Where(p => p.Id == model.PostId).FirstOrDefault();
                 post.QuantFav = post.QuantFav + 1;
                 if (await context.SaveChangesAsync() > 0)

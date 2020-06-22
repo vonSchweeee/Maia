@@ -18,6 +18,7 @@ namespace Maia.Migrations
                     Nome = table.Column<string>(nullable: true),
                     Biografia = table.Column<string>(nullable: true),
                     UrlImagem = table.Column<string>(nullable: true),
+                    UrlSpotify = table.Column<string>(nullable: true),
                     QuantAcessos = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -53,6 +54,8 @@ namespace Maia.Migrations
                     Titulo = table.Column<string>(nullable: false),
                     ArtistaId = table.Column<int>(nullable: false),
                     UrlImagem = table.Column<string>(nullable: true),
+                    UrlSpotify = table.Column<string>(nullable: true),
+                    DataLanc = table.Column<DateTime>(nullable: false),
                     QuantAcessos = table.Column<int>(nullable: false),
                     MediaNota = table.Column<byte>(nullable: false),
                     QuantAvaliacoes = table.Column<int>(nullable: false)
@@ -78,9 +81,10 @@ namespace Maia.Migrations
                     Titulo = table.Column<string>(nullable: false),
                     Single = table.Column<bool>(nullable: false),
                     Faixa = table.Column<int>(nullable: true),
-                    Duracao = table.Column<TimeSpan>(nullable: false),
+                    Duracao = table.Column<string>(maxLength: 8, nullable: true),
                     UrlImagem = table.Column<string>(nullable: true),
                     DataLanc = table.Column<DateTime>(nullable: false),
+                    UrlSpotify = table.Column<string>(nullable: true),
                     QuantAcessos = table.Column<int>(nullable: false),
                     MediaNota = table.Column<byte>(nullable: false),
                     QuantAvaliacoes = table.Column<int>(nullable: false),
@@ -342,6 +346,12 @@ namespace Maia.Migrations
                 column: "PostId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Favoritos_UsuarioId_PostId",
+                table: "Favoritos",
+                columns: new[] { "UsuarioId", "PostId" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Letras_MusicaId",
                 table: "Letras",
                 column: "MusicaId");
@@ -390,6 +400,12 @@ namespace Maia.Migrations
                 name: "IX_Tabs_UsuarioId",
                 table: "Tabs",
                 column: "UsuarioId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Usuarios_Email",
+                table: "Usuarios",
+                column: "Email",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

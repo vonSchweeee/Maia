@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ImageSnippet} from "../../../shared/utils/ImageSnippet";
+import {Artista} from "../../../shared/models/Artista";
+import {AdminService} from "../../admin.service";
 
 @Component({
   selector: 'app-add-album',
@@ -10,8 +12,11 @@ export class AddAlbumComponent implements OnInit {
 
   image: ImageSnippet;
   loading = false;
+  artista = new Artista('', '');
+  artistas: Artista[];
+  timeoutPesquisa: any;
 
-  constructor() { }
+  constructor(private admService: AdminService) { }
 
 
   ngOnInit(): void {
@@ -35,4 +40,13 @@ export class AddAlbumComponent implements OnInit {
     });
   }
 
+  onArtistaTxtChange() {
+    clearTimeout(this.timeoutPesquisa);
+    this.timeoutPesquisa = setTimeout(() => {
+      this.admService.fetchArtistasByNome(this.artista.nome)
+        .subscribe(res => {
+          console.log(res);
+        });
+    }, 1800);
+  }
 }

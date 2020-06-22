@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Artista } from '../shared/models/Artista';
@@ -11,11 +11,16 @@ export class AdminService {
 
   constructor(private http: HttpClient) { }
 
-  addArtista(artista: Artista) {
+  public addArtista(artista: Artista) {
     return this.http.post<Artista>(baseUrl + "artistas", artista);
   }
 
-  fetchArtistas() {
+  public fetchArtistas() {
     return this.http.get<Artista[]>(baseUrl + "artistas");
   }
+
+  public fetchArtistasByNome(nome: string) {
+    return this.http.get<Artista[]>(`${baseUrl}artistas?nome=${nome}`);
+  }
+
 }

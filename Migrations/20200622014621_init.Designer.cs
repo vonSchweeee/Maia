@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Maia.Migrations
 {
     [DbContext(typeof(MaiaContext))]
-    [Migration("20200621201317_init")]
+    [Migration("20200622014621_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,6 +31,9 @@ namespace Maia.Migrations
                     b.Property<bool>("Ativo")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<DateTime>("DataLanc")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<byte>("MediaNota")
                         .HasColumnType("tinyint unsigned");
 
@@ -45,6 +48,9 @@ namespace Maia.Migrations
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("UrlImagem")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("UrlSpotify")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("Id");
@@ -73,6 +79,9 @@ namespace Maia.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("UrlImagem")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("UrlSpotify")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("Id");
@@ -150,6 +159,9 @@ namespace Maia.Migrations
 
                     b.HasIndex("PostId");
 
+                    b.HasIndex("UsuarioId", "PostId")
+                        .IsUnique();
+
                     b.ToTable("Favoritos");
                 });
 
@@ -206,8 +218,9 @@ namespace Maia.Migrations
                     b.Property<DateTime>("DataLanc")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<TimeSpan>("Duracao")
-                        .HasColumnType("time(6)");
+                    b.Property<string>("Duracao")
+                        .HasColumnType("varchar(8) CHARACTER SET utf8mb4")
+                        .HasMaxLength(8);
 
                     b.Property<int?>("Faixa")
                         .HasColumnType("int");
@@ -229,6 +242,9 @@ namespace Maia.Migrations
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("UrlImagem")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("UrlSpotify")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("Id");
@@ -356,7 +372,7 @@ namespace Maia.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -373,6 +389,9 @@ namespace Maia.Migrations
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
 
                     b.ToTable("Usuarios");
                 });

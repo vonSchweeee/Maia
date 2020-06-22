@@ -30,6 +30,13 @@ namespace Maia.Data
             var valueConverter = new ValueConverter<List<string>, string>(v => string.Join(',', v), v => v.Split(separator).ToList());
             modelBuilder.Entity<Post>().Property(nameof(Post.Tags)).HasConversion(valueConverter);
             modelBuilder.Entity<Post>().Property(nameof(Avaliacao.Tags)).HasConversion(valueConverter);
+            
+            modelBuilder.Entity<Usuario>()
+                .HasIndex(u => u.Email)
+                .IsUnique();
+            
+            modelBuilder.Entity<Favorito>()
+                .HasIndex(f => new {f.UsuarioId , f.PostId}).IsUnique();
 
             modelBuilder.Entity<ArtistaMusica>()
                 .HasKey(am => new { am.ArtistaId, am.MusicaId});

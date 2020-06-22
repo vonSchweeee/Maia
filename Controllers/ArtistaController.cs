@@ -18,20 +18,40 @@ namespace Maia
     {
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult<List<Artista>>> Get([FromQuery] PageParameters parameters, [FromServices] MaiaContext context)
+        public async Task<ActionResult<List<Artista>>> Get(
+            [FromQuery] PageParameters parameters, [FromServices] MaiaContext context, [FromQuery] string nome
+            )
         {
-            try
+            if (nome != null)
             {
-                return Ok(
-                    await context.Artistas
-                        .Skip((parameters.Page - 1) * parameters.Size)
-                        .Take(parameters.Size)
-                        .ToListAsync()
-                );
+                try
+                {
+                    return Ok(
+                            await context.Artistas
+                                .FromSqlRaw($"SELECT * FROM maia.artistas WHERE Nome LIKE '%{nome}%'")
+                                .ToListAsync()
+                        );
+                }
+                catch(Exception e)
+                {
+                    throw e;
+                }
             }
-            catch (Exception e)
+            else
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, e);
+                try
+                {
+                    return Ok(
+                        await context.Artistas
+                            .Skip((parameters.Page - 1) * parameters.Size)
+                            .Take(parameters.Size)
+                            .ToListAsync()
+                    );
+                }
+                catch (Exception e)
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError, e);
+                }
             }
         }
         
