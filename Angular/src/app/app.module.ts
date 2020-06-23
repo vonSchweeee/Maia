@@ -42,6 +42,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { RegistroComponent } from './registro/registro.component';
 import { SearchComponent } from './search/search.component';
 import { AuthInterceptorService } from './shared/auth/auth-interceptor.service';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
 
 @NgModule({
    declarations: [
@@ -81,7 +82,8 @@ import { AuthInterceptorService } from './shared/auth/auth-interceptor.service';
       BrowserAnimationsModule,
       MaterialModule,
       AngularFireModule.initializeApp(environment.firebaseConfig),
-      AngularFireStorageModule
+      AngularFireStorageModule,
+      NgxMaskModule.forRoot()
    ],
    providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
    bootstrap: [

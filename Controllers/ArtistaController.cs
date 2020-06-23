@@ -28,7 +28,7 @@ namespace Maia
                 {
                     return Ok(
                             await context.Artistas
-                                .FromSqlRaw($"SELECT * FROM maia.artistas WHERE Nome LIKE '%{nome}%'")
+                                .FromSqlRaw($"SELECT * FROM maia.artistas WHERE Nome LIKE '%{nome}%' LIMIT 5")
                                 .ToListAsync()
                         );
                 }

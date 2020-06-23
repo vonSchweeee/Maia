@@ -24,7 +24,6 @@ h1 {
 .mat-card {
   min-width: 330px;
   min-height: 330px;
-  max-height: 500px;
   max-width: 750px;
   width: 100%;
   height: 100%;
@@ -117,4 +116,64 @@ input[type='file'] {
 
 .snackbar-success {
   background-color: #291;
+}
+
+.result-text {
+  margin-left: 15px;
+  height: 45px;
+  padding-top: 15px;
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  align-items: center;
+}
+
+.result-text-last {
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.result:hover {
+  background: #F8F8F8;
+}
+
+.list-results {
+  position: absolute;
+  z-index: 3;
+  margin-top: 16px;
+  width: 103%;
+  margin-left: -10px;
+  background-color: white;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border: 1px solid #5557;
+}
+
+.form-array-musicas {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.input-titulo-musica {
+  justify-self: start;
+  margin-right: 10px;
+}
+
+.row-musicas {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  align-items: center;
+}
+
+.btn-add-musica {
+  margin-top: 10px;
+}
+
+.btn-remover-musica {
+  background-color: #AB0000;
+  border-radius: 50%;
+  transform: scale(0.8);
+  font-size: 25px;
 }
