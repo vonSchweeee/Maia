@@ -5,13 +5,13 @@ import { Artista } from '../../../../shared/models/Artista';
 
 @Component({
   selector: 'app-dialog-preview',
-  templateUrl: './dialog-preview.component.html',
-  styleUrls: ['./dialog-preview.component.css']
+  templateUrl: './dialog-preview-artista.component.html',
+  styleUrls: ['./dialog-preview-artista.component.css']
 })
-export class DialogPreviewComponent implements OnInit {
+export class DialogPreviewArtistaComponent implements OnInit {
 
   constructor(
-    public dialogRef: MatDialogRef<DialogPreviewComponent>,
+    public dialogRef: MatDialogRef<DialogPreviewArtistaComponent>,
     @Inject(MAT_DIALOG_DATA) public artista: Artista
     ) { }
 

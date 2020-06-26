@@ -19,6 +19,9 @@ namespace Maia.Models
         public int UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
         
+        [MaxLength(90)]
+        public string Titulo { get; set; }
+        
         [Required]
         public string UrlPdf { get; set; }
         

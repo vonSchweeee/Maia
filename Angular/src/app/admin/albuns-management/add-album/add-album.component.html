@@ -3,7 +3,7 @@
     <h1>Adicionar Álbum</h1>
     <div class="content">
       <mat-card>
-        <form [formGroup]="form">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
           <div class="display-flex-column">
             <mat-form-field appearance="outline">
               <mat-label>Título</mat-label>

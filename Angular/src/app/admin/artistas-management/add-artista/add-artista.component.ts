@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Artista } from '../../../shared/models/Artista';
 import { ImageService } from '../../../shared/services/image.service';
 import { ImageSnippet } from '../../../shared/utils/ImageSnippet';
-import { DialogPreviewComponent } from './dialog-preview/dialog-preview.component';
+import { DialogPreviewArtistaComponent } from './dialog-preview-artista/dialog-preview-artista.component';
 import {AdminService} from "../../admin.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
@@ -67,7 +67,7 @@ export class AddArtistaComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(DialogPreviewComponent, {
+    const dialogRef = this.dialog.open(DialogPreviewArtistaComponent, {
       width: '470px',
       height: '550px',
       data: this.artista

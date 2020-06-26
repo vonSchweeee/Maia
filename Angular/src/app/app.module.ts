@@ -15,7 +15,6 @@ import {
   ListaAlbumManagementComponent,
 } from './admin/albuns-management/lista-album-management/lista-album-management.component';
 import { AddArtistaComponent } from './admin/artistas-management/add-artista/add-artista.component';
-import { DialogPreviewComponent } from './admin/artistas-management/add-artista/dialog-preview/dialog-preview.component';
 import { ArtistasManagementComponent } from './admin/artistas-management/artistas-management.component';
 import {
   ListaArtistaManagementComponent,
@@ -43,6 +42,8 @@ import { RegistroComponent } from './registro/registro.component';
 import { SearchComponent } from './search/search.component';
 import { AuthInterceptorService } from './shared/auth/auth-interceptor.service';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
+import {DialogPreviewArtistaComponent} from "./admin/artistas-management/add-artista/dialog-preview-artista/dialog-preview-artista.component";
+import {DialogPreviewAlbumComponent} from "./admin/albuns-management/add-album/dialog-preview-album/dialog-preview-album.component";
 
 @NgModule({
    declarations: [
@@ -71,7 +72,8 @@ import { NgxMaskModule, IConfig } from 'ngx-mask';
       MusicasManagementComponent,
       AddMusicaComponent,
       ListaMusicaManagementComponent,
-      DialogPreviewComponent
+      DialogPreviewArtistaComponent,
+      DialogPreviewAlbumComponent
    ],
    imports: [
       BrowserModule,
