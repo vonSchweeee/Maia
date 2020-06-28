@@ -38,8 +38,10 @@ namespace Maia.Controllers
                 }    
                 return BadRequest(ModelState);   
             }
-            catch(Exception)
+            catch(Exception e)
             {
+                Console.WriteLine(e);
+
                 return this.StatusCode(
                     StatusCodes.Status500InternalServerError, "Falha no banco de dados"
                 );

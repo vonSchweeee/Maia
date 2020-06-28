@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AdminService} from '../../admin.service';
+import {Musica} from '../../../shared/models/Musica';
 
 @Component({
   selector: 'app-lista-musica',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListaMusicaManagementComponent implements OnInit {
 
-  constructor() { }
+  musicas: Musica[] = [];
 
-  ngOnInit(): void {
+  constructor(private admService: AdminService) { }
+
+  ngOnInit() {
+    this.admService.fetchMusicas().subscribe(musicas => {
+      this.musicas = musicas;
+    });
   }
 
 }

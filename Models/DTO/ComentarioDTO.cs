@@ -14,7 +14,7 @@ namespace Maia.Models.DTO
 
         public Comentario ToComentario()
         {
-            return new Comentario();
+            return new Comentario(this);
         }
     }
 }

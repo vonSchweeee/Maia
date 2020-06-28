@@ -136,8 +136,8 @@ namespace Maia.Controllers
                 var posts = await context.Posts
                     .Include(p => p.Usuario)
                     .OrderByDescending(p => p.DataPub)
-                    .Skip((pageParameters.Page - 1) * pageParameters.Size)
-                    .Take(pageParameters.Size)
+                    .Skip((page - 1) * size)
+                    .Take(size)
                     .ToListAsync();
 
                 for (int i = 0; i < posts.Count; i++)

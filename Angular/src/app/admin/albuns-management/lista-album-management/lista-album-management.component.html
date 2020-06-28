@@ -1,1 +1,28 @@
-<p>lista-album works!</p>
+<div class="container-fluid">
+  <div class="col-xs-12">
+    <div class="root-content">
+      <div class="title">
+        <h1>Lista de Álbuns</h1>
+        <!--        <div class="search-section">-->
+        <!--          <input placeholder="Procurar por nome..." class="input-pesquisa">-->
+        <!--          <a mat-icon-button class="btn-pesquisa">-->
+        <!--            <mat-icon style="max-width: 24px; max-height: 24px; height: 24px; width: 24px;">search</mat-icon>-->
+        <!--          </a>-->
+        <!--        </div>-->
+      </div>
+      <div class="lista-artistas">
+        <div class="item-artista" *ngFor="let album of albuns">
+          <mat-card>
+            <div class="card-row">
+              <img class="img-artista" [src]="album.urlImagem">
+              <div class="card-column">
+                <mat-card-title>{{ album.titulo }}</mat-card-title>
+                <mat-card-subtitle>{{ album.dataLanc | date }}</mat-card-subtitle>
+              </div>
+            </div>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

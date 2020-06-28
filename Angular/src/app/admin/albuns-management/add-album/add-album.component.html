@@ -24,6 +24,10 @@
                 </div>
               </div>
             </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>URL do Embed do Spotify</mat-label>
+              <input id="input-url-spotify" matInput name="urlSpotify" formControlName="urlSpotify" (input)="onArtistaTxtChange()" placeholder="https://open.spotify.com/embed/...">
+            </mat-form-field>
             <div formArrayName="musicas" class="form-array-musicas" *ngIf="musicasForm.controls.length > 0">
               Músicas
               <div class="item-musica" *ngFor="let musica of musicasForm.controls; let i = index;" [formGroupName]="i">
@@ -47,11 +51,11 @@
                 <div class="row-musicas">
                   <mat-form-field appearance="outline" class="input-titulo-musica">
                     <mat-label>URL do Embed do Spotify</mat-label>
-                    <input id="input-url-spotify" matInput name="urlSpotify" formControlName="urlSpotify" placeholder="https://open.spotify.com/embed/...">
+                    <input id="input-url-spotify-musica" matInput name="urlSpotify" formControlName="urlSpotify" placeholder="https://open.spotify.com/embed/...">
                   </mat-form-field>
                   <mat-form-field appearance="outline" class="input-titulo-musica">
                     <mat-label>URL para ouvir no YouTube</mat-label>
-                    <input id="input-url-youtube" matInput name="urlYoutube" formControlName="urlSpotify" placeholder="https://open.spotify.com/embed/...">
+                    <input id="input-url-youtube" matInput name="urlYoutube" formControlName="urlSpotify" placeholder="https://www.youtube.com/watch?v=...">
                   </mat-form-field>
                 </div>
               </div>

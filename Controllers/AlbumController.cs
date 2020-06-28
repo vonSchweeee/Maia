@@ -37,10 +37,30 @@ namespace Maia.Controllers
             }
         }
 
+    
+        [HttpGet]
+        [Authorize]
+        public async Task<ActionResult<List<Album>>> Get([FromQuery] PageParameters parameters, [FromServices] MaiaContext context)
+        {
+            int size = parameters.Size;
+            int page = parameters.Page;
+            try 
+            {
+                return await context.Albums
+                    .Skip((page - 1) * size)
+                    .Take(size)
+                    .ToListAsync();
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+        }
+
         [HttpGet]
         [Authorize]
         [Route("id/{id}")]
-        public async Task<ActionResult<List<Album>>> Get([FromRoute] int id, [FromServices] MaiaContext context, [FromQuery] bool includeMusics)
+        public async Task<ActionResult<List<Album>>> GetById([FromRoute] int id, [FromServices] MaiaContext context, [FromQuery] bool includeMusics)
         {
             try
             {

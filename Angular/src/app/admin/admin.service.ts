@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Artista } from '../shared/models/Artista';
 import {baseUrl} from "../shared/settings/settings";
 import {Album} from '../shared/models/Album';
+import {Musica} from '../shared/models/Musica';
 
 @Injectable({
   providedIn: 'root'
@@ -28,4 +29,11 @@ export class AdminService {
     return this.http.post<Album>(baseUrl + "albuns", album);
   }
 
+  fetchMusicas() {
+    return this.http.get<Musica[]>(baseUrl + "musicas");
+  }
+
+  fetchAlbuns() {
+    return this.http.get<Album[]>(baseUrl + "albuns");
+  }
 }

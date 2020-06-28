@@ -41,6 +41,7 @@ export class AddAlbumComponent implements OnInit {
     this.form = this.formBuilder.group({
       titulo: [null, Validators.required],
       artista: [this.artista.nome, Validators.required],
+      urlSpotify: [null],
       musicas: new FormArray([])
     });
     this.form.get('artista').valueChanges.subscribe(value => {
@@ -135,9 +136,9 @@ export class AddAlbumComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(async () => {
       this.loading = true;
-      const urlImagem = await this.imageService.uploadImageArtista(this.image, this.artista.nome);
+      const urlImagem = await this.imageService.uploadImageAlbum(this.image, this.artista.nome);
       if (urlImagem) {
-        this.artista.urlImagem = urlImagem;
+        this.album.urlImagem = urlImagem;
         this.admService.addAlbum(this.album).subscribe(res => {
             this.openSnackBar(`O álbum '${res.titulo}' foi salvo com sucesso!`, "Ok.", 3500);
             if (this.form)
@@ -163,8 +164,40 @@ export class AddAlbumComponent implements OnInit {
 
   onSubmit() {
     console.log(this.form);
-    const {titulo, musicas} = this.form.value;
-    this.album = new Album(titulo, new Date(), '', this.image.src, musicas);
+    const {titulo, musicas, urlSpotify} = this.form.value;
+
+    if (! this.validate(musicas))
+      return;
+
+    console.log({album: new Album(titulo, new Date(), urlSpotify, this.image.src, musicas, this.artista.id)});
+    if (! confirm('Xalimbau?'))
+      return;
+    this.album = new Album(titulo, new Date(), urlSpotify, this.image.src, musicas, this.artista.id);
     this.openDialog();
   }
+
+
+  validate(musicas: Musica[]): boolean {
+    const erros: string[] = [];
+    if (musicas.length < 1)
+      erros.push("Insira pelo menos uma música!");
+    else {
+      musicas.forEach(musica => {
+        if (musica.duracao === '00:00:00' || ! /(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)/gm.test(musica.duracao)) {
+          erros.push(`${musica.titulo}: Insira uma duração no formato HH:mm:ss, que seja diferente de 00:00:00!`);
+        }
+      });
+    }
+    if (! this.artista.id)
+      erros.push("Por favor selecione um artista que aparece nos resultados!");
+
+    if (erros.length > 0) {
+      const mensagem = erros.join('\n');
+      alert(mensagem);
+      return false;
+    }
+    else
+      return true;
+  }
+
 }
