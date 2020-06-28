@@ -2,12 +2,20 @@ img {
   object-fit: contain;
   max-width: 260px;
   max-height: 260px;
-  border-radius: 100%;
+  border-radius: 10%;
   box-shadow: 3px 3px 3px 2px #0007;
   align-self: center;
 }
 
 .content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.main-content {
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -21,4 +29,15 @@ h1 {
 
 button {
   outline: none;
+}
+
+.musica {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+
+}
+
+.container-fluid, .content, .col-xs-12 {
+  height: 100%;
 }

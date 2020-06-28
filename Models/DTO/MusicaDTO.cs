@@ -22,6 +22,7 @@ namespace Maia.Models.DTO
         public DateTime DataLanc { get; set; }
         
         public string UrlSpotify { get; set; }
+        public string UrlYoutube { get; set; }
 
         public Musica ToEntity()
         {

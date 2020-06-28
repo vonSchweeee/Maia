@@ -17,11 +17,7 @@ export class ImageService {
     return new Promise((resolve, reject) => {
       let task: AngularFireUploadTask;
 
-      // Função para substituir qualquer caractere special, acento, espaço ou qualquer coisa
-      // diferenciada por um caractere normal, e espaço por traço.
-      nomeArtista = nomeArtista.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-        .replace(/[^a-zA-Z ]/g, "")
-        .trim().replace(/\s+/g, '-').toLowerCase();
+      nomeArtista = this.normalizarString(nomeArtista);
 
       const idImagem = uuid();
       const path = `img/artistas/${nomeArtista}/${idImagem}`;
@@ -41,4 +37,34 @@ export class ImageService {
     });
   }
 
+  uploadImageAlbum(image: ImageSnippet, nomeAlbum: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+      let task: AngularFireUploadTask;
+      nomeAlbum = this.normalizarString(nomeAlbum);
+
+      const idImagem = uuid();
+      const path = `img/artistas/${nomeAlbum}/${idImagem}`;
+      const ref = this.storage.ref(path);
+      task = this.storage.upload(path, image.file);
+
+      task.snapshotChanges().pipe(
+        finalize(async () => {
+          const url = await ref.getDownloadURL().toPromise();
+          if (typeof(url) === "string")
+            return resolve(url);
+          else {
+            reject("Não foi possível obter a url.");
+          }
+        }),
+      ).subscribe();
+    });
+  }
+
+  // Função para substituir qualquer caractere special, acento, espaço ou qualquer coisa
+  // diferenciada por um caractere normal, e espaço por traço.
+  normalizarString(stringParaNormalizar: string): string {
+    return stringParaNormalizar.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-zA-Z ]/g, "")
+      .trim().replace(/\s+/g, '-').toLowerCase();
+  }
 }

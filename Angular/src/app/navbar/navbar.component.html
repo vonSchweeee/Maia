@@ -14,11 +14,11 @@
       <mat-icon>search</mat-icon>
     </button>
     <div *ngIf="! mobileView">
-      <a mat-button [routerLink]="['/admin']" routerLinkActive="active"  [routerLinkActiveOptions]="{exact: false}" *ngIf="admin"> Admin </a>
-      <a mat-button [routerLink]="['/feed']" routerLinkActive="active"> Feed </a>
-      <a mat-button [routerLink]="['/letras']" routerLinkActive="active"> Letras </a>
-      <a mat-button [routerLink]="['/partituras']" routerLinkActive="active"> Partituras </a>
-      <a mat-button [routerLink]="['/tabs']" routerLinkActive="active"> Tablaturas </a>
+      <a mat-button [routerLink]="['/admin']" routerLinkActive="active"  [routerLinkActiveOptions]="{exact: false}" *ngIf="admin" style="text-decoration: none;"> Admin </a>
+      <a mat-button [routerLink]="['/feed']" routerLinkActive="active" style="text-decoration: none;"> Feed </a>
+      <a mat-button [routerLink]="['/letras']" routerLinkActive="active" style="text-decoration: none;"> Letras </a>
+      <a mat-button [routerLink]="['/partituras']" routerLinkActive="active" style="text-decoration: none;"> Partituras </a>
+      <a mat-button [routerLink]="['/tabs']" routerLinkActive="active" style="text-decoration: none;"> Tablaturas </a>
       <button type="button" mat-icon-button *ngIf="! usuario.urlImagem" style="outline: none" class="btn-usuario" [matMenuTriggerFor]="userMenu">
         <mat-icon class="user-icon">person</mat-icon>
       </button>
@@ -31,6 +31,6 @@
 
 
 <mat-menu #userMenu="matMenu">
-  <button mat-menu-item type="button" style="outline: none; cursor: default; background-color: initial;"> {{ usuario.nome }}</button>
+  <button mat-menu-item type="button" style="outline: none; cursor: default; background-color: initial; pointer-events: none;"> {{ usuario.nome }}</button>
   <button mat-menu-item type="button" style="outline: none" (click)="onLogout()" tabindex="-1">Sair</button>
 </mat-menu>

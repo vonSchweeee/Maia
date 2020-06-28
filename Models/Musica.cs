@@ -23,10 +23,12 @@ namespace Maia.Models
         public int? Faixa { get; set; }
         
         [MaxLength(8)]
+        [RegularExpression("/(?:[01]\\d|2[0123]):(?:[012345]\\d):(?:[012345]\\d)/gm")]
         public string Duracao { get; set; }
         public string UrlImagem { get; set;}
         public DateTime DataLanc { get; set; }
         public string UrlSpotify { get; set; }
+        public string UrlYoutube { get; set; }
 
         [JsonIgnore] 
         public int QuantAcessos { get; set; } = 0;
@@ -50,6 +52,7 @@ namespace Maia.Models
             this.UrlImagem = dto.UrlImagem;
             this.DataLanc = dto.DataLanc;
             this.UrlSpotify = dto.UrlSpotify;
+            this.UrlYoutube = dto.UrlYoutube;
         }
     }
 }

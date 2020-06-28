@@ -1,9 +1,15 @@
 <div class="container-fluid">
   <div class="col-xs-12">
     <div class="content">
-      <img *ngIf="album && album.urlImagem" [src]="album.urlImagem">
-      <h2>{{ album.titulo }}</h2>
-      <p *ngFor="let musica of album.musicas">{{ musica.titulo }}</p>
+      <div class="main-content">
+        <img *ngIf="album && album.urlImagem" [src]="album.urlImagem">
+        <h2>{{ album.titulo }}</h2>
+        <div class="musicas">
+          <div class="musica" *ngFor="let musica of album.musicas">
+            <p>{{ musica.faixa }} - {{ musica.titulo }} ({{ musica.duracao }})</p>
+          </div>
+        </div>
+      </div>
       <button (click)="onConfirm()" class="btn-submit" mat-raised-button color="primary">
         Confirmar
       </button>

@@ -26,6 +26,7 @@ export class AddAlbumComponent implements OnInit {
   resultsClosed = false;
   form: FormGroup;
   album: Album;
+  faixaAtual = 1;
 
   constructor(
     private admService: AdminService,
@@ -40,7 +41,7 @@ export class AddAlbumComponent implements OnInit {
     this.form = this.formBuilder.group({
       titulo: [null, Validators.required],
       artista: [this.artista.nome, Validators.required],
-      musicas: new FormArray([], Validators.required)
+      musicas: new FormArray([])
     });
     this.form.get('artista').valueChanges.subscribe(value => {
       this.onArtistaTxtChange();
@@ -63,16 +64,22 @@ export class AddAlbumComponent implements OnInit {
   addMusica() {
     const musica = this.formBuilder.group({
       titulo: [null, Validators.required],
-      duracao: '00:00:00',
-      dataLanc: [null, Validators.required],
-      urlSpotify: [null, Validators.required],
-      faixa: 0
+      duracao: ['00:00:00'
+        // , Validators.pattern(/(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)/gm)
+      ],
+      urlSpotify: [null],
+      urlYoutube: [null],
+      faixa: this.faixaAtual
     });
     this.musicasForm.push(musica);
+
+    this.faixaAtual++;
   }
 
   deleteMusica(i: number) {
     this.musicasForm.removeAt(i);
+
+    this.faixaAtual--;
   }
 
   async processFile(imageInput: any) {
@@ -126,24 +133,25 @@ export class AddAlbumComponent implements OnInit {
       data: this.album
     });
 
-  //   dialogRef.afterClosed().subscribe(async () => {
-  //     this.loading = true;
-  //     const urlImagem = await this.imageService.uploadImageArtista(this.image, this.artista.nome);
-  //     if (urlImagem) {
-  //       this.artista.urlImagem = urlImagem;
-  //       this.admService.addArtista(this.artista).subscribe(res => {
-  //           this.openSnackBar(`O artista '${res.nome}' foi salvo com sucesso!`, "Ok.", 3500);
-  //           // if (this.formArtista)
-  //           //   this.formArtista.reset();
-  //           this.image = undefined;
-  //           this.loading = false;
-  //         },
-  //         erro => {
-  //           this.openSnackBar(`Erro: ${erro}`, "Ok.", 3500);
-  //           this.loading = false;
-  //         });
-  //     }
-  //   });
+    dialogRef.afterClosed().subscribe(async () => {
+      this.loading = true;
+      const urlImagem = await this.imageService.uploadImageArtista(this.image, this.artista.nome);
+      if (urlImagem) {
+        this.artista.urlImagem = urlImagem;
+        this.admService.addAlbum(this.album).subscribe(res => {
+            this.openSnackBar(`O álbum '${res.titulo}' foi salvo com sucesso!`, "Ok.", 3500);
+            if (this.form)
+              this.form.reset();
+            this.image = undefined;
+            this.loading = false;
+          },
+          erro => {
+            this.openSnackBar(`Erro: ${erro}`, "Ok.", 3500);
+            this.loading = false;
+            console.log(erro);
+          });
+      }
+    });
   }
 
   openSnackBar(message: string, action: string, duration: number, error: boolean = false) {
@@ -154,8 +162,9 @@ export class AddAlbumComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log(this.form);
     const {titulo, musicas} = this.form.value;
-    this.album = new Album(titulo, new Date(), '', '', musicas);
+    this.album = new Album(titulo, new Date(), '', this.image.src, musicas);
     this.openDialog();
   }
 }
