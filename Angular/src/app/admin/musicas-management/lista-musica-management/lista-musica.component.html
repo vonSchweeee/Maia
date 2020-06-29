@@ -12,15 +12,17 @@
       </div>
       <div class="lista-artistas">
         <div class="item-artista" *ngFor="let musica of musicas">
-          <mat-card>
-            <div class="card-row">
-              <img class="img-artista" [src]="musica.urlImagem">
-              <div class="card-column">
-                <mat-card-title>{{ musica.titulo }}</mat-card-title>
-                <mat-card-subtitle>{{ musica.duracao }}</mat-card-subtitle>
+          <a mat-button (click)="onMusicaClick(musica)">
+            <mat-card>
+              <div class="card-row">
+                <img class="img-artista" [src]="musica.urlImagem">
+                <div class="card-column">
+                  <mat-card-title>{{ musica.titulo }}</mat-card-title>
+                  <mat-card-subtitle>{{ musica.duracao }}</mat-card-subtitle>
+                </div>
               </div>
-            </div>
-          </mat-card>
+            </mat-card>
+          </a>
         </div>
       </div>
     </div>

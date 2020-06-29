@@ -44,6 +44,7 @@ import { AuthInterceptorService } from './shared/auth/auth-interceptor.service';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import {DialogPreviewArtistaComponent} from "./admin/artistas-management/add-artista/dialog-preview-artista/dialog-preview-artista.component";
 import {DialogPreviewAlbumComponent} from "./admin/albuns-management/add-album/dialog-preview-album/dialog-preview-album.component";
+import {MusicaComponent} from './musica/musica.component';
 
 @NgModule({
    declarations: [
@@ -73,7 +74,8 @@ import {DialogPreviewAlbumComponent} from "./admin/albuns-management/add-album/d
       AddMusicaComponent,
       ListaMusicaManagementComponent,
       DialogPreviewArtistaComponent,
-      DialogPreviewAlbumComponent
+      DialogPreviewAlbumComponent,
+      MusicaComponent
    ],
    imports: [
       BrowserModule,

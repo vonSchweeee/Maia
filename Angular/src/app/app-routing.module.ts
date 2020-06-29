@@ -22,6 +22,7 @@ import {AddMusicaComponent} from './admin/musicas-management/add-musica/add-musi
 import {ListaAlbumManagementComponent} from './admin/albuns-management/lista-album-management/lista-album-management.component';
 import {AddAlbumComponent} from './admin/albuns-management/add-album/add-album.component';
 import {RegistroComponent} from "./registro/registro.component";
+import {MusicaComponent} from './musica/musica.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent, canActivate: [AuthGuard]},
@@ -53,8 +54,9 @@ const routes: Routes = [
         ]},
   ]},
   {path: 'registro', component: RegistroComponent},
+  {path: 'musica/:id', canActivate: [AuthGuard], component: MusicaComponent},
   {path: '**', redirectTo: 'login'}
-]
+];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

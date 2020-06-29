@@ -34,5 +34,7 @@ namespace Maia.Controllers
                 throw e;
             }
         }
+
+        // TODO: Fazer um endpoint que pegue tudo necessário para a página de música.
     }
 }
