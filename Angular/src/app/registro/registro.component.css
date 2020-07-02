@@ -1,0 +1,66 @@
+.container-fluid {
+  height: 100%;
+}
+
+.col-xs-12 {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  margin-bottom: 25px;
+}
+
+.form-registro {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  max-width: 620px;
+  width: 90%;
+  max-height: 500px;
+  height: 80%;
+}
+
+.mat-card {
+  max-width: 600px;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+  max-height: 600px;
+  height: 90%;
+  padding-top: 30px;
+}
+
+button {
+  outline: none;
+}
+
+.error-message {
+  color: #fa0000;
+}
+
+.btn-registro {
+  margin-top: auto;
+  margin-bottom: 40px;
+}
+
+mat-icon {
+  transform: scale(3);
+  margin: 30px;
+  margin-bottom: 50px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.mat-progress-spinner {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

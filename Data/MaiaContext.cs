@@ -12,8 +12,9 @@ namespace Maia.Data
         public MaiaContext(DbContextOptions options) : base(options) { }
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Artista> Artistas { get; set;}
-        public DbSet<Album> Albums {get; set;}
         public DbSet<Musica> Musicas { get; set; }
+        public DbSet<ArtistaMusica> ArtistaMusicas { get; set; }
+        public DbSet<Album> Albums {get; set;}
         public DbSet<Post> Posts { get; set; }
         public DbSet<Avaliacao> Avaliacoes { get; set; }
         public DbSet<Favorito> Favoritos { get; set; }
@@ -40,13 +41,15 @@ namespace Maia.Data
 
             modelBuilder.Entity<ArtistaMusica>()
                 .HasKey(am => new { am.ArtistaId, am.MusicaId});
+                
             modelBuilder.Entity<ArtistaMusica>()
                 .HasOne(am => am.Artista)
-                .WithMany(a => a.ArtistasMusicas)
+                .WithMany(a => a.ArtistaMusicas)
                 .HasForeignKey(am => am.ArtistaId);
+
             modelBuilder.Entity<ArtistaMusica>()
                 .HasOne(am => am.Musica)
-                .WithMany(m => m.ArtistasMusicas)
+                .WithMany(m => m.ArtistaMusicas)
                 .HasForeignKey(am => am.MusicaId);
         }
         

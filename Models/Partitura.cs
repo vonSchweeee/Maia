@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Maia.Models.Interfaces;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace Maia.Models
 {

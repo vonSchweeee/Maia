@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using Maia.Models.Interfaces;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 using Maia.Models.DTO;
 
 namespace Maia.Models
@@ -22,7 +22,7 @@ namespace Maia.Models
         [JsonIgnore] 
         public int QuantAcessos { get; set; } = 0;
         
-        public ICollection<ArtistaMusica> ArtistasMusicas { get; set; }
+        public List<ArtistaMusica> ArtistaMusicas { get; set; }
         public List<Album> Albuns { get; set; }
         
         public Artista() { }

@@ -57,9 +57,10 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
       duration,
       panelClass: [error ? 'snackbar-error' : 'snackbar-success']
     });
-    setTimeout(() => {
-      this.router.navigate(['/feed']);
-    }, 1100);
+    if (! error)
+      setTimeout(() => {
+        this.router.navigate(['/feed']);
+      }, 1100);
   }
   ngOnDestroy() {
   if (this.userSub) {

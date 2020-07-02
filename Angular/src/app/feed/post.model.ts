@@ -1,5 +1,5 @@
 import { Usuario } from '../shared/models/Usuario';
-import {Comentario} from './comentario.model';
+import { Comentario } from './comentario.model';
 
 export class Post {
   constructor(
@@ -18,15 +18,14 @@ export class Post {
     public favoritado?: boolean
   ) { }
 
-  set Usuario(usuario: Usuario)
-  {
-    if (usuario.id)
-    {
-      this.usuario = usuario;
-    }
-    else
-    {
-      throw new Error('Id de usuário nulo');
-    }
-  }
+  // setUsuario(usuario: Usuario) {
+  //   if (usuario.id)
+  //   {
+  //     this.usuario = usuario;
+  //   }
+  //   else
+  //   {
+  //     throw new Error('Id de usuário nulo');
+  //   }
+  // }
 }

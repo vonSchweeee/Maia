@@ -103,4 +103,14 @@ export class AuthService {
       return null;
     }
   }
+
+
+
+  registrar(email: string, nome: string, senha: string) {
+    const body = {email, nome, senha};
+    return this.http.post<ILoginResponse>(baseUrl + 'registro', body)
+      .pipe(tap(res => this.handleAuthentication(res, false)));
+  }
+
+
 }

@@ -43,7 +43,7 @@ export class PostWriterComponent implements OnInit {
       this.feedService.makePost(post).subscribe(post => {
         this.loading = false;
         const newPosts = this.feedService.postsSubj.value;
-        post.Usuario = usuario;
+        post.usuario = usuario;
         newPosts.unshift(post);
         this.feedService.postsSubj.next(newPosts);
         form.reset();

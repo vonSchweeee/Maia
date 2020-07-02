@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using Maia.Models.DTO;
 using Maia.Models.Interfaces;

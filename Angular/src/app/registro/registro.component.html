@@ -1,14 +1,29 @@
-<div class="col-xs-12">
-  <h1>Registro</h1>
-  <hr>
-  <form class="form-group">
-    <label for="email-input">E-mail</label>
-    <input type="text" name="email" id="email-input" class="form-control" placeholder="Insira seu e-mail...">
-    <label for="nome-input">Nome</label>
-    <input type="text" name="nome" id="nome-input" class="form-control" placeholder="Nome" >
-    <label for="password-input">Senha</label>
-    <input type="password" name="senha" id="password-input" class="form-control" placeholder="Mínimo de 6 caracteres...">
-    <br>
-    <button class="btn btn-outline-primary" (click)="registrar()">Registrar-se</button>
-  </form>
+<div class="container-fluid">
+  <div class="col-xs-12">
+    <mat-card>
+      <mat-icon class="icon-reg">account_circle</mat-icon>
+      <mat-card-title class="title">Registro</mat-card-title>
+      <form class="form-registro" #f="ngForm" (ngSubmit)="registrar(f)">
+        <mat-form-field appearance="outline">
+          <mat-label for="email-input">E-mail</mat-label>
+          <input matInput ngModel name="email" id="email-input" placeholder="Insira seu e-mail..." email required>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label for="senha-input">Senha</mat-label>
+          <input matInput ngModel type="password" name="senha" id="senha-input" placeholder="Minímo de 6 caracteres." required minlength="6">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label for="confirm-senha-input">Confirmar Senha</mat-label>
+          <input matInput ngModel type="password" name="confirmSenha" id="confirm-senha-input" placeholder="Confirme sua senha." required>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label for="nome-input">Nome</mat-label>
+          <input matInput ngModel name="nome" id="nome-input" placeholder="Insira seu nome..." required>
+        </mat-form-field>
+        <mat-spinner *ngIf="loading" [color]="'accent'" [diameter]="50"></mat-spinner>
+        <button mat-raised-button color="accent" [disabled]="f.invalid || loading" class="btn-registro">Registrar-se</button>
+        <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+      </form>
+    </mat-card>
+  </div>
 </div>

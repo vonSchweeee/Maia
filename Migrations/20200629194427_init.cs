@@ -85,6 +85,7 @@ namespace Maia.Migrations
                     UrlImagem = table.Column<string>(nullable: true),
                     DataLanc = table.Column<DateTime>(nullable: false),
                     UrlSpotify = table.Column<string>(nullable: true),
+                    UrlYoutube = table.Column<string>(nullable: true),
                     QuantAcessos = table.Column<int>(nullable: false),
                     MediaNota = table.Column<byte>(nullable: false),
                     QuantAvaliacoes = table.Column<int>(nullable: false),
@@ -102,7 +103,7 @@ namespace Maia.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ArtistaMusica",
+                name: "ArtistaMusicas",
                 columns: table => new
                 {
                     ArtistaId = table.Column<int>(nullable: false),
@@ -110,15 +111,15 @@ namespace Maia.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ArtistaMusica", x => new { x.ArtistaId, x.MusicaId });
+                    table.PrimaryKey("PK_ArtistaMusicas", x => new { x.ArtistaId, x.MusicaId });
                     table.ForeignKey(
-                        name: "FK_ArtistaMusica_Artistas_ArtistaId",
+                        name: "FK_ArtistaMusicas_Artistas_ArtistaId",
                         column: x => x.ArtistaId,
                         principalTable: "Artistas",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ArtistaMusica_Musicas_MusicaId",
+                        name: "FK_ArtistaMusicas_Musicas_MusicaId",
                         column: x => x.MusicaId,
                         principalTable: "Musicas",
                         principalColumn: "Id",
@@ -165,6 +166,7 @@ namespace Maia.Migrations
                     Ativo = table.Column<bool>(nullable: false),
                     MusicaId = table.Column<long>(nullable: false),
                     UsuarioId = table.Column<int>(nullable: false),
+                    Titulo = table.Column<string>(maxLength: 90, nullable: true),
                     UrlPdf = table.Column<string>(nullable: false),
                     QuantAcessos = table.Column<int>(nullable: false)
                 },
@@ -236,8 +238,11 @@ namespace Maia.Migrations
                     Ativo = table.Column<bool>(nullable: false),
                     MusicaId = table.Column<long>(nullable: false),
                     UsuarioId = table.Column<int>(nullable: false),
+                    Titulo = table.Column<string>(maxLength: 90, nullable: true),
                     Texto = table.Column<string>(nullable: true),
                     TextoHtml = table.Column<string>(nullable: true),
+                    Afinacao = table.Column<string>(maxLength: 8, nullable: true),
+                    Descricao = table.Column<string>(maxLength: 140, nullable: true),
                     QuantAcessos = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -321,8 +326,8 @@ namespace Maia.Migrations
                 column: "ArtistaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ArtistaMusica_MusicaId",
-                table: "ArtistaMusica",
+                name: "IX_ArtistaMusicas_MusicaId",
+                table: "ArtistaMusicas",
                 column: "MusicaId");
 
             migrationBuilder.CreateIndex(
@@ -411,7 +416,7 @@ namespace Maia.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ArtistaMusica");
+                name: "ArtistaMusicas");
 
             migrationBuilder.DropTable(
                 name: "Comentarios");

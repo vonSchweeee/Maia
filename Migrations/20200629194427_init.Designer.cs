@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Maia.Migrations
 {
     [DbContext(typeof(MaiaContext))]
-    [Migration("20200622014621_init")]
+    [Migration("20200629194427_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -101,7 +101,7 @@ namespace Maia.Migrations
 
                     b.HasIndex("MusicaId");
 
-                    b.ToTable("ArtistaMusica");
+                    b.ToTable("ArtistaMusicas");
                 });
 
             modelBuilder.Entity("Maia.Models.Comentario", b =>
@@ -247,6 +247,9 @@ namespace Maia.Migrations
                     b.Property<string>("UrlSpotify")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<string>("UrlYoutube")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AlbumId");
@@ -268,6 +271,10 @@ namespace Maia.Migrations
 
                     b.Property<int>("QuantAcessos")
                         .HasColumnType("int");
+
+                    b.Property<string>("Titulo")
+                        .HasColumnType("varchar(90) CHARACTER SET utf8mb4")
+                        .HasMaxLength(90);
 
                     b.Property<string>("UrlPdf")
                         .IsRequired()
@@ -334,8 +341,16 @@ namespace Maia.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
+                    b.Property<string>("Afinacao")
+                        .HasColumnType("varchar(8) CHARACTER SET utf8mb4")
+                        .HasMaxLength(8);
+
                     b.Property<bool>("Ativo")
                         .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Descricao")
+                        .HasColumnType("varchar(140) CHARACTER SET utf8mb4")
+                        .HasMaxLength(140);
 
                     b.Property<long>("MusicaId")
                         .HasColumnType("bigint");
@@ -348,6 +363,10 @@ namespace Maia.Migrations
 
                     b.Property<string>("TextoHtml")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Titulo")
+                        .HasColumnType("varchar(90) CHARACTER SET utf8mb4")
+                        .HasMaxLength(90);
 
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int");
@@ -493,7 +512,7 @@ namespace Maia.Migrations
 
             modelBuilder.Entity("Maia.Models.Musica", b =>
                 {
-                    b.HasOne("Maia.Models.Album", null)
+                    b.HasOne("Maia.Models.Album", "Album")
                         .WithMany("Musicas")
                         .HasForeignKey("AlbumId");
                 });

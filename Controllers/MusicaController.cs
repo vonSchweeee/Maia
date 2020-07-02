@@ -35,6 +35,31 @@ namespace Maia.Controllers
             }
         }
 
-        // TODO: Fazer um endpoint que pegue tudo necessário para a página de música.
+        [HttpGet]
+        [Authorize]
+        [Route("id/{id}")]
+        public async Task<ActionResult<object>> GetByIdWithInfo([FromRoute] int id, [FromServices] MaiaContext context)
+        {
+            try
+            {
+                var musica = await context.Musicas.Where(m => m.Id == id).FirstOrDefaultAsync();
+                var album = await context.Albums.Where(a => a.Id == musica.AlbumId).FirstOrDefaultAsync();
+                var artista = await context.Artistas.Where(a => a.Id == album.ArtistaId).FirstOrDefaultAsync();
+
+                musica.Album = album;
+                musica.ArtistaMusicas = new List<ArtistaMusica>()
+                {
+                    new ArtistaMusica()
+                    {
+                        Artista = artista
+                    }
+                };
+                return musica;
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }

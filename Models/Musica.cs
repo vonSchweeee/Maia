@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Maia.Models.Interfaces;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 using Maia.Models.DTO;
 
 namespace Maia.Models
@@ -38,9 +38,9 @@ namespace Maia.Models
 
         public int QuantAvaliacoes { get; set; } = 0;
         
-        public ICollection<ArtistaMusica> ArtistasMusicas { get; set; }
+        public List<ArtistaMusica> ArtistaMusicas { get; set; }
         public int? AlbumId { get; set; }
-        
+        public Album Album { get; set; }
         public Musica() { }
 
         public Musica(MusicaDTO dto)

@@ -99,7 +99,7 @@ namespace Maia.Migrations
 
                     b.HasIndex("MusicaId");
 
-                    b.ToTable("ArtistaMusica");
+                    b.ToTable("ArtistaMusicas");
                 });
 
             modelBuilder.Entity("Maia.Models.Comentario", b =>
@@ -510,7 +510,7 @@ namespace Maia.Migrations
 
             modelBuilder.Entity("Maia.Models.Musica", b =>
                 {
-                    b.HasOne("Maia.Models.Album", null)
+                    b.HasOne("Maia.Models.Album", "Album")
                         .WithMany("Musicas")
                         .HasForeignKey("AlbumId");
                 });

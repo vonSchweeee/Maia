@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 
 namespace Maia
 {
@@ -30,8 +31,9 @@ namespace Maia
                 (Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<MaiaContext, MaiaContext>();
             services.AddCors();
-            services.AddControllersWithViews().AddJsonOptions(options => {
-                options.JsonSerializerOptions.IgnoreNullValues = true;
+            services.AddControllersWithViews().AddNewtonsoftJson(options => {
+                options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
 
             var key = Encoding.ASCII.GetBytes(Configuration.GetSection("Jwt").GetValue<string>("Key"));
