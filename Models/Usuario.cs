@@ -1,17 +1,14 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
-using Maia.Models.DTO;
-using Maia.Models.Interfaces;
+using Maia.Utils.DTO;
+using Maia.Utils.Abstracts;
 
-namespace Maia.Models
+namespace Maia.Utils
 {
     
-    public class Usuario : IEntidade<int>
+    public class Usuario : Entidade<int>
     {
-        [Key]
-        public int Id { get; set; }        
-
         [Required]
         [EmailAddress]
         public string Email { get; set; }
@@ -30,10 +27,6 @@ namespace Maia.Models
         public string Role { get; set; } = "user";
         
         public string UrlImagem { get; set; }
-
-        [JsonIgnore]
-        [DefaultValue(true)]
-        public bool Ativo { get; set; } = true;
 
         public Usuario(string email, string senha, string nome)
         {

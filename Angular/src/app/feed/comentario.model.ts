@@ -7,6 +7,7 @@ export class Comentario {
    public usuario: Usuario;
    public postId: number;
    public respostas: any[];
+   public dataPub: Date;
 
 
   constructor(texto: string, usuarioId: number, postId: number) {

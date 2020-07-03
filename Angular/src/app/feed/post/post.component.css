@@ -25,6 +25,10 @@
   cursor: pointer;
 }
 
+.row {
+  margin: 0;
+}
+
 hr {
   margin-bottom: 0;
   float: left;

@@ -2,20 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using Maia.Models.Interfaces;
-using Maia.Models.DTO;
+using Maia.Utils.Abstracts;
+using Maia.Utils.DTO;
 using Newtonsoft.Json;
 
-namespace Maia.Models
+namespace Maia.Utils
 {
-    public class Album : IEntidade<int>
+    public class Album : Entidade<int>
     {
-        public int Id { get; set; }
-        
-        [JsonIgnore] 
-        [DefaultValue(true)] 
-        public bool Ativo { get; set; } = true;
-        
         [Required]
         public string Titulo { get; set; }
         

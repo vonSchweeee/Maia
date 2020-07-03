@@ -1,22 +1,18 @@
 using System.ComponentModel;
-using Maia.Models.DTO;
-using Maia.Models.Interfaces;
+using Maia.Utils.Abstracts;
+using Maia.Utils.DTO;
 using Newtonsoft.Json;
 
-namespace Maia.Models
+namespace Maia.Utils
 {
-    public class Favorito : IEntidade<long>
+    public class Favorito : Entidade<long>
     {
-        public long Id { get; set; }
         public int UsuarioId { get; set; }
         // public Usuario Usuario { get; set; }
         public int PostId { get; set; }
         // public Post Post { get; set; }
         public long? ComentarioId { get; set; }
-
-        [JsonIgnore] 
-        [DefaultValue(true)] 
-        public bool Ativo { get; set; } = true;
+        
         
         public Favorito() { }
 

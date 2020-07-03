@@ -1,4 +1,4 @@
-namespace Maia.Models
+namespace Maia.Utils
 {
     public class PageParameters
 	{

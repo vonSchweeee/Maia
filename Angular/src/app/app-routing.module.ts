@@ -29,7 +29,7 @@ const routes: Routes = [
   {path: 'feed', component: FeedComponent, canActivate: [AuthGuard]},
   {path: 'posts', canActivate: [AuthGuard], children: [
     {path: 'tag/:id', component: SearchComponent, resolve: { posts: SearchResolverService }},
-    {path: ':id', component: PostScreenComponent, resolve: { post: PostResolverService }},
+    {path: 'id/:id', component: PostScreenComponent, resolve: { post: PostResolverService }},
   ]},
   {path: 'letras', canActivate: [AuthGuard], children: [
     {path: '', component: LetrasComponent}

@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace Maia.Models
+namespace Maia.Utils
 {
     public class Resposta : Comentario
     {

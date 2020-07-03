@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Maia.Models
+namespace Maia.Utils
 {
     public class Avaliacao : Post
     {

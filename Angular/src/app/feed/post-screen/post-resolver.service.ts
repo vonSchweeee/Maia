@@ -15,7 +15,7 @@ export class PostResolverService implements Resolve<Post> {
     ) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    return this.feedService.fetchPost(+route.url[0].path)
+    return this.feedService.fetchPost(+route.params.id)
     .pipe(tap(post => {
       if (! post)
         this.router.navigate(['/feed']);

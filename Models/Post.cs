@@ -4,13 +4,12 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Newtonsoft.Json;
-using Maia.Models.Interfaces;
+using Maia.Utils.Abstracts;
 
-namespace Maia.Models
+namespace Maia.Utils
 {
-    public class Post : IEntidade<int>
-    {   
-        public int Id { get; set; }
+    public class Post : Entidade<int>
+    {
         public string Titulo { get; set; }
         public string Texto { get; set; }
         public int QuantFav { get; set; } = 0;
@@ -22,9 +21,6 @@ namespace Maia.Models
         public Usuario Usuario { get; set; }
         [NotMapped] 
         public bool Favoritado { get; set; }
-        [JsonIgnore] 
-        [DefaultValue(true)] 
-        public bool Ativo { get; set; } = true;
         public List<Favorito> Favoritos { get; set; }
         public List<Comentario> Comentarios { get; set;}
         

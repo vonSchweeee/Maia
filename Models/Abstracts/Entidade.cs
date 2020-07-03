@@ -1,6 +1,6 @@
-﻿namespace Maia.Models.Interfaces
+﻿namespace Maia.Utils.Abstracts
 {
-    public interface IEntidade<T>
+    public abstract class Entidade<T>
     { 
         public T Id { get; set; }
         public bool Ativo { get; set; }

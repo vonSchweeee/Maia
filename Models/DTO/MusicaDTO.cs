@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Maia.Models.DTO
+namespace Maia.Utils.DTO
 {
     public class MusicaDTO
     {

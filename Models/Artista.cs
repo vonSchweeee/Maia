@@ -1,18 +1,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
-using Maia.Models.Interfaces;
 using Newtonsoft.Json;
-using Maia.Models.DTO;
+using Maia.Utils.Abstracts;
+using Maia.Utils.DTO;
 
-namespace Maia.Models
+namespace Maia.Utils
 {
-    public class Artista : IEntidade<int>
+    public class Artista : Entidade<int>
     {
-        public int Id { get; set; }
-
-        [JsonIgnore] 
-        [DefaultValue(true)] 
-        public bool Ativo { get; set; } = true;
         public string Nome { get; set; }
         public string Biografia { get; set; }
         public string UrlImagem { get; set; }

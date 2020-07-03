@@ -4,8 +4,8 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Maia.Data;
-using Maia.Models;
-using Maia.Models.DTO;
+using Maia.Utils;
+using Maia.Utils.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -25,7 +25,10 @@ namespace Maia.Controllers
         {
             try
             {
-                return await context.Posts.Include(p => p.Usuario).Where(p => p.Id == postId).FirstOrDefaultAsync();
+                return await context.Posts
+                        .Include(p => p.Usuario)
+                        .Include(p => p.Comentarios)
+                        .Where(p => p.Id == postId).FirstOrDefaultAsync();
             }
             catch(Exception)
             {

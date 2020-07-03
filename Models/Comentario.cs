@@ -1,26 +1,26 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
-using Maia.Models.DTO;
-using Maia.Models.Interfaces;
+using Maia.Utils.Abstracts;
+using Maia.Utils.DTO;
 
-namespace Maia.Models
+namespace Maia.Utils
 {
-    public class Comentario : IEntidade<long>
-    {
-        public long Id { get; set; }
-        
-        [JsonIgnore] 
-        [DefaultValue(true)] 
-        public bool Ativo { get; set; } = true;
+    public class Comentario : Entidade<long>
+    { 
         public string Texto { get; set; }
+        
         [Required]
         public int UsuarioId { get; set;}
         public Usuario Usuario { get; set;}
+        
         [JsonIgnore]
         public int PostId { get; set; }
 
+        public DateTime DataPub { get; set; } = DateTime.Now;
+        
         public List<Resposta> Respostas { get; set; }
 
         public Comentario() { }
