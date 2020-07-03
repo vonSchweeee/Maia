@@ -13,6 +13,7 @@ export class MusicaComponent implements OnInit {
 
   musica: Musica;
   urlSpotify: SafeResourceUrl;
+  biografia: string;
 
   constructor(private mscService: MusicaService, private route: ActivatedRoute, private sanitizer: DomSanitizer) {}
 
@@ -30,9 +31,8 @@ export class MusicaComponent implements OnInit {
     try {
       this.mscService.fetchDetailedMusicaById(id).subscribe(res => {
         this.musica = res;
-        console.log(res);
-        console.log(this.musica.urlSpotify);
         this.urlSpotify = this.sanitizer.bypassSecurityTrustResourceUrl(this.musica.urlSpotify);
+        this.biografia = this.musica.artistaMusicas[0].artista.biografia.replace(/\n/g, '<br><br>');
       });
     }
     catch (e) {

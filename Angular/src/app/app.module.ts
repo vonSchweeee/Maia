@@ -45,6 +45,7 @@ import { NgxMaskModule, IConfig } from 'ngx-mask';
 import {DialogPreviewArtistaComponent} from "./admin/artistas-management/add-artista/dialog-preview-artista/dialog-preview-artista.component";
 import {DialogPreviewAlbumComponent} from "./admin/albuns-management/add-album/dialog-preview-album/dialog-preview-album.component";
 import {MusicaComponent} from './musica/musica.component';
+import {LineBreakHtmlPipe} from './line-break-html.pipe';
 
 @NgModule({
    declarations: [
@@ -75,7 +76,8 @@ import {MusicaComponent} from './musica/musica.component';
       ListaMusicaManagementComponent,
       DialogPreviewArtistaComponent,
       DialogPreviewAlbumComponent,
-      MusicaComponent
+      MusicaComponent,
+      LineBreakHtmlPipe
    ],
    imports: [
       BrowserModule,

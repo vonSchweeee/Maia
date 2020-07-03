@@ -73,3 +73,46 @@ p {
   -moz-box-shadow: -8px 5px 20px 1px rgba(0,0,0,0.75);
   box-shadow: -8px 5px 20px 1px rgba(0,0,0,0.75);
 }
+
+.txt-artistas {
+  font-size: 2.2em;
+  text-align: center;
+  margin-bottom: 2px;
+  color: #FFF;
+}
+
+.img-artista {
+  border-radius: 50%;
+  max-width: 350px;
+  width: 100%;
+}
+
+.nome-artista {
+  font-size: 1.8em;
+  font-weight: 500;
+  color: #111111;
+}
+
+.txt-sobre {
+  color: #222;
+  font-size: 1.5em;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.txt-biografia {
+  color: #333;
+  font-size: 1em;
+  text-align: justify;
+}
+
+.info-artista {
+  max-width: 350px;
+}
+
+.divider-sobre {
+  width: 100%;
+  height: 1px;
+  border-radius: 5px;
+  background-color: #9998;
+}
