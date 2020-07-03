@@ -44,7 +44,7 @@ hr {
 }
 
 .public-icon {
-  font-size: 15px;
+  font-size: 16px;
   padding: 0;
   align-self: flex-start;
   justify-self: flex-start;
@@ -75,6 +75,7 @@ hr {
 .username {
   color: #000;
   font-weight: bold;
+  font-size: 1.1em;
 }
 
 h5 {
@@ -153,4 +154,21 @@ h3 {
 
 .space-between {
   justify-content: space-between;
+}
+
+.more-size {
+  transform: scale(1.1);
+}
+
+.txt-horario {
+  font-size: 1em;
+  color: #000;
+}
+
+a {
+  color: #888;
+}
+
+a:hover {
+  color: #000;
 }

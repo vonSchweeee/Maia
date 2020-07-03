@@ -14,7 +14,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   usuario: Usuario;
   usuarioSub: Subscription;
-  mobileView = false;
   searching = false;
   pesquisa = '';
   admin = false;
@@ -26,7 +25,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.usuarioSub = this.authService.usuarioSubj
       .subscribe(usuario => this.usuario = usuario);
-    this.mobileView = window.screen.width < 530;
   }
 
   ngOnDestroy() {
@@ -36,7 +34,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   onLogout() {
-    console.log('saiu hein');
     this.authService.logout();
   }
 

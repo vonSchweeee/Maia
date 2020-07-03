@@ -1,10 +1,12 @@
 ﻿import {ArtistaMusica} from './ArtistaMusica';
+import {Album} from "./Album";
 
 export class Musica {
   public mediaNota?: number;
   public id?: number;
   public quantAvaliacoes?: number;
   public artistaMusicas: ArtistaMusica[];
+  public album: Album;
 
   constructor(
     public titulo: string,
@@ -15,5 +17,6 @@ export class Musica {
     public urlSpotify?: string,
     public urlYoutube?: string,
     public urlImagem?: string,
+    public albumId?: string,
   ) { }
 }

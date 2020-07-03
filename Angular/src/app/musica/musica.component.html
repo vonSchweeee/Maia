@@ -1,12 +1,37 @@
 <div class="root">
-  <div class="flex-row0" *ngIf="musica">
+  <div class="flex-row0 content-root" *ngIf="musica">
     <div class="flex-column0 center info-musica">
       <img [src]="musica.urlImagem" class="img-musica">
       <p class="text-center nome-musica"> {{ musica.titulo }}</p>
+      <p class="nome-album-musica">{{ musica.album.titulo }}</p>
       <p class="text-center duracao-musica"> {{ musica.duracao }}</p>
       <iframe [src]="urlSpotify" class="iframe-spotify" width="320" height="390" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
     </div>
-    <div class="flex-column0 center" *ngIf="musica && musica.artistaMusicas">
+    <div class="flex-column1 center center-content">
+      <a mat-button [routerLink]="['/letras/id/' + musica.id]" class="component-center">
+        <mat-card class="card-material">
+          <mat-card-content>
+            <div class="flex-row1 center">
+              <img [src]="musica.urlImagem" class="img-musica img-musica-letra">
+              <p class="txt-letra">Veja a letra de {{ musica.titulo }}</p>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </a>
+      <mat-card class="card-material component-center">
+        <mat-card-title>Partituras</mat-card-title>
+        <mat-card-content>
+
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="card-material component-center">
+        <mat-card-title>Tablaturas</mat-card-title>
+        <mat-card-content>
+
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="flex-column0 center info-artistas" *ngIf="musica && musica.artistaMusicas">
       <p class="txt-artistas">{{ musica.artistaMusicas.length > 1 ? 'Sobre os artistas' : 'Sobre o artista' }}</p>
       <mat-card>
         <mat-card-content>

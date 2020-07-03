@@ -48,3 +48,16 @@ h1 {
   width: 70%;
   padding-left: 10px;
 }
+
+.btn-menu {
+  display: none;
+}
+
+@media (max-width: 1165px) {
+  .btn-menu {
+    display: initial;
+  }
+  .navigators-pc {
+    display: none;
+  }
+}

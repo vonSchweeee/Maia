@@ -1,6 +1,6 @@
 <mat-toolbar class="navbar-maia">
   <mat-toolbar-row>
-    <button mat-icon-button class="btn-menu" *ngIf="mobileView">
+    <button mat-icon-button class="btn-menu">
       <mat-icon class="disable-select">menu</mat-icon>
     </button>
     <h1>Maia</h1>
@@ -13,7 +13,7 @@
     <button type="button" mat-icon-button aria-label="pesquisar" (click)="onSearch()" style="outline: none">
       <mat-icon>search</mat-icon>
     </button>
-    <div *ngIf="! mobileView">
+    <div class="navigators-pc">
       <a mat-button [routerLink]="['/admin']" routerLinkActive="active"  [routerLinkActiveOptions]="{exact: false}" *ngIf="admin" style="text-decoration: none;"> Admin </a>
       <a mat-button [routerLink]="['/feed']" routerLinkActive="active" style="text-decoration: none;"> Feed </a>
       <a mat-button [routerLink]="['/letras']" routerLinkActive="active" style="text-decoration: none;"> Letras </a>

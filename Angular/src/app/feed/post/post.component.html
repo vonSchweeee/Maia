@@ -10,15 +10,15 @@
         <img [src]="post && post.usuario && post.usuario.urlImagem ? post.usuario.urlImagem
           : 'assets/img/user-default.png'" [ngStyle]="{'border': post && post.usuario &&
            post.usuario.urlImagem ? 'initial' : 'none'}"
-             style="justify-self: flex-start;" class="avatar less-size">
+             style="justify-self: flex-start;" class="avatar more-size">
         <div style="display: flex; flex: 1; flex-direction: column">
           <div class="username">
             {{ post.usuario && post.usuario.nome }}
           </div>
           <div class="datetime" style="display: flex; flex-direction: row;">
-            <div>
+            <a [routerLink]="['/posts/id/' + post.id]" class="txtHorario">
               {{ post.dataPub && post.dataPub | date: 'HH:mm'}}
-            </div>
+            </a>
             <div>
               <mat-icon class="public-icon">public</mat-icon>
             </div>
