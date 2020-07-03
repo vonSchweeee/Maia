@@ -18,7 +18,8 @@
   color: #000;
   font-weight: bolder;
   padding-top: 5px;
-  margin-right: 5px;
+  margin-right: 8px;
+  position: relative;
 }
 
 .comment-text {
@@ -41,4 +42,15 @@
   border-radius: 50%;
   border: 1px solid #0009;
   cursor: pointer;
+  position: relative;
+  background-color: #FAFAFA;
+}
+
+.greybg {
+  background-color: #AAA8;
+  position: absolute;
+  border-radius: 20px;
+  height: 20px;
+  margin-top: 9px;
+  margin-left: 4px;
 }

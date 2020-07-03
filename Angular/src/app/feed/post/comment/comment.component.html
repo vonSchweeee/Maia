@@ -1,4 +1,5 @@
 <mat-card-subtitle>
+  <div class="greybg" [style]="'width:' + comentario.usuario.nome.length * 10.8 + 'px'"></div>
   <img [src]="comentario && comentario.usuario && comentario.usuario.urlImagem ? comentario.usuario.urlImagem
   : 'assets/img/user-default.png'" [ngStyle]="{'border': comentario.usuario.urlImagem ? 'initial' : 'none'}"
        style="float: left;" class="avatar less-size">

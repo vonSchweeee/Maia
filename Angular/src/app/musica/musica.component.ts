@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Musica} from '../shared/models/Musica';
+import {MusicaService} from './musica.service';
+import {ActivatedRoute, ActivatedRouteSnapshot, Router} from '@angular/router';
+import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-musica',
@@ -9,14 +12,31 @@ import {Musica} from '../shared/models/Musica';
 export class MusicaComponent implements OnInit {
 
   musica: Musica;
+  urlSpotify: SafeResourceUrl;
 
-  constructor() {}
+  constructor(private mscService: MusicaService, private route: ActivatedRoute, private sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {
     this.musica = history.state && history.state.musica;
-    if (! this.musica) {
-      this.musica = JSON.parse('{"id":1,"titulo":"Warsaw","single":false,"faixa":1,"duracao":"00:02:26","urlImagem":"https://firebasestorage.googleapis.com/v0/b/maia-music.appspot.com/o/img%2Fan%20ideal%20for%20living.jpg?alt=media&token=4b252641-bcde-4e8c-a37c-782143114924","dataLanc":"2020-06-22T01:05:35.082","urlSpotify":"https://open.spotify.com/embed/track/58vvxoXqQicDlUFJHfOuEs","mediaNota":0,"quantAvaliacoes":0,"albumId":1}');
-      console.log(this.musica);
+    if (this.musica)
+      this.fetchMusica(this.musica.id);
+    else {
+      const id = this.route.snapshot.params.id;
+      this.fetchMusica(id);
+    }
+  }
+
+  private async fetchMusica(id: number) {
+    try {
+      this.mscService.fetchDetailedMusicaById(id).subscribe(res => {
+        this.musica = res;
+        console.log(res);
+        console.log(this.musica.urlSpotify);
+        this.urlSpotify = this.sanitizer.bypassSecurityTrustResourceUrl(this.musica.urlSpotify);
+      });
+    }
+    catch (e) {
+      console.log(e);
     }
   }
 

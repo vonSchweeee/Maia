@@ -1,7 +1,10 @@
-﻿export class Musica {
+﻿import {ArtistaMusica} from './ArtistaMusica';
+
+export class Musica {
   public mediaNota?: number;
   public id?: number;
   public quantAvaliacoes?: number;
+  public artistaMusicas: ArtistaMusica[];
 
   constructor(
     public titulo: string,

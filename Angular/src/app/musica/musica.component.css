@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   flex: 1;
-  align-items: flex-start;
+  align-items: stretch;
 }
 
 .flex-row1 {
@@ -11,17 +11,65 @@
   flex: 1;
 }
 
+.flex-row0 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .flex-column1 {
   display: flex;
   flex-direction: column;
   flex: 1;
 }
 
+.flex-column0 {
+  display: flex;
+  flex-direction: column;
+}
+
 .img-musica {
   object-fit: contain;
   border-radius: 10%;
+  width: 316px;
+  height: 316px;
+  -webkit-box-shadow: -8px 5px 20px 1px rgba(0,0,0,0.75);
+  -moz-box-shadow: -8px 5px 20px 1px rgba(0,0,0,0.75);
+  box-shadow: -8px 5px 20px 1px rgba(0,0,0,0.75);
 }
 
 p {
   color: #FAFAFA;
+}
+
+.info-musica {
+  margin: 12px 0 0 8px;
+}
+
+.center {
+  align-items: center;
+}
+
+.start {
+  align-content: flex-start;
+}
+
+.nome-musica {
+  font-size: 1.8em;
+  font-weight: 400;
+  margin-bottom: 0;
+  text-shadow: -2px 2px 2px #000000;
+}
+
+.duracao-musica {
+  color: #FAFAFAAA;
+  margin-top: -8px;
+  text-shadow: -2px 2px 2px #000000;
+}
+
+.iframe-spotify {
+  border-radius: 20px;
+  -webkit-box-shadow: -8px 5px 20px 1px rgba(0,0,0,0.75);
+  -moz-box-shadow: -8px 5px 20px 1px rgba(0,0,0,0.75);
+  box-shadow: -8px 5px 20px 1px rgba(0,0,0,0.75);
 }

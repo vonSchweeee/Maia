@@ -140,13 +140,22 @@ namespace Maia.Controllers
                     .Take(size)
                     .ToListAsync();
 
-                for (int i = 0; i < posts.Count; i++)
+                foreach (var post in posts)
                 {
                     var like = await context.Favoritos.FirstOrDefaultAsync(
-                        f => f.UsuarioId == usuarioId && f.PostId == posts[i].Id && f.Ativo
+                        f => f.UsuarioId == usuarioId && f.PostId == post.Id && f.Ativo
                         );
+
+                    // Por algum motivo apenas trazer esse comentário faz com que ele seja adicionado ao JSON.
+                    await context.Comentarios
+                        .Where(c => c.PostId == post.Id)
+                        .FirstOrDefaultAsync();
+
                     if (like != null)
-                        posts[i].Favoritado = true;
+                        post.Favoritado = true;
+
+                    // if (comentario != null)
+                    //     post.Comentarios.Add(comentario);
                 }
 
                 return posts;

@@ -23,6 +23,11 @@ namespace Maia.Controllers
             try
             {
                 context.Add(album);
+                var artista = await context.Artistas.Where(a => a.Id == album.ArtistaId).FirstOrDefaultAsync();
+                foreach(var musica in album.Musicas){
+                    context.ArtistaMusicas.Add(new ArtistaMusica() { Artista = artista, Musica = musica });
+                }
+
                 if (await context.SaveChangesAsync() > 0)
                 {
                     return Created($"albuns/id/{album.Id}", album);

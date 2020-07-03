@@ -5,7 +5,7 @@ import { BehaviorSubject, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 import { Usuario } from '../models/Usuario';
-import { baseUrl } from '../settings/settings';
+import { BASEURL } from '../settings/settings';
 
 interface ILoginResponse {
   usuario: {
@@ -32,7 +32,7 @@ export class AuthService {
     ) { }
 
   login(email: string, senha: string) {
-    return this.http.post<ILoginResponse>(baseUrl + 'login', {email, senha})
+    return this.http.post<ILoginResponse>(BASEURL + 'login', {email, senha})
       .pipe(catchError(this.handleError),
       tap(res => this.handleAuthentication(res, false)));
   }
@@ -108,7 +108,7 @@ export class AuthService {
 
   registrar(email: string, nome: string, senha: string) {
     const body = {email, nome, senha};
-    return this.http.post<ILoginResponse>(baseUrl + 'registro', body)
+    return this.http.post<ILoginResponse>(BASEURL + 'registro', body)
       .pipe(tap(res => this.handleAuthentication(res, false)));
   }
 

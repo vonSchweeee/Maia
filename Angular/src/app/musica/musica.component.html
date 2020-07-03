@@ -1,6 +1,13 @@
 <div class="root">
-  <div class="flex-row1">
-    <img [src]="musica.urlImagem" class="img-musica">
-    <p>{{ musica.titulo }} works!</p>
+  <div class="flex-row0" *ngIf="musica">
+    <div class="flex-column0 center info-musica">
+      <img [src]="musica.urlImagem" class="img-musica">
+      <p class="text-center nome-musica"> {{ musica.titulo }}</p>
+      <p class="text-center duracao-musica"> {{ musica.duracao }}</p>
+      <iframe [src]="urlSpotify" class="iframe-spotify" width="320" height="390" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+    </div>
+    <div class="flex-column0 center">
+      <p class="text-center nome-artista" *ngFor="let am of musica.artistaMusicas">{{ am.artista.nome }} </p>
+    </div>
   </div>
 </div>

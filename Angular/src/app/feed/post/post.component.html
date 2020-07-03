@@ -67,11 +67,10 @@
         </div>
       </div>
     </mat-card-actions>
-<!--    <mat-divider></mat-divider>-->
-<!--    <div *ngFor="let comentario of post.comentarios" style="display: flex; flex-direction: column">-->
-<!--      <app-comment [comentario]="comentario" ></app-comment>-->
-<!--      <mat-divider style="opacity: 0.5;"></mat-divider>-->
-<!--    </div>-->
+    <mat-divider></mat-divider>
+    <div *ngFor="let comentario of post.comentarios" style="display: flex; flex-direction: column; margin-bottom: -8px">
+      <app-comment [comentario]="comentario" ></app-comment>
+    </div>
     <app-comment-form [idPost]="post.id" *ngIf="commentMode"></app-comment-form>
   </mat-card>
 </div>

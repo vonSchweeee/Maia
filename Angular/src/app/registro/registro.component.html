@@ -18,7 +18,7 @@
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label for="nome-input">Nome</mat-label>
-          <input matInput ngModel name="nome" id="nome-input" placeholder="Insira seu nome..." required>
+          <input matInput ngModel name="nome" id="nome-input" placeholder="Insira seu nome..." required minlength="3">
         </mat-form-field>
         <mat-spinner *ngIf="loading" [color]="'accent'" [diameter]="50"></mat-spinner>
         <button mat-raised-button color="accent" [disabled]="f.invalid || loading" class="btn-registro">Registrar-se</button>

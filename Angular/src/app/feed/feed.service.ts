@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-import { baseUrl } from '../shared/settings/settings';
+import { BASEURL } from '../shared/settings/settings';
 import { Post } from './post.model';
 import {Comentario} from './comentario.model';
 import {Usuario} from "../shared/models/Usuario";
@@ -20,33 +20,33 @@ export class FeedService {
   constructor(private http: HttpClient, private authService: AuthService) { }
 
   fetchPosts() {
-    return this.http.get<Post[]>(baseUrl + 'posts/all')
+    return this.http.get<Post[]>(BASEURL + 'posts/all')
       .pipe(tap(posts => {
         this.postsSubj.next(posts);
       }));
   }
 
   fetchPost(postId: number): Observable<Post> {
-    return this.http.get<Post>(baseUrl + `posts/id/${postId}`);
+    return this.http.get<Post>(BASEURL + `posts/id/${postId}`);
   }
 
   fetchPostsByTag(tag: string) {
-    return this.http.get<Post[]>(baseUrl + `posts/tag/${tag}`);
+    return this.http.get<Post[]>(BASEURL + `posts/tag/${tag}`);
   }
 
   makePost(post: Post) {
-    return this.http.post<Post>(baseUrl + `posts`, post);
+    return this.http.post<Post>(BASEURL + `posts`, post);
   }
 
   deletePost(postId: number) {
-    return this.http.delete<void>(baseUrl + `posts/id/${postId}`)
+    return this.http.delete<void>(BASEURL + `posts/id/${postId}`)
       .pipe(tap(() => {
         this.postsSubj.next(this.postsSubj.value.filter(post => post.id !== postId));
       }));
   }
 
   makeComment(comentario: Comentario, usuario: Usuario) {
-    return this.http.post<Comentario>(baseUrl + `comentarios`, comentario)
+    return this.http.post<Comentario>(BASEURL + `comentarios`, comentario)
       .pipe(tap(res => {
         const postsAtualizado = this.postsSubj.value;
         postsAtualizado.map(post => {
@@ -83,7 +83,7 @@ export class FeedService {
 
     this.postsSubj.next(posts);
 
-    this.http.delete(baseUrl + 'favoritos', options).subscribe();
+    this.http.delete(BASEURL + 'favoritos', options).subscribe();
   }
 
   favoritar(postId: number) {
@@ -104,6 +104,6 @@ export class FeedService {
 
     this.postsSubj.next(posts);
 
-    this.http.post(baseUrl + 'favoritos', body).subscribe();
+    this.http.post(BASEURL + 'favoritos', body).subscribe();
   }
 }

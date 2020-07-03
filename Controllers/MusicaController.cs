@@ -42,19 +42,22 @@ namespace Maia.Controllers
         {
             try
             {
-                var musica = await context.Musicas.Where(m => m.Id == id).FirstOrDefaultAsync();
-                var album = await context.Albums.Where(a => a.Id == musica.AlbumId).FirstOrDefaultAsync();
-                var artista = await context.Artistas.Where(a => a.Id == album.ArtistaId).FirstOrDefaultAsync();
-
-                musica.Album = album;
-                musica.ArtistaMusicas = new List<ArtistaMusica>()
+                var musica = await context.Musicas.Where(m => m.Id == id)
+                        .Include(m => m.Album)
+                        .Include(m => m.ArtistaMusicas)
+                        .FirstOrDefaultAsync();
+                
+                for(int i = 0 ; i < musica.ArtistaMusicas.Count ; i++ )
                 {
-                    new ArtistaMusica()
-                    {
-                        Artista = artista
-                    }
-                };
+                    var idArtista = musica.ArtistaMusicas[i].ArtistaId;
+                    var artista = await context.Artistas
+                                    .Where(a => a.Id == idArtista)
+                                    .FirstOrDefaultAsync();
+                    musica.ArtistaMusicas[i].Artista = artista;
+                }
+
                 return musica;
+
             }
             catch(Exception e)
             {
