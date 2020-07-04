@@ -14,6 +14,7 @@ export class PostComponent implements OnInit {
 
   @Input() post: Post;
   commentMode = false;
+  @Input() fixedCommentMode = false;
   commentEditModeSubs: Subscription;
   constructor(private feedService: FeedService) { }
 

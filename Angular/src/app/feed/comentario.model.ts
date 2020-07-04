@@ -8,6 +8,7 @@ export class Comentario {
    public postId: number;
    public respostas: any[];
    public dataPub: Date;
+   public dontPipe = false; // Atributo apenas para a view;
 
 
   constructor(texto: string, usuarioId: number, postId: number) {

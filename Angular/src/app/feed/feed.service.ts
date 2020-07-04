@@ -45,17 +45,12 @@ export class FeedService {
       }));
   }
 
-  makeComment(comentario: Comentario, usuario: Usuario) {
+  makeComment(comentario: Comentario, usuario: Usuario, post: Post) {
     return this.http.post<Comentario>(BASEURL + `comentarios`, comentario)
       .pipe(tap(res => {
-        const postsAtualizado = this.postsSubj.value;
-        postsAtualizado.map(post => {
-          res.usuario = usuario;
-          if (post.id === comentario.postId)
-            post.comentarios.push(res);
-        });
+        res.usuario = usuario;
+        post.comentarios.push(res);
         this.commentEditSubj.next('aa');
-        this.postsSubj.next(postsAtualizado);
       }));
   }
 

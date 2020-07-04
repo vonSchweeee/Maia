@@ -16,4 +16,7 @@ export class CommentComponent implements OnInit {
 
   }
 
+  onSeeMoreClick($event: MouseEvent) {
+    this.comentario.dontPipe = true;
+  }
 }

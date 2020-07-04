@@ -6,10 +6,9 @@
   min-width: 150px;
   max-width: 650px;
   min-height: 100px;
-  max-height: 600px;
   height: 100%;
   width: 90%;
-  margin-bottom: 22px;
+  margin-bottom: 12px;
 }
 
 .col-bs {
@@ -46,6 +45,7 @@ hr {
   float: left;
   margin-left: 3px;
 }
+
 
 .public-icon {
   font-size: 16px;
@@ -175,4 +175,9 @@ a {
 
 a:hover {
   color: #000;
+}
+
+.divider-comentario {
+  position: relative;
+  width: 98%;
 }

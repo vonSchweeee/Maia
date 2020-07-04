@@ -10,9 +10,9 @@
     <div class="flex-column1 center center-content">
       <a mat-button [routerLink]="['/letras/id/' + musica.id]" class="component-center">
         <mat-card class="card-material">
-          <mat-card-content>
-            <div class="flex-row1 center">
-              <img [src]="musica.urlImagem" class="img-musica img-musica-letra">
+          <mat-card-content class="content-letra">
+            <div class="flex-row1 center letra">
+              <mat-icon class="icon-letra">history_edu</mat-icon>
               <p class="txt-letra">Veja a letra de {{ musica.titulo }}</p>
             </div>
           </mat-card-content>

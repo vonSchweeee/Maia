@@ -14,7 +14,7 @@ export class AdminGuard implements CanActivate {
     boolean | UrlTree | Promise<boolean | UrlTree> | Observable<boolean | UrlTree> {
     return this.authService.usuarioSubj.pipe(take(1), map(usuario => {
       const isAuth = !!usuario;
-      const isAdm = usuario.isAdm;
+      const isAdm = usuario && usuario.isAdm;
       if (isAuth) {
         if (route.url[0].path === 'login') {
           return this.router.createUrlTree(['/feed']);

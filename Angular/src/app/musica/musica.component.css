@@ -142,7 +142,7 @@ a {
 .card-material, a.mat-button {
   width: 100%;
   max-width: 400px;
-  min-height: 100px;
+  min-height: 80px;
 }
 
 .img-musica-letra {
@@ -162,6 +162,25 @@ a {
 
 .component-center {
   margin-bottom: 12px;
+}
+
+.letra {
+  margin-right: 20px;
+  text-align: center;
+}
+
+.icon-letra {
+  font-size: 40px;
+  margin-top: -14px;
+  margin-right: 22px;
+}
+
+.content-letra {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  height: 100%;
+  padding-top: 5px;
 }
 
 @media (max-width: 1165px) {
