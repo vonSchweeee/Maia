@@ -4,7 +4,7 @@
       <img [src]="musica.urlImagem" class="img-musica">
       <p class="text-center nome-musica"> {{ musica.titulo }}</p>
       <p class="nome-album-musica">{{ musica.album.titulo }}</p>
-      <p class="text-center duracao-musica"> {{ musica.duracao }}</p>
+      <p class="text-center duracao-musica"> {{ musica.duracao | shortenTime }}</p>
       <iframe [src]="urlSpotify" class="iframe-spotify" width="320" height="390" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
     </div>
     <div class="flex-column1 center center-content">

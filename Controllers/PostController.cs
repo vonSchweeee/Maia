@@ -28,6 +28,7 @@ namespace Maia.Controllers
                 return await context.Posts
                         .Include(p => p.Usuario)
                         .Include(p => p.Comentarios)
+                        .ThenInclude(c => c.Usuario)
                         .Where(p => p.Id == postId).FirstOrDefaultAsync();
             }
             catch(Exception)

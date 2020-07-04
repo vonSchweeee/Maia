@@ -4,6 +4,8 @@ import moment from 'moment';
 import { FeedService } from '../feed.service';
 import { Post } from '../post.model';
 import {Subject, Subscription} from "rxjs";
+import {AuthService} from "../../shared/auth/auth.service";
+import {Usuario} from "../../shared/models/Usuario";
 
 @Component({
   selector: 'app-post',
@@ -16,10 +18,15 @@ export class PostComponent implements OnInit {
   commentMode = false;
   @Input() fixedCommentMode = false;
   commentEditModeSubs: Subscription;
-  constructor(private feedService: FeedService) { }
+  usuarioAtual: Usuario;
+
+  constructor(private feedService: FeedService, private authService: AuthService) { }
+  @Input() fullmode = false;
 
   ngOnInit(): void {
     this.commentEditModeSubs = this.feedService.commentEditSubj.subscribe(() => this.onHandleComment());
+    if (this.fullmode)
+      this.usuarioAtual = this.authService.usuarioSubj.value;
   }
 
   onDelete() {

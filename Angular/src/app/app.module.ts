@@ -48,6 +48,7 @@ import {MusicaComponent} from './musica/musica.component';
 import {LineBreakHtmlPipe} from './shared/pipes/line-break-html.pipe';
 import {SeeMorePipe} from "./shared/pipes/see-more.pipe";
 import {TimeAgoPipe} from "./shared/pipes/time-ago.pipe";
+import {ShortenTimePipe} from "./shared/pipes/shorten-time.pipe";
 
 @NgModule({
    declarations: [
@@ -81,7 +82,8 @@ import {TimeAgoPipe} from "./shared/pipes/time-ago.pipe";
       MusicaComponent,
       LineBreakHtmlPipe,
       SeeMorePipe,
-      TimeAgoPipe
+      TimeAgoPipe,
+      ShortenTimePipe
    ],
    imports: [
       BrowserModule,

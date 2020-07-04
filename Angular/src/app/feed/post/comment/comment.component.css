@@ -77,7 +77,7 @@ button {
   outline: none;
 }
 
-.btn-excluir {
+.btns-acoes {
   position: absolute;
   margin-top: -10px;
   right: 2%;
@@ -88,7 +88,7 @@ button {
   display: initial;
 }
 
-mat-card-subtitle:hover .btn-excluir {
+mat-card-subtitle:hover .btns-acoes {
   display: initial;
 }
 

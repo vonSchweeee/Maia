@@ -1,28 +1,23 @@
 <div class="container-fluid">
-  <div class="col-xs-12">
-    <div class="root-content">
-      <div class="title">
-        <h1>Lista de Músicas</h1>
-        <!--        <div class="search-section">-->
-        <!--          <input placeholder="Procurar por nome..." class="input-pesquisa">-->
-        <!--          <a mat-icon-button class="btn-pesquisa">-->
-        <!--            <mat-icon style="max-width: 24px; max-height: 24px; height: 24px; width: 24px;">search</mat-icon>-->
-        <!--          </a>-->
-        <!--        </div>-->
-      </div>
-      <div class="lista-artistas">
-        <div class="item-artista" *ngFor="let musica of musicas">
+  <div class="row">
+    <div class="col-xs-12 root">
+      <h1>Lista de Músicas</h1>
+      <div class="row">
+        <div class="item-musica" *ngFor="let musica of musicas">
           <a mat-button (click)="onMusicaClick(musica)">
             <mat-card>
               <div class="card-row">
-                <img class="img-artista" [src]="musica.urlImagem">
+                <img class="img-musica" [src]="musica.urlImagem">
                 <div class="card-column">
-                  <mat-card-title>{{ musica.titulo }}</mat-card-title>
-                  <mat-card-subtitle>{{ musica.duracao }}</mat-card-subtitle>
+                  <div>
+                    <mat-card-title>{{ musica.titulo }}</mat-card-title>
+                    <mat-card-subtitle>{{ musica.duracao | shortenTime }}</mat-card-subtitle>
+                  </div>
                 </div>
               </div>
             </mat-card>
           </a>
+
         </div>
       </div>
     </div>
