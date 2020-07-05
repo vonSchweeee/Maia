@@ -13,7 +13,7 @@ export class LetraService {
 
   constructor(private http: HttpClient) { }
 
-  public fetchLetras(musicaId: number): Observable<Letra[]> {
+  public fetchLetrasByMusicaId(musicaId: number): Observable<Letra[]> {
     return this.http.get<Letra[]>(`${BASEURL}letras?musicaId=${musicaId}`);
   }
 
@@ -25,4 +25,8 @@ export class LetraService {
     return this.http.get<response>(BASEURL + 'letras/check?musicaId=' + musicaId);
   }
 
+  // Retorna apenas as informações da música
+  fetchLetrasByPopularity(): Observable<Musica[]> {
+    return this.http.get<Musica[]>(`${BASEURL}` + 'letras/popular');
+  }
 }

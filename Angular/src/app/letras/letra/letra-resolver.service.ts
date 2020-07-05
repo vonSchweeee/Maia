@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot} from "@angular/router";
-import {Letra} from "../shared/models/Letra";
+import {Letra} from "../../shared/models/Letra";
 import {Observable, throwError} from "rxjs";
-import {LetraService} from "./letra.service";
+import {LetraService} from '../letras.service';
 import {catchError, tap} from "rxjs/operators";
 import {HttpErrorResponse} from "@angular/common/http";
 
@@ -17,7 +17,7 @@ export class LetraResolverService implements Resolve<Letra[]> {
   ) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Letra[]> | Promise<Letra[]> | Letra[] {
-    return this.letraService.fetchLetras(route.params.id)
+    return this.letraService.fetchLetrasByMusicaId(route.params.id)
       .pipe(tap(letras => {
         console.log(letras);
         if (! letras || ! letras.length)

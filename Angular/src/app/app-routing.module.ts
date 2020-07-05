@@ -25,8 +25,9 @@ import {RegistroComponent} from "./registro/registro.component";
 import {MusicaComponent} from './musica/musica.component';
 import {LetraComponent} from "./letras/letra/letra.component";
 import {AddLetraComponent} from "./letras/add-letra/add-letra.component";
-import {LetraResolverService} from "./letras/letra-resolver.service";
+import {LetraResolverService} from "./letras/letra/letra-resolver.service";
 import {AddLetraResolverService} from "./letras/add-letra/add-letra-resolver.service";
+import {LetrasResolverService} from "./letras/letras-resolver.service";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent, canActivate: [AuthGuard]},
@@ -36,8 +37,8 @@ const routes: Routes = [
     {path: 'id/:id', component: PostScreenComponent, resolve: { post: PostResolverService }},
   ]},
   {path: 'letras', canActivate: [AuthGuard], children: [
-    {path: '', component: LetrasComponent},
-    {path: 'id/:id', component: LetraComponent, resolve: { letra: LetraResolverService}},
+    {path: '', component: LetrasComponent, resolve: { musicas: LetrasResolverService}},
+    {path: 'id/:id', component: LetraComponent, resolve: { letras: LetraResolverService}},
     {path: 'add/id/:id', component: AddLetraComponent, resolve: { response: AddLetraResolverService }},
   ]},
   {path: 'admin', canActivate: [AdminGuard], component: AdminComponent, children: [

@@ -3,7 +3,7 @@ import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from "@angular/rou
 import {Musica} from "../../shared/models/Musica";
 import {Observable} from "rxjs";
 import {MusicaService} from "../../musica/musica.service";
-import {LetraService} from "../letra.service";
+import {LetraService} from "../letras.service";
 import {tap} from "rxjs/operators";
 
 export type response = {

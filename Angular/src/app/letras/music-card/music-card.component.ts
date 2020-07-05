@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Musica} from "../../shared/models/Musica";
 
 @Component({
   selector: 'app-music-card',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./music-card.component.css']
 })
 export class MusicCardComponent implements OnInit {
+
+  @Input() musica: Musica;
 
   constructor() { }
 

@@ -5,7 +5,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {Letra} from "../../shared/models/Letra";
 import {Usuario} from "../../shared/models/Usuario";
 import {AuthService} from "../../shared/auth/auth.service";
-import {LetraService} from "../letra.service";
+import {LetraService} from "../letras.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {response} from "./add-letra-resolver.service";
 
@@ -113,10 +113,10 @@ export class AddLetraComponent implements OnInit {
   onPaste($event: ClipboardEvent) {
     $event.preventDefault();
 
-    // get text representation of clipboard
-    const text = ($event).clipboardData.getData('text/plain');
+    // Pega o texto e substitui as quebras de linha pela tag em html
+    const text = ($event).clipboardData.getData('text/plain').replace(/\n/g, '<br>');
 
-    // insert text manually
+    // Insere o texto
     document.execCommand("insertHTML", false, text);
   }
 

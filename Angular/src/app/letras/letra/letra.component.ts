@@ -18,7 +18,7 @@ export class LetraComponent implements OnInit {
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.letras = this.route.snapshot.data.letra;
+    this.letras = this.route.snapshot.data.letras;
     this.letras.forEach(letra => {
       if (letra.idioma === 'PT-BR')
         this.letraTraduzida = letra;

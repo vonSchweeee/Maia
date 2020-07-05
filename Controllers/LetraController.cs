@@ -15,18 +15,52 @@ namespace Maia.Controllers
     public class LetraController : ControllerBase
     {
         [HttpGet]
+        [Route("popular")]
+        [Authorize]
+        public async Task<ActionResult<List<Musica>>> GetByPopularity([FromServices] MaiaContext context)
+        {
+            try
+            {
+                return await context.Letras
+                    .Include(l => l.Musica)
+                    .ThenInclude(m => m.Album)
+                    .Include(l => l.Musica)
+                    .ThenInclude(m => m.ArtistaMusicas)
+                    .ThenInclude(am => am.Artista)
+                    .OrderByDescending(l => l.QuantAcessos)
+                    .Select(l => l.Musica)
+                    .ToListAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+        
+        
+        [HttpGet]
         [Authorize]
         public async Task<ActionResult<List<Letra>>> GetByMusicaId([FromServices] MaiaContext context, [FromQuery] int musicaId)
         {
 
             try
             {
-                return await context.Letras
+                var letras = await context.Letras
                     .Where(l => l.MusicaId == musicaId)
                     .Include(l => l.Musica)
                     .ThenInclude(l => l.ArtistaMusicas)
                     .ThenInclude(l => l.Artista)
                     .ToListAsync();
+
+                foreach (var letra in letras)
+                {
+                    letra.QuantAcessos += 1;
+                }
+                await context.SaveChangesAsync();
+
+                return letras;
+                
             }
             catch (Exception e)
             {

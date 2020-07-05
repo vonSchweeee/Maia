@@ -1,15 +1,15 @@
-<a mat-button>
+<a mat-button [routerLink]="['/letras/id/' + musica.id]">
   <mat-card>
     <div class="flex-column">
       <mat-card-title>
         <div>
-          Around The World
+          {{ musica.titulo }}
         </div>
       </mat-card-title>
       <mat-card-subtitle>
-        Daft Punk
+        {{ musica.artistaMusicas | artistas:'string' }}
       </mat-card-subtitle>
-      <img src="https://images-na.ssl-images-amazon.com/images/I/71A1gmVPm-L._AC_SL1401_.jpg" alt="Daft Punk - Homework">
+      <img [src]="musica.album.urlImagem" alt="Daft Punk - Homework">
     </div>
   </mat-card>
 </a>

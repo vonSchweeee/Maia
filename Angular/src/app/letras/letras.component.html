@@ -2,10 +2,7 @@
   <div class="col-xs-12">
     <h1>Populares</h1>
     <div class="content">
-      <app-music-card></app-music-card>
-      <app-music-card></app-music-card>
-      <app-music-card></app-music-card>
-      <app-music-card></app-music-card>
+      <app-music-card *ngFor="let musica of musicas" [musica]="musica"></app-music-card>
     </div>
   </div>
 </div>
