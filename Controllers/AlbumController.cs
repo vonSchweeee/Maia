@@ -45,20 +45,30 @@ namespace Maia.Controllers
     
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult<List<Album>>> Get([FromQuery] PageParameters parameters, [FromServices] MaiaContext context)
+        public async Task<ActionResult<List<Album>>> Get([FromQuery] PageParameters parameters, [FromQuery] string nome,[FromServices] MaiaContext context)
         {
-            int size = parameters.Size;
-            int page = parameters.Page;
-            try 
+            if (nome == null)
+            {
+                int size = parameters.Size;
+                int page = parameters.Page;
+                try
+                {
+                    return await context.Albums
+                        .Skip((page - 1) * size)
+                        .Take(size)
+                        .ToListAsync();
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+            }
+            else
             {
                 return await context.Albums
-                    .Skip((page - 1) * size)
-                    .Take(size)
+                    .FromSqlRaw($"SELECT * FROM maia.albums WHERE Titulo LIKE '%{nome}%'")
+                    .Include(a => a.Artista)
                     .ToListAsync();
-            }
-            catch(Exception e)
-            {
-                throw e;
             }
         }
 

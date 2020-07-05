@@ -26,7 +26,7 @@
             </mat-form-field>
             <mat-form-field appearance="outline">
               <mat-label>URL do Embed do Spotify</mat-label>
-              <input id="input-url-spotify" matInput name="urlSpotify" formControlName="urlSpotify" (input)="onArtistaTxtChange()" placeholder="https://open.spotify.com/embed/...">
+              <input id="input-url-spotify" matInput name="urlSpotify" formControlName="urlSpotify"  [ngModel]="urlSpotify | urlSpotify" (ngModelChange)="urlSpotify=$event">
             </mat-form-field>
             <div formArrayName="musicas" class="form-array-musicas" *ngIf="musicasForm.controls.length > 0">
               Músicas
@@ -61,6 +61,7 @@
               </div>
             </div>
             <button mat-raised-button color="primary" type="button" class="btn-add-musica" (click)="addMusica()">Adicionar Música</button>
+            <img *ngIf="image && image.src" class="image-preview" [src]="image.src">
             <div class="flex-row">
               <label for="input-img">
                 <button type="button" (click)="inputFile.click()" mat-raised-button color="accent" class="btn-img">

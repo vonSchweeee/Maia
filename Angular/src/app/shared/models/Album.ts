@@ -1,6 +1,10 @@
 ﻿import {Musica} from "./Musica";
+import {Artista} from "./Artista";
 
 export class Album {
+  
+  public artista: Artista;
+
   constructor(
     public titulo: string,
     public dataLanc: Date,

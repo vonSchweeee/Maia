@@ -40,4 +40,8 @@ export class AdminService {
   fetchMusicasByNome(pesquisa: string) {
     return this.http.get<Musica[]>(`${BASEURL}musicas?nome=${pesquisa}`);
   }
+
+  fetchAlbunsByNome(pesquisa: string) {
+    return this.http.get<Album[]>(`${BASEURL}albuns?nome=${pesquisa}`);
+  }
 }

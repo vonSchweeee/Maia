@@ -17,7 +17,6 @@ export class LetrasComponent implements OnInit {
   ngOnInit(): void {
     const musicas = this.route.snapshot.data.musicas;
     this.musicas = this.getUnique(musicas, musicas);
-
   }
 
   getUnique(arr, comp) {

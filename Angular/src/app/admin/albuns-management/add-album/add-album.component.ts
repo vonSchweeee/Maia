@@ -27,6 +27,7 @@ export class AddAlbumComponent implements OnInit {
   form: FormGroup;
   album: Album;
   faixaAtual = 1;
+  urlSpotify: string;
 
   constructor(
     private admService: AdminService,
@@ -102,13 +103,19 @@ export class AddAlbumComponent implements OnInit {
   }
 
   onArtistaTxtChange() {
+
+    this.resultsClosed = false;
+
+    if (! this.artistaName) {
+      console.log('a');
+      this.resultsClosed = true;
+      return;
+    }
+
     if (this.artista.id && this.artistaName !== this.artista.nome) {
       this.resultsClosed = false;
     }
     if (this.artista.nome === this.artistaName)
-      return;
-
-    if (! this.artistaName)
       return;
 
     clearTimeout(this.timeoutPesquisa);
@@ -117,7 +124,7 @@ export class AddAlbumComponent implements OnInit {
         .subscribe(res => {
           this.artistas = res;
         });
-    }, 1800);
+    }, 1000);
   }
 
   onSelectArtista(artista: Artista) {

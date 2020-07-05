@@ -4,28 +4,30 @@
   flex-grow: 1;
 }
 
-.mat-card {
-  height: 330px;
-  width: 330px;
-}
-
 .container-fluid {
   margin-top: 15px;
 }
 
 h1 {
   color: #FFF;
+  text-align: center;
 }
 
 .content {
   margin-left: 15px;
+  margin-right: 15px;
   display: flex;
   flex: 1;
+  justify-content: center;
 }
 
 .mat-card {
-  width: 330px;
-  height: 330px;
+  min-width: 330px;
+  min-height: 330px;
+  max-height: 500px;
+  max-width: 750px;
+  width: 100%;
+  height: 100%;
   border-radius: 8px;
   text-shadow: 1px 1px 3px #FFF4;
 }
@@ -56,4 +58,126 @@ a {
     align-content: center;
     align-items: center;
   }
+}
+
+.mat-form-field {
+  cursor: text;
+  width: 100%;
+}
+
+.btn-submit {
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  margin-top: 25px;
+}
+
+.display-flex-column {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+button {
+  outline: none;
+
+}
+
+.btn-img {
+  width: 50%;
+  margin-top: 5px;
+}
+
+.lb-btn-img {
+  width: 100%;
+  display: flex;
+
+}
+
+input[type='file'] {
+  opacity: 0.1;
+  height: 0;
+  width: 0;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+}
+
+.p-check {
+  align-self: center;
+  font-size: 24px;
+  color: #2D1;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+.flex-row1 {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  align-items: center;
+}
+
+.input-album {
+  max-width: 100%;
+}
+
+.check-single {
+  margin-left: 2%;
+}
+
+.input-url-spotify {
+  margin-right: 4px;
+}
+
+.input-url-youtube {
+  margin-left: 4px;
+}
+
+.img-preview {
+  position: absolute;
+  right: 0;
+  height: 40px;
+  width: 40px;
+  box-shadow: none;
+  margin-top: -15px;
+  border-radius: 50%;
+}
+
+.img-preview.album {
+  border-radius: 10%;
+}
+
+.list-results {
+  position: absolute;
+  z-index: 3;
+  margin-top: 16px;
+  width: 103%;
+  margin-left: -10px;
+  background-color: white;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border: 1px solid #5557;
+}
+
+.result-text {
+  margin-left: 15px;
+  height: 45px;
+  padding-top: 15px;
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  align-items: center;
+}
+
+.result-text-last {
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.result:hover {
+  background: #F8F8F8;
 }

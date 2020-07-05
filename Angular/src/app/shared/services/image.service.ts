@@ -60,6 +60,29 @@ export class ImageService {
     });
   }
 
+  uploadImageSingle(image: ImageSnippet, nomeMusica: string, nomeArtista: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+      let task: AngularFireUploadTask;
+      nomeMusica = this.normalizarString(nomeMusica);
+
+      const idImagem = uuid();
+      const path = `img/artistas/${nomeArtista}/singles/${nomeMusica}/${idImagem}`;
+      const ref = this.storage.ref(path);
+      task = this.storage.upload(path, image.file);
+
+      task.snapshotChanges().pipe(
+        finalize(async () => {
+          const url = await ref.getDownloadURL().toPromise();
+          if (typeof(url) === "string")
+            return resolve(url);
+          else {
+            reject("Não foi possível obter a url.");
+          }
+        }),
+      ).subscribe();
+    });
+  }
+
   // Função para substituir qualquer caractere special, acento, espaço ou qualquer coisa
   // diferenciada por um caractere normal, e espaço por traço.
   normalizarString(stringParaNormalizar: string): string {

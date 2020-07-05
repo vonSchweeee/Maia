@@ -1,1 +1,75 @@
-<p>add-musica works!</p>
+<div class="container-fluid">
+  <div class="col-xs-12">
+    <h1>Adicionar Música</h1>
+    <div class="content">
+      <mat-card>
+        <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+          <div class="display-flex-column">
+            <mat-form-field appearance="outline">
+              <mat-label>Nome</mat-label>
+              <input id="input-nome" matInput name="nome" ngModel required>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Artista *</mat-label>
+              <input id="input-artista" matInput name="artista" [(ngModel)]="nomeArtista" (input)="onArtistaTxtChange()">
+              <img [src]="artista.urlImagem" class="img-preview" *ngIf="artista.urlImagem">
+              <div class="list-results" *ngIf="artistas && ! resultsArtistaClosed">
+                <div *ngFor="let artista of artistas; let i = index;" class="result"
+                     [ngClass]="{'result-text-last': i === artistas.length - 1}"
+                     (click)="onSelectArtista(artista)">
+                  <mat-divider></mat-divider>
+                  <div class="result-text">
+                    <p>{{ artista.nome }}</p>
+                  </div>
+                </div>
+              </div>
+            </mat-form-field>
+            <div class="flex-row1">
+              <mat-form-field class="input-album" appearance="outline">
+                <mat-label>Album</mat-label>
+                <input id="input-album" matInput name="album" [(ngModel)]="nomeAlbum" (input)="onAlbumTxtChange()" [disabled]="single">
+                <img [src]="album.urlImagem" class="img-preview album" *ngIf="album && album.urlImagem">
+                <div class="list-results" *ngIf="albuns && ! resultsAlbumClosed">
+                  <div *ngFor="let album of albuns; let i = index;" class="result"
+                       [ngClass]="{'result-text-last': i === albuns.length - 1}"
+                       (click)="onSelectAlbum(album)">
+                    <mat-divider></mat-divider>
+                    <div class="result-text">
+                      <p>{{ album.titulo }}</p>
+                    </div>
+                  </div>
+                </div>
+              </mat-form-field>
+              <mat-checkbox class="check-single" (change)="onSingleCheck($event)" [checked]="single">Single</mat-checkbox>
+            </div>
+            <div class="flex-row1">
+              <mat-form-field class="input-url-spotify" appearance="outline">
+                <mat-label>URL do Embed do Spotify</mat-label>
+                <input id="input-url-spotify" matInput name="urlSpotify" [ngModel]="urlSpotify | urlSpotify" (ngModelChange)="urlSpotify=$event">
+              </mat-form-field>
+              <mat-form-field class="input-url-youtube" appearance="outline">
+                <mat-label>URL do Youtube</mat-label>
+                <input id="input-url-youtube" matInput name="urlYoutube" ngModel>
+              </mat-form-field>
+            </div>
+            <div class="flex-row">
+              <label for="input-img" class="lb-btn-img">
+                <div class="flex-row1"></div>
+                <button type="button" (click)="inputFile.click()" mat-raised-button color="accent" type="button" class="btn-img" [disabled]="! single">
+                  Adicionar Imagem
+                </button>
+                <div class="flex-row1"></div>
+              </label>
+              <p class="p-check" *ngIf="image">✔</p>
+            </div>
+            <input #inputFile type="file" id="input-img" accept="image/png, image/jpeg"
+                   (change)="processFile(inputFile)">
+            <button class="btn-submit" type="submit" mat-raised-button color="primary" [disabled]="f.invalid || (single && ! image) || loading">Salvar</button>
+          </div>
+        </form>
+      </mat-card>
+
+      <!-- <img *ngIf="image" [src]="image.src"> -->
+    </div>
+  </div>
+</div>
