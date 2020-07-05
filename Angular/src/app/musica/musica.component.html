@@ -13,7 +13,7 @@
           <mat-card-content class="content-letra">
             <div class="flex-row1 center letra">
               <mat-icon class="icon-letra">history_edu</mat-icon>
-              <p class="txt-letra">Veja a letra de {{ musica.titulo }}</p>
+              <p class="txt-letra">Veja a letra de {{ musica.titulo | shorten:14 }}</p>
             </div>
           </mat-card-content>
         </mat-card>

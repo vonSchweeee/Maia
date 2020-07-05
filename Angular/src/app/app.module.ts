@@ -52,6 +52,7 @@ import {ShortenTimePipe} from "./shared/pipes/shorten-time.pipe";
 import {LetraComponent} from "./letras/letra/letra.component";
 import {AngularEditorModule} from "@kolkov/angular-editor";
 import {AddLetraComponent} from "./letras/add-letra/add-letra.component";
+import {ShortenPipe} from "./shared/pipes/shorten.pipe";
 
 @NgModule({
    declarations: [
@@ -88,7 +89,8 @@ import {AddLetraComponent} from "./letras/add-letra/add-letra.component";
       TimeAgoPipe,
       ShortenTimePipe,
       LetraComponent,
-      AddLetraComponent
+      AddLetraComponent,
+      ShortenPipe
    ],
    imports: [
       BrowserModule,
