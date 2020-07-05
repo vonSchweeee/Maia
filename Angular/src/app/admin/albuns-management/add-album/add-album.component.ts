@@ -169,8 +169,7 @@ export class AddAlbumComponent implements OnInit {
     if (! this.validate(musicas))
       return;
 
-    console.log({album: new Album(titulo, new Date(), urlSpotify, this.image.src, musicas, this.artista.id)});
-    if (! confirm('Xalimbau?'))
+    if (! confirm(`Deseja adicionar o álbum ${this.album.titulo}?`))
       return;
     this.album = new Album(titulo, new Date(), urlSpotify, this.image.src, musicas, this.artista.id);
     this.openDialog();

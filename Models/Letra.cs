@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Maia.Utils.Abstracts;
+using Maia.Utils.DTO;
 using Newtonsoft.Json;
 
 namespace Maia.Utils
@@ -15,5 +16,16 @@ namespace Maia.Utils
         public string Texto { get; set; }
         
         public string TextoHtml { get; set; }
+        
+        public Letra() { }
+
+        public Letra(LetraDTO dto)
+        {
+            this.UsuarioId = dto.UsuarioId;
+            this.MusicaId = dto.MusicaId;
+            this.Idioma = dto.Idioma;
+            this.Texto = dto.Texto;
+            this.TextoHtml = dto.TextoHtml;
+        }
     }
 }

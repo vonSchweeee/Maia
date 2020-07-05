@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Maia.Utils.Abstracts
 {
-    public abstract class AnotacaoMusical : Entidade<long>
+    public abstract class AnotacaoMusical : Entidade<int>
     {
         public long MusicaId { get; set; }
         public Musica Musica { get; set; }
