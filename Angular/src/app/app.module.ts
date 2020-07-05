@@ -49,6 +49,9 @@ import {LineBreakHtmlPipe} from './shared/pipes/line-break-html.pipe';
 import {SeeMorePipe} from "./shared/pipes/see-more.pipe";
 import {TimeAgoPipe} from "./shared/pipes/time-ago.pipe";
 import {ShortenTimePipe} from "./shared/pipes/shorten-time.pipe";
+import {LetraComponent} from "./letras/letra/letra.component";
+import {AngularEditorModule} from "@kolkov/angular-editor";
+import {AddLetraComponent} from "./letras/add-letra/add-letra.component";
 
 @NgModule({
    declarations: [
@@ -83,7 +86,9 @@ import {ShortenTimePipe} from "./shared/pipes/shorten-time.pipe";
       LineBreakHtmlPipe,
       SeeMorePipe,
       TimeAgoPipe,
-      ShortenTimePipe
+      ShortenTimePipe,
+      LetraComponent,
+      AddLetraComponent
    ],
    imports: [
       BrowserModule,
@@ -95,7 +100,8 @@ import {ShortenTimePipe} from "./shared/pipes/shorten-time.pipe";
       MaterialModule,
       AngularFireModule.initializeApp(environment.firebaseConfig),
       AngularFireStorageModule,
-      NgxMaskModule.forRoot()
+      NgxMaskModule.forRoot(),
+      AngularEditorModule
    ],
    providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
    bootstrap: [

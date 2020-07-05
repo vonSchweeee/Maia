@@ -18,48 +18,67 @@ namespace Maia.Controllers
     {
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult<List<Musica>>> Get([FromQuery] PageParameters pageParameters, [FromServices] MaiaContext context)
+        public async Task<ActionResult<List<Musica>>> Get([FromQuery] PageParameters pageParameters, [FromServices] MaiaContext context, [FromQuery] string nome)
         {
-            int size = pageParameters.Size;
-            int page = pageParameters.Page;
-            try 
+            if (nome == null)
+            {
+                int size;
+                if (pageParameters != null)
+                    size = pageParameters.Size;
+                else
+                    size = 16;
+                
+                int page = pageParameters.Page;
+                try
+                {
+                    return await context.Musicas
+                        .Skip((page - 1) * size)
+                        .Take(size)
+                        .ToListAsync();
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+            }
+            else
             {
                 return await context.Musicas
-                    .Skip((page - 1) * size)
-                    .Take(size)
+                    .FromSqlRaw($"SELECT * FROM maia.musicas WHERE Titulo LIKE '%{nome}%'")
                     .ToListAsync();
-            }
-            catch(Exception e)
-            {
-                throw e;
             }
         }
 
         [HttpGet]
         [Authorize]
         [Route("id/{id}")]
-        public async Task<ActionResult<object>> GetByIdWithInfo([FromRoute] int id, [FromServices] MaiaContext context)
+        public async Task<ActionResult<object>> GetById(
+            [FromRoute] int id, [FromServices] MaiaContext context, [FromQuery] bool detailed = false, [FromQuery] bool includeAlbum = false
+        )
         {
             try
             {
-                var musica = await context.Musicas.Where(m => m.Id == id)
+                if (detailed)
+                {
+                    return await context.Musicas.Where(m => m.Id == id)
                         .Include(m => m.Album)
                         .Include(m => m.ArtistaMusicas)
+                        .ThenInclude(am => am.Artista)
                         .FirstOrDefaultAsync();
-                
-                for(int i = 0 ; i < musica.ArtistaMusicas.Count ; i++ )
-                {
-                    var idArtista = musica.ArtistaMusicas[i].ArtistaId;
-                    var artista = await context.Artistas
-                                    .Where(a => a.Id == idArtista)
-                                    .FirstOrDefaultAsync();
-                    musica.ArtistaMusicas[i].Artista = artista;
                 }
 
-                return musica;
+                if (includeAlbum)
+                {
+                    return await context.Musicas.Where(m => m.Id == id)
+                        .Include(m => m.Album)
+                        .FirstOrDefaultAsync();
+                }
+
+                return await context.Musicas.Where(m => m.Id == id)
+                    .FirstOrDefaultAsync();
 
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw e;
             }

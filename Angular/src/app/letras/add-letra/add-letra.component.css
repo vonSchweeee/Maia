@@ -1,0 +1,47 @@
+.text-editor {
+  background-color: #FFF;
+  width: 60%;
+  padding: 1%;
+  border-radius: 5%;
+  display: flex;
+  flex-direction: column;
+}
+
+/*angular-editor {*/
+/*  width: 100%;*/
+/*}*/
+
+* {
+  border: none;
+}
+
+.row {
+  justify-content: center;
+}
+
+@media (max-width: 1150px) {
+  .text-editor {
+    width: 85%;
+  }
+  .sorry-text {
+    font-size: 1.5em;
+  }
+}
+
+h1 {
+  text-align: center;
+}
+
+.nome-musica-artista {
+  margin-bottom: 0;
+}
+
+.sorry-text {
+  color: #FDFDFD;
+  margin-top: 10px;
+}
+
+.btn-enviar {
+  width: 50%;
+  margin: 8px auto 0 auto;
+}

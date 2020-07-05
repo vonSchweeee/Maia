@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AdminService} from '../../admin.service';
 import {Musica} from '../../../shared/models/Musica';
 import {Router} from '@angular/router';
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-lista-musica',
@@ -11,6 +12,7 @@ import {Router} from '@angular/router';
 export class ListaMusicaManagementComponent implements OnInit {
 
   musicas: Musica[] = [];
+  musicasRes: Musica[] = null;
 
   constructor(private admService: AdminService, private router: Router) { }
 
@@ -27,5 +29,15 @@ export class ListaMusicaManagementComponent implements OnInit {
 
   onMusicaClick(musica: Musica) {
     this.router.navigate([`/musica/${musica.id}`], {state: {musica} });
+  }
+
+  onSearchSubmit(form: NgForm) {
+    const pesquisa = form.value.pesquisa;
+
+    this.admService.fetchMusicasByNome(pesquisa)
+      .subscribe(res => {
+        console.log(res);
+        this.musicasRes = res;
+      });
   }
 }

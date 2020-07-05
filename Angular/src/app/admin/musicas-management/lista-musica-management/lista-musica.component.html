@@ -1,9 +1,16 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-12 root">
-      <h1>Lista de Músicas</h1>
-      <div class="row">
-        <div class="item-musica" *ngFor="let musica of musicas">
+      <div class="row title">
+        <h1>Lista de Músicas</h1>
+        <div class="search-section">
+          <form #f="ngForm" (ngSubmit)="onSearchSubmit(f)">
+            <input placeholder="Procurar por nome..." class="input-pesquisa" ngModel name="pesquisa">
+          </form>
+        </div>
+      </div>
+      <div class="row lista-musicas">
+        <div class="item-musica" *ngFor="let musica of musicasRes || musicas">
           <a mat-button (click)="onMusicaClick(musica)">
             <mat-card>
               <div class="card-row">
@@ -17,7 +24,6 @@
               </div>
             </mat-card>
           </a>
-
         </div>
       </div>
     </div>

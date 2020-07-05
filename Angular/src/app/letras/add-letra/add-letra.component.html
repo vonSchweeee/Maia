@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    <h1 class="sorry-text">
+      Desculpe, infelizmente ainda não há uma letra para esta música :(
+      <br>
+      Que tal adicionar uma?
+    </h1>
+    <div class="text-editor">
+      <h1 class="nome-musica-artista">{{ musica.artistaMusicas[0].artista.nome }} - {{ musica.titulo }}</h1>
+      <angular-editor [placeholder]="'Insira a letra da música...'" [(ngModel)]="textoLetra" [config]="editorConfig"></angular-editor>
+      <button class="btn-enviar" mat-raised-button color="accent" (click)="onSubmit()">Enviar</button>
+    </div>
+  </div>
+</div>

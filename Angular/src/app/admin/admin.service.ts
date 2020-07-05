@@ -36,4 +36,8 @@ export class AdminService {
   fetchAlbuns() {
     return this.http.get<Album[]>(BASEURL + "albuns");
   }
+
+  fetchMusicasByNome(pesquisa: string) {
+    return this.http.get<Musica[]>(`${BASEURL}musicas?nome=${pesquisa}`);
+  }
 }
