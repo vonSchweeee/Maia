@@ -1,1 +1,45 @@
-<h1>Letra</h1>
+<div class="container">
+  <div class="row">
+    <div class="flex-column1">
+      <div class="flex-row1 info-musica">
+        <div class="flex-column1 f-center">
+          <div class="flex-row1">
+            <img class="img-artista" [src]="letras[0].musica.artistaMusicas[0].artista.urlImagem">
+            <div class="flex-column1 coluna-artista-musica">
+              <div class="txt-nome-musica">
+                {{ letraOriginal.musica.titulo }}
+              </div>
+              <div class="txt-artista">
+                {{ letraOriginal.musica.artistaMusicas[0].artista.nome }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex-row1">
+        <div class="flex-column1">
+          <img src="assets/svg/usa.svg" class="flag end">
+          <p *ngIf="letraOriginal; else noOriginalLyrics" class="letra-original" [innerHTML]="letraOriginal.textoHtml"></p>
+          <ng-template #noOriginalLyrics>
+            <p class="letra-original">
+              Não disponível
+              <br>
+              Deseja <a [routerLink]="['/letras/add/id/' + letraTraduzida.musicaId]" >adicionar</a> uma letra em inglês?
+            </p>
+          </ng-template>
+        </div>
+        <div class="flex-column1">
+          <img src="assets/svg/brasil.svg" class="flag">
+          <p *ngIf="letraTraduzida; else noTranslatedLyrics" class="letra-traducao" [innerHTML]="letraTraduzida.textoHtml"></p>
+          <ng-template #noTranslatedLyrics>
+            <p class="letra-traducao">
+              Não disponível
+              <br>
+              Deseja <a [routerLink]="['/letras/add/id/' + letraOriginal.musicaId]">adicionar</a> uma letra em português?
+            </p>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

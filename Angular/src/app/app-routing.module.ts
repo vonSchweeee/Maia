@@ -38,7 +38,7 @@ const routes: Routes = [
   {path: 'letras', canActivate: [AuthGuard], children: [
     {path: '', component: LetrasComponent},
     {path: 'id/:id', component: LetraComponent, resolve: { letra: LetraResolverService}},
-    {path: 'add/id/:id', component: AddLetraComponent, resolve: { musica: AddLetraResolverService }},
+    {path: 'add/id/:id', component: AddLetraComponent, resolve: { response: AddLetraResolverService }},
   ]},
   {path: 'admin', canActivate: [AdminGuard], component: AdminComponent, children: [
       {path: '', redirectTo: 'dashboard', pathMatch: 'full'},

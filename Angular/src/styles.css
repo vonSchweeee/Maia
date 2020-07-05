@@ -42,4 +42,5 @@ button {
 .angular-editor-placeholder {
   width: 100%;
   text-align: center;
+  cursor: text;
 }
