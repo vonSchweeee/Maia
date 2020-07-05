@@ -19,6 +19,7 @@ export class LetraResolverService implements Resolve<Letra[]> {
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Letra[]> | Promise<Letra[]> | Letra[] {
     return this.letraService.fetchLetras(route.params.id)
       .pipe(tap(letras => {
+        console.log(letras);
         if (! letras || ! letras.length)
           this.router.navigate([`/letras/add/id/${route.params.id}`]);
       }), catchError(erro => this.handleError(erro, route)));
@@ -26,7 +27,7 @@ export class LetraResolverService implements Resolve<Letra[]> {
 
   private handleError(error: HttpErrorResponse, route: ActivatedRouteSnapshot) {
     this.router.navigate([`/letras/add/id/${route.params.id}`]);
-    return throwError('N');
+    return throwError(error);
   }
 
 }

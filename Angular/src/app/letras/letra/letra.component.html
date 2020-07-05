@@ -7,10 +7,12 @@
             <img class="img-artista" [src]="letras[0].musica.artistaMusicas[0].artista.urlImagem">
             <div class="flex-column1 coluna-artista-musica">
               <div class="txt-nome-musica">
-                {{ letraOriginal.musica.titulo }}
+                <a [routerLink]="['/musica/' + musica.id]" style="color: #FAFAFA;" class="nome-musica">
+                  {{ musica.titulo }}
+                </a>
               </div>
               <div class="txt-artista">
-                {{ letraOriginal.musica.artistaMusicas[0].artista.nome }}
+                <div [innerHTML]="musica.artistaMusicas | artistas"></div>
               </div>
             </div>
           </div>
