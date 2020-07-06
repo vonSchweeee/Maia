@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { AuthService } from '../shared/auth/auth.service';
+import {ToastService} from "../shared/services/toast.service";
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,8 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private authService: AuthService,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private toast: ToastService
   ) { }
 
   ngAfterViewInit() {
@@ -32,7 +34,7 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     this.userSub = this.authService.usuarioSubj.subscribe(usuario => {
       if (usuario) {
-        this.openSnackBar(`Seja bem-vindo, ${usuario.nome}!`, 'Ok.', 1000);
+        this.toast.toast(`Seja bem-vindo, ${usuario.nome}!`, 1000);
       }
     });
   }
@@ -43,25 +45,16 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
     this.authService.login(email, senha).subscribe(usuario => {
       setTimeout(() => {
         this.loading = false;
+        this.router.navigate(['/feed']);
       }, 1000);
     }, erro => {
-      this.openSnackBar(erro, 'Ok', 3000, true);
+      this.toast.toast(erro, 2000, "OK", true);
       setTimeout(() => {
         this.loading = false;
       }, 200);
     });
   }
 
-  openSnackBar(message: string, action: string, duration: number, error: boolean = false) {
-    this.snackBar.open(message, action, {
-      duration,
-      panelClass: [error ? 'snackbar-error' : 'snackbar-success']
-    });
-    if (! error)
-      setTimeout(() => {
-        this.router.navigate(['/feed']);
-      }, 1100);
-  }
   ngOnDestroy() {
   if (this.userSub) {
       this.userSub.unsubscribe();

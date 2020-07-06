@@ -10,6 +10,7 @@ import {ImageService} from "../../../shared/services/image.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Album} from "../../../shared/models/Album";
 import {DialogPreviewAlbumComponent} from "./dialog-preview-album/dialog-preview-album.component";
+import {ToastService} from "../../../shared/services/toast.service";
 
 @Component({
   selector: 'app-add-album',
@@ -34,7 +35,7 @@ export class AddAlbumComponent implements OnInit {
     protected formBuilder: FormBuilder,
     private dialog: MatDialog,
     private imageService: ImageService,
-    private snackBar: MatSnackBar
+    private toast: ToastService
   ) { }
 
 
@@ -147,25 +148,18 @@ export class AddAlbumComponent implements OnInit {
       if (urlImagem) {
         this.album.urlImagem = urlImagem;
         this.admService.addAlbum(this.album).subscribe(res => {
-            this.openSnackBar(`O álbum '${res.titulo}' foi salvo com sucesso!`, "Ok.", 3500);
+            this.toast.toast(`O álbum '${res.titulo}' foi salvo com sucesso!`, 3500);
             if (this.form)
               this.form.reset();
             this.image = undefined;
             this.loading = false;
           },
           erro => {
-            this.openSnackBar(`Erro: ${erro}`, "Ok.", 3500);
+            this.toast.toast(`Erro: ${erro}`, 3500);
             this.loading = false;
             console.log(erro);
           });
       }
-    });
-  }
-
-  openSnackBar(message: string, action: string, duration: number, error: boolean = false) {
-    this.snackBar.open(message, action, {
-      duration,
-      panelClass: [error ? 'snackbar-error' : 'snackbar-success']
     });
   }
 

@@ -9,6 +9,7 @@ import {Album} from "../../../shared/models/Album";
 import {Musica} from "../../../shared/models/Musica";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ArtistaMusica} from "../../../shared/models/ArtistaMusica";
+import {ToastService} from "../../../shared/services/toast.service";
 
 @Component({
   selector: 'app-add-musica',
@@ -35,7 +36,7 @@ export class AddMusicaComponent implements OnInit {
   constructor(
     private imageService: ImageService,
     private admService: AdminService,
-    private snackbar: MatSnackBar
+    private toast: ToastService
   ) { }
 
   ngOnInit(): void {
@@ -149,7 +150,7 @@ export class AddMusicaComponent implements OnInit {
           musica.artistaMusicas = [new ArtistaMusica(this.artista.id, this.artista)];
           this.admService.addSingle(musica)
             .subscribe(res => {
-              this.openSnackBar(`Single ${res.titulo} adicionado com sucesso.`, 'Ok', 2000);
+              this.toast.toast(`Single ${res.titulo} adicionado com sucesso.`, 2000);
               this.loading = false;
               this.artista = new Artista('', '');
               this.nomeArtista = '';
@@ -157,23 +158,16 @@ export class AddMusicaComponent implements OnInit {
               f.reset();
             }, erro => {
               console.log(erro);
-              this.openSnackBar(`Erro ao adicionar música.`, 'Ok', 2500, true);
+              this.toast.toast(`Erro ao adicionar música.`, 2500, "OK", true);
               this.loading = false;
             });
         })
         .catch(err => {
           console.log(err);
-          this.openSnackBar(`Erro ao adicionar música.`, 'Ok', 2500, true);
+          this.toast.toast(`Erro ao adicionar música.`, 2500, 'Ok', true);
           this.loading = false;
         });
     }
 
-  }
-
-  openSnackBar(message: string, action: string, duration: number, error: boolean = false) {
-    this.snackbar.open(message, action, {
-      duration,
-      panelClass: [error ? 'snackbar-error' : 'snackbar-success']
-    });
   }
 }

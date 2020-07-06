@@ -15,15 +15,15 @@
           </label>
           <input id="input-titulo" class="input-titulo" placeholder="Título" [(ngModel)]="titulo" maxlength="90">
           <label class="select-instrumento text-size">
-            <select name="instrumento" class="instrumento" [(ngModel)]="instrumento" (ngModelChange)="onTuningChange($event)">
+            <select name="instrumento" class="instrumento" [(ngModel)]="instrumento" (ngModelChange)="onTuningChange($event)" [disabled]="finished">
               <option *ngFor="let option of options" [value]="option.replace('ã', 'a')">{{ option }}</option>
             </select>
           </label>
         </h1>
       </div>
       <div class="flex-column1-center">
-        <input id="input-descricao" class="input-descricao" placeholder="Descrição" [(ngModel)]="descricao" maxlength="90">
-        <input class="input-afinacao" placeholder="Afinação" [ngModel]="afinacao | uppercase" maxlength="8" (ngModelChange)="afinacao=$event">
+        <input id="input-descricao" class="input-descricao" placeholder="Descrição" [(ngModel)]="descricao" maxlength="90" [disabled]="finished">
+        <input class="input-afinacao" placeholder="Afinação" [ngModel]="afinacao | uppercase" maxlength="8" (ngModelChange)="afinacao=$event" [disabled]="finished">
         <div class="flex-row">
           <label for="input-img">
             <button type="button" (click)="inputFile.click()" mat-raised-button color="accent" class="btn-img">
@@ -32,11 +32,11 @@
           </label>
         </div>
         <input #inputFile type="file" id="input-img" accept="text/plain"
-               (change)="processFile(inputFile)"
+               (change)="processFile(inputFile)" [disabled]="finished"
         >
       </div>
-      <angular-editor [placeholder]="'Monte aqui sua tablatura...'" [(ngModel)]="textoTab" [config]="editorConfig" (paste)="onPaste($event)"></angular-editor>
-      <button class="btn-enviar" mat-raised-button color="accent" (click)="onSubmit()">Enviar</button>
+      <angular-editor [placeholder]="'Monte aqui sua tablatura...'" [(ngModel)]="textoTab" [config]="editorConfig" (paste)="onPaste($event)" [disabled]="finished"></angular-editor>
+      <button [disabled]="finished" class="btn-enviar" mat-raised-button color="accent" (click)="onSubmit()">Enviar</button>
     </div>
   </div>
 </div>

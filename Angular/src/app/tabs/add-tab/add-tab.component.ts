@@ -10,6 +10,7 @@ import {Letra} from "../../shared/models/Letra";
 import {instrumento, Tab} from "../../shared/models/Tab";
 import {ImageSnippet} from "../../shared/utils/ImageSnippet";
 import {TabService} from "../tab.service";
+import {ToastService} from "../../shared/services/toast.service";
 
 @Component({
   selector: 'app-add-tab',
@@ -53,12 +54,13 @@ export class AddTabComponent implements OnInit {
   txtSorryVisible = false;
   titulo: string;
   descricao: string;
+  finished = false;
 
   constructor(
     private route: ActivatedRoute,
     private authService: AuthService,
     private tabService: TabService,
-    private snackbar: MatSnackBar,
+    private toast: ToastService,
     private router: Router
   ) { }
 
@@ -88,10 +90,11 @@ export class AddTabComponent implements OnInit {
         this.instrumento
       );
     this.tabService.addTab(tab)
-      .subscribe(tab => {
-        this.openSnackbar(`Tablatura de ${tab.instrumento.toLowerCase()} da música ${this.musica.titulo} adicionada`, 'Ok', 1500);
+      .subscribe(res => {
+        this.toast.toast(`Tablatura de ${res.instrumento.toLowerCase()} da música ${this.musica.titulo} adicionada`, 1500);
+        this.finished = true;
         setTimeout(() => {
-          this.router.navigate([`/tabs/id/${tab.id}`]);
+          this.router.navigate([`/tabs/id/${res.id}`]);
         }, 1500);
       });
   }
@@ -104,13 +107,6 @@ export class AddTabComponent implements OnInit {
 
     // Insere o texto
     document.execCommand("insertHTML", false, text);
-  }
-
-  openSnackbar(message: string, action: string, duration: number, error: boolean = false) {
-    this.snackbar.open(message, action, {
-      duration,
-      panelClass: [error ? 'snackbar-error' : 'snackbar-success']
-    });
   }
 
   onTuningChange(event: instrumento) {

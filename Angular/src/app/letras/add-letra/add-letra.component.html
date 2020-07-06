@@ -23,8 +23,8 @@
         </h1>
 
       </div>
-      <angular-editor [placeholder]="'Insira a letra da música...'" [(ngModel)]="textoLetra" [config]="editorConfig" (paste)="onPaste($event)"></angular-editor>
-      <button class="btn-enviar" mat-raised-button color="accent" (click)="onSubmit()">Enviar</button>
+      <angular-editor [placeholder]="'Insira a letra da música...'" [(ngModel)]="textoLetra" [disabled]="finished" [config]="editorConfig" (paste)="onPaste($event)"></angular-editor>
+      <button [disabled]="textoLetra.length < 15 || finished" class="btn-enviar" mat-raised-button color="accent" (click)="onSubmit()">Enviar</button>
     </div>
   </div>
 </div>

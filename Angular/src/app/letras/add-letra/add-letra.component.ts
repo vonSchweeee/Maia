@@ -8,6 +8,7 @@ import {AuthService} from "../../shared/auth/auth.service";
 import {LetraService} from "../letras.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {response} from "./add-letra-resolver.service";
+import {ToastService} from "../../shared/services/toast.service";
 
 @Component({
   selector: 'app-add-letra',
@@ -16,6 +17,7 @@ import {response} from "./add-letra-resolver.service";
 })
 export class AddLetraComponent implements OnInit {
 
+  finished = false;
   textoLetra: string;
   musica: Musica;
   idioma = 'PT-BR';
@@ -74,7 +76,7 @@ export class AddLetraComponent implements OnInit {
     private route: ActivatedRoute,
     private authService: AuthService,
     private letraService: LetraService,
-    private snackbar: MatSnackBar,
+    private toast: ToastService,
     private router: Router
   ) { }
 
@@ -103,11 +105,12 @@ export class AddLetraComponent implements OnInit {
     const letra = new Letra(this.musica.id, usuario.id, this.idioma, textoLetraRaw, this.textoLetra);
     this.letraService.addLetra(letra)
       .subscribe(res => {
-        this.openSnackbar(`Letra em ${res.idioma} de ${this.musica.titulo} adicionada`, 'Ok', 1500);
+        this.finished = true;
+        this.toast.toast(`Letra em ${res.idioma} de ${this.musica.titulo} adicionada`,  1500);
         setTimeout(() => {
           this.router.navigate([`/letras/id/${res.id}`]);
         }, 1500);
-      });
+      }, erro => this.toast.toast("Erro", 2000, "OK", false));
   }
 
   onPaste($event: ClipboardEvent) {
@@ -118,12 +121,5 @@ export class AddLetraComponent implements OnInit {
 
     // Insere o texto
     document.execCommand("insertHTML", false, text);
-  }
-
-  openSnackbar(message: string, action: string, duration: number, error: boolean = false) {
-    this.snackbar.open(message, action, {
-      duration,
-      panelClass: [error ? 'snackbar-error' : 'snackbar-success']
-    });
   }
 }
