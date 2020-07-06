@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using Newtonsoft.Json;
+﻿using System.ComponentModel.DataAnnotations;
 using Maia.Utils.Abstracts;
 
 namespace Maia.Utils
@@ -18,5 +16,9 @@ namespace Maia.Utils
         
         [MaxLength(140)]
         public string Descricao { get; set; }
+
+        [RegularExpression("Guitarra|Baixo|Violao")]
+        public string Instrumento { get; set; } = "Guitarra";
+
     }
 }

@@ -56,6 +56,9 @@ import {ShortenPipe} from "./shared/pipes/shorten.pipe";
 import {ArtistasPipe} from "./shared/pipes/artistas.pipe";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {UrlSpotifyPipe} from "./shared/pipes/url-spotify.pipe";
+import {TabsComponent} from "./tabs/tabs.component";
+import {TabComponent} from "./tabs/tab/tab.component";
+import {AddTabComponent} from "./tabs/add-tab/add-tab.component";
 
 @NgModule({
   declarations: [
@@ -95,7 +98,10 @@ import {UrlSpotifyPipe} from "./shared/pipes/url-spotify.pipe";
     AddLetraComponent,
     ShortenPipe,
     ArtistasPipe,
-    UrlSpotifyPipe
+    UrlSpotifyPipe,
+    TabsComponent,
+    TabComponent,
+    AddTabComponent
   ],
   imports: [
     BrowserModule,
