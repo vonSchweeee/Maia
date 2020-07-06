@@ -4,8 +4,14 @@
 
 .img-artista {
   border-radius: 50%;
-  width: 90px;
-  height: 90px;
+  width: 75px;
+  height: 75px;
+}
+
+.img-autor {
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
 }
 
 .row {
@@ -33,7 +39,7 @@
 .txt-nome-musica {
   font-size: 2.2em;
   font-weight: 500;
-  margin: 0;
+  margin: -6px 0 0 0;
   padding: 0;
 }
 
@@ -102,4 +108,32 @@
 
 a {
   color: #673AB7;
+}
+
+.card-autor {
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+  margin: 20px 0 20px 0;
+}
+
+.autor {
+  font-size: 2em;
+  color: #000;
+}
+
+.nome-autor {
+  font-size: 1.85em;
+  color: #111;
+}
+
+.titulo {
+  font-size: 1.45em;
+  margin-bottom: 1px;
+}
+
+.afinacao {
+  margin-bottom: 0;
 }

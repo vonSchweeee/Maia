@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="flex-column1">
+    <div class="flex-column1 center">
       <div class="flex-row1 info-musica">
         <div class="flex-column1 f-center">
           <div class="flex-row1">
@@ -8,7 +8,7 @@
             <div class="flex-column1 coluna-artista-musica">
               <div class="txt-nome-musica">
                 <a [routerLink]="['/musica/' + tab.musica.id]" style="color: #FAFAFA;" class="nome-musica">
-                  {{ tab.musica.titulo }}
+                  {{ tab.musica.titulo }} ({{ tab.instrumento !== 'Violao' ? tab.instrumento : 'Violão' }})
                 </a>
               </div>
               <div class="txt-artista">
@@ -18,9 +18,18 @@
           </div>
         </div>
       </div>
+      <br>
       <div class="flex-column1 center">
+        <p class="titulo">{{ tab.titulo }}</p>
+        <p class="afinacao">Afinação: {{ tab.afinacao }}</p>
+        <p *ngIf="tab.descricao">{{ tab.descricao }}</p>
         <p class="letra-traducao" [innerHTML]="tab.textoHtml"></p>
       </div>
+      <mat-card class="card-autor">
+        <p class="autor">Autor</p>
+        <img class="img-autor" [src]="tab.usuario.urlImagem || 'assets/img/user-default.png'">
+        <p class="nome-autor">{{ tab.usuario.nome }}</p>
+      </mat-card>
     </div>
   </div>
 </div>

@@ -66,6 +66,7 @@ namespace Maia.Controllers
             {
                 return await context.Tabs
                     .Where(t => t.Id == id)
+                    .Include(t => t.Usuario)
                     .Include(t => t.Musica)
                     .ThenInclude(m => m.Album)
                     .Include(t => t.Musica)
