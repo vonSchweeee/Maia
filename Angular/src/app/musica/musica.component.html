@@ -3,9 +3,9 @@
     <div class="flex-column0 center info-musica">
       <img [src]="musica.urlImagem" class="img-musica">
       <p class="text-center nome-musica"> {{ musica.titulo }}</p>
-      <p class="nome-album-musica">{{ musica.album.titulo }}</p>
+      <p class="nome-album-musica" >{{ musica.album && musica.album.titulo || "Single" }}</p>
       <p class="text-center duracao-musica"> {{ musica.duracao | shortenTime }}</p>
-      <iframe [src]="urlSpotify" class="iframe-spotify" width="320" height="390" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+      <iframe [src]="urlSpotify" class="iframe-spotify" width="320" height="390" frameborder="0" allowtransparency="true" allow="encrypted-media" *ngIf="musica.urlSpotify"></iframe>
     </div>
     <div class="flex-column1 center center-content">
       <a mat-button [routerLink]="['/letras/id/' + musica.id]" class="component-center">

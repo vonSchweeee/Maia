@@ -6,6 +6,9 @@ import {NgForm} from "@angular/forms";
 import {AdminService} from "../../admin.service";
 import {Artista} from "../../../shared/models/Artista";
 import {Album} from "../../../shared/models/Album";
+import {Musica} from "../../../shared/models/Musica";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {ArtistaMusica} from "../../../shared/models/ArtistaMusica";
 
 @Component({
   selector: 'app-add-musica',
@@ -31,7 +34,8 @@ export class AddMusicaComponent implements OnInit {
 
   constructor(
     private imageService: ImageService,
-    private admService: AdminService
+    private admService: AdminService,
+    private snackbar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -106,6 +110,10 @@ export class AddMusicaComponent implements OnInit {
     }, 1000);
   }
 
+  get cantSubmit() {
+    return ! this.artista.id ||  (this.single && ! this.image) || (! this.single && ! this.album) || this.loading;
+  }
+
   onSelectArtista(artista: Artista) {
     this.artista = artista;
     this.nomeArtista = artista.nome;
@@ -125,6 +133,47 @@ export class AddMusicaComponent implements OnInit {
   }
 
   onSubmit(f: NgForm) {
+    const {nome, urlSpotify, urlYoutube, duracao} = f.value;
 
+    console.log(f.value);
+
+    if (duracao === '00:00:00' || ! /(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)/gm.test(duracao)) {
+      return alert('Insira uma duração no formato HH:mm:ss, que seja diferente de 00:00:00!');
+    }
+
+    this.loading = true;
+    if (this.single) {
+      this.imageService.uploadImageSingle(this.image, nome, this.artista.nome)
+        .then(urlImagem => {
+          const musica = new Musica(nome, duracao, this.single, undefined, undefined, urlSpotify, urlYoutube, urlImagem);
+          musica.artistaMusicas = [new ArtistaMusica(this.artista.id, this.artista)];
+          this.admService.addSingle(musica)
+            .subscribe(res => {
+              this.openSnackBar(`Single ${res.titulo} adicionado com sucesso.`, 'Ok', 2000);
+              this.loading = false;
+              this.artista = new Artista('', '');
+              this.nomeArtista = '';
+              this.image = undefined;
+              f.reset();
+            }, erro => {
+              console.log(erro);
+              this.openSnackBar(`Erro ao adicionar música.`, 'Ok', 2500, true);
+              this.loading = false;
+            });
+        })
+        .catch(err => {
+          console.log(err);
+          this.openSnackBar(`Erro ao adicionar música.`, 'Ok', 2500, true);
+          this.loading = false;
+        });
+    }
+
+  }
+
+  openSnackBar(message: string, action: string, duration: number, error: boolean = false) {
+    this.snackbar.open(message, action, {
+      duration,
+      panelClass: [error ? 'snackbar-error' : 'snackbar-success']
+    });
   }
 }

@@ -44,4 +44,8 @@ export class AdminService {
   fetchAlbunsByNome(pesquisa: string) {
     return this.http.get<Album[]>(`${BASEURL}albuns?nome=${pesquisa}`);
   }
+
+  addSingle(musica: Musica) {
+    return this.http.post<Musica>(`${BASEURL}musicas/single`, musica);
+  }
 }

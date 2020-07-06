@@ -14,7 +14,7 @@ namespace Maia.Controllers
 {
     [ApiController]
     [Route("[controller]s")]
-    public class MusicaController
+    public class MusicaController : ControllerBase
     {
         [HttpGet]
         [Authorize]
@@ -81,6 +81,36 @@ namespace Maia.Controllers
             catch (Exception e)
             {
                 throw e;
+            }
+        }
+
+        [HttpPost]
+        [Route("single")]
+        [Authorize(Roles = "adm")]
+        public async Task<ActionResult<Musica>> AddSingle([FromBody] MusicaDTO dto, [FromServices] MaiaContext context)
+        {
+            try
+            {
+                var musica = dto.ToEntity();
+                context.Musicas.Add(musica);
+                
+                foreach (var am in dto.ArtistaMusicas)
+                {
+                    var artista = await context.Artistas.Where(a => a.Id == am.ArtistaId).FirstOrDefaultAsync();
+                    context.ArtistaMusicas.Add(new ArtistaMusica() { Artista = artista, Musica = musica });
+                }
+                
+                if (await context.SaveChangesAsync() > 0)
+                {
+                    return Created($"musicas/id/{musica.Id}", musica);
+                }
+
+                return BadRequest();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
             }
         }
     }

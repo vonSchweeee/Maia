@@ -20,10 +20,6 @@ export class ListaMusicaManagementComponent implements OnInit {
     this.admService.fetchMusicas().subscribe(musicas => {
       this.musicas = musicas;
 
-      this.musicas.forEach(musica => {
-        this.musicas.push(musica);
-      });
-
     });
   }
 

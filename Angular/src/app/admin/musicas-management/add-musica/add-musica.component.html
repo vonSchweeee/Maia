@@ -5,10 +5,16 @@
       <mat-card>
         <form #f="ngForm" (ngSubmit)="onSubmit(f)">
           <div class="display-flex-column">
-            <mat-form-field appearance="outline">
-              <mat-label>Nome</mat-label>
-              <input id="input-nome" matInput name="nome" ngModel required>
-            </mat-form-field>
+            <div class="flex-row1">
+              <mat-form-field appearance="outline">
+                <mat-label>Nome</mat-label>
+                <input id="input-nome" matInput name="nome" ngModel required>
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="input-duracao-musica" style="width: 85px;">
+                <mat-label>Duração</mat-label>
+                <input id="input-duracao-musica" matInput name="duracao" ngModel mask="hh:m0:s0" [dropSpecialCharacters]="false">
+              </mat-form-field>
+            </div>
             <mat-form-field appearance="outline">
               <mat-label>Artista *</mat-label>
               <input id="input-artista" matInput name="artista" [(ngModel)]="nomeArtista" (input)="onArtistaTxtChange()">
@@ -40,7 +46,7 @@
                   </div>
                 </div>
               </mat-form-field>
-              <mat-checkbox class="check-single" (change)="onSingleCheck($event)" [checked]="single">Single</mat-checkbox>
+              <mat-checkbox [ngModel]="single" name="single" class="check-single" (change)="onSingleCheck($event)" [checked]="single">Single</mat-checkbox>
             </div>
             <div class="flex-row1">
               <mat-form-field class="input-url-spotify" appearance="outline">
@@ -52,11 +58,12 @@
                 <input id="input-url-youtube" matInput name="urlYoutube" ngModel>
               </mat-form-field>
             </div>
+            <img class="img-preview-single" *ngIf="image && single" [src]="image.src">
             <div class="flex-row">
               <label for="input-img" class="lb-btn-img">
                 <div class="flex-row1"></div>
                 <button type="button" (click)="inputFile.click()" mat-raised-button color="accent" type="button" class="btn-img" [disabled]="! single">
-                  Adicionar Imagem
+                  Adicionar Imagem <b *ngIf="single">*</b>
                 </button>
                 <div class="flex-row1"></div>
               </label>
@@ -64,7 +71,10 @@
             </div>
             <input #inputFile type="file" id="input-img" accept="image/png, image/jpeg"
                    (change)="processFile(inputFile)">
-            <button class="btn-submit" type="submit" mat-raised-button color="primary" [disabled]="f.invalid || (single && ! image) || loading">Salvar</button>
+            <button class="btn-submit" type="submit" mat-raised-button color="primary" [disabled]="f.invalid || cantSubmit">
+              Salvar
+            </button>
+            <mat-spinner class="loading" *ngIf="loading" [color]="'primary'" [diameter]="25"></mat-spinner>
           </div>
         </form>
       </mat-card>

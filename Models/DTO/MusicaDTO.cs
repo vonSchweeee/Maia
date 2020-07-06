@@ -23,6 +23,8 @@ namespace Maia.Utils.DTO
         
         public string UrlSpotify { get; set; }
         public string UrlYoutube { get; set; }
+        
+        public List<ArtistaMusica> ArtistaMusicas { get; set; }
 
         public Musica ToEntity()
         {
