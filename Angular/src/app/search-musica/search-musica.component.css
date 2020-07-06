@@ -1,0 +1,112 @@
+.root {
+  margin: 15px;
+  width: 100%;
+}
+
+.flex-row1 {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  flex-basis: 100%;
+}
+
+.search-section {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  background-color: #fafafa;
+  border-radius: 50px;
+  max-width: 500px;
+  margin-left: 24px;
+  max-height: 30px;
+  margin-bottom: 3px;
+}
+
+h1 {
+  color: #FFF;
+  margin-bottom: 15px;
+  font-size: 30px;
+  align-self: flex-end;
+}
+
+.input-pesquisa {
+  border: none;
+  border-radius: 55px;
+  padding-left: 10px;
+  padding-top: 3px;
+  width: 100%;
+}
+
+form {
+  width: 100%;
+}
+
+.btn-pesquisa {
+  background-color: #0002;
+  height: 30px; width: 30px;
+}
+
+.item-musica {
+  margin: 0 0 15px 15px;
+  width: 360px;
+}
+
+a {
+  padding: 0;
+  width: 100%;
+}
+
+.card-column {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: flex-start;
+  margin-left: 20px;
+  margin-top: 15px;
+}
+
+.mat-card-title {
+  margin-bottom: 0;
+}
+
+.mat-card-subtitle {
+  text-align: start;
+  margin-top: -10px;
+}
+
+.card-row {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  align-items: center;
+}
+
+.img-musica {
+  width: 110px;
+  height: 110px;
+  border-radius: 10%;
+  border: 1px solid #9999;
+}
+
+.container-fluid {
+  padding: 0;
+}
+
+.row {
+  margin: 0;
+}
+
+.lista-musicas {
+  margin-left: 35px;
+}
+
+@media (max-width: 1160px) {
+  .row {
+    justify-content: center;
+    margin: 0;
+  }
+}
+
+.title {
+  flex: 1;
+}

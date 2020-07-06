@@ -199,3 +199,12 @@ a {
     margin-bottom: 10px;
   }
 }
+
+a.tab {
+  color: #114;
+}
+
+a.tab:hover {
+  color: #114;
+  text-decoration: underline #673AB7;
+}

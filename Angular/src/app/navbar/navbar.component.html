@@ -6,7 +6,7 @@
     <h1>Maia</h1>
     <div style="flex: 1;"></div>
     <input class="input-pesquisa" #inputPesquisa *ngIf="searching"
-      placeholder="Insira uma #tag ou procure por um usuário." [(ngModel)]="pesquisa">
+      placeholder="Insira uma #tag ou procure por uma música." [(ngModel)]="pesquisa" (keypress)="onKeyPress($event)">
     <button type="button" mat-icon-button aria-label="cancelar" *ngIf="searching" (click)="onCancelSearch()" style="outline: none">
       <mat-icon>cancel</mat-icon>
     </button>
@@ -18,7 +18,7 @@
       <a mat-button [routerLink]="['/feed']" routerLinkActive="active" style="text-decoration: none;"> Feed </a>
       <a mat-button [routerLink]="['/letras']" routerLinkActive="active" style="text-decoration: none;"> Letras </a>
       <a mat-button [routerLink]="['/partituras']" routerLinkActive="active" style="text-decoration: none;"> Partituras </a>
-      <a mat-button [routerLink]="['/tabs']" routerLinkActive="active" style="text-decoration: none;"> Tablaturas </a>
+      <a mat-button [routerLink]="['/tabs']" routerLinkActive="active" style="text-decoration: none; margin-right: 8px"> Tablaturas </a>
       <button type="button" mat-icon-button *ngIf="! usuario.urlImagem" style="outline: none" class="btn-usuario" [matMenuTriggerFor]="userMenu">
         <mat-icon class="user-icon">person</mat-icon>
       </button>

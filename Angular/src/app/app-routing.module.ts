@@ -36,6 +36,8 @@ import {AddTabComponent} from "./tabs/add-tab/add-tab.component";
 import {TabResolverService} from "./tabs/tab/tab-resolver.service";
 import {TabsMusicaResolverService} from "./tabs/tabs-musica/tabs-musica-resolver.service";
 import {AddTabResolverService} from "./tabs/add-tab/add-tab-resolver.service";
+import {SearchMusicaComponent} from "./search-musica/search-musica.component";
+import {SearchMusicaResolverService} from "./search-musica/search-musica-resolver.service";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent, canActivate: [AuthGuard]},
@@ -89,6 +91,7 @@ const routes: Routes = [
     ]
   },
   {path: 'registro', component: RegistroComponent},
+  {path: 'musicas', canActivate: [AuthGuard], component: SearchMusicaComponent, resolve: {musicas: SearchMusicaResolverService}},
   {path: 'musica/:id', canActivate: [AuthGuard], component: MusicaComponent},
   {path: '**', redirectTo: 'login'}
 ];

@@ -46,6 +46,8 @@ namespace Maia.Controllers
             {
                 return await context.Musicas
                     .FromSqlRaw($"SELECT * FROM maia.musicas WHERE Titulo LIKE '%{nome}%'")
+                    .Include(m => m.ArtistaMusicas)
+                    .ThenInclude(am => am.Artista)
                     .ToListAsync();
             }
         }

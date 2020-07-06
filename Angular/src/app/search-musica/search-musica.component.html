@@ -1,0 +1,27 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12 root">
+      <div class="row title">
+        <h1 *ngIf="musicas && musicas.length">Resultados para "{{ pesquisa }}"</h1>
+        <h1 *ngIf="! musicas || ! musicas.length">Nenhum resultado encontrado para "{{ pesquisa }}".</h1>
+      </div>
+      <div class="row lista-musicas">
+        <div class="item-musica" *ngFor="let musica of musicas">
+          <a mat-button [routerLink]="['/musica/'] + musica.id">
+            <mat-card>
+              <div class="card-row">
+                <img class="img-musica" [src]="musica.urlImagem">
+                <div class="card-column">
+                  <div>
+                    <mat-card-title>{{ musica.titulo }}</mat-card-title>
+                    <mat-card-subtitle>{{ musica.artistaMusicas | artistas:'string' }}</mat-card-subtitle>
+                  </div>
+                </div>
+              </div>
+            </mat-card>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

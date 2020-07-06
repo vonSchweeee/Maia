@@ -17,7 +17,7 @@ namespace Maia.Controllers
     {
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult<List<Tab>>> Get([FromQuery] int musicaId, [FromServices] MaiaContext context)
+        public async Task<ActionResult<object>> Get([FromQuery] int musicaId, [FromServices] MaiaContext context)
         {
             if (musicaId == 0)
             {
@@ -38,13 +38,45 @@ namespace Maia.Controllers
             {
                 try
                 {
-                    return await context.Tabs.Where(t => t.MusicaId == musicaId).ToListAsync();
+                    return await context.Tabs
+                        .Where(t => t.MusicaId == musicaId)
+                        .Select(t => new
+                        {
+                            t.Titulo,
+                            t.Id,
+                            t.Instrumento,
+                            t.Musica
+                        })
+                        .ToListAsync();
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
                     throw;
                 }
+            }
+        }
+
+        [HttpGet]
+        [Authorize]
+        [Route("id/{id}")]
+        public async Task<ActionResult<Tab>> GetById([FromRoute] int id, [FromServices] MaiaContext context)
+        {
+            try
+            {
+                return await context.Tabs
+                    .Where(t => t.Id == id)
+                    .Include(t => t.Musica)
+                    .ThenInclude(m => m.Album)
+                    .Include(t => t.Musica)
+                    .ThenInclude(m => m.ArtistaMusicas)
+                    .ThenInclude(am => am.Artista)
+                    .FirstOrDefaultAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
             }
         }
 

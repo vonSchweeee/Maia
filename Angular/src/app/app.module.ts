@@ -61,6 +61,7 @@ import {TabComponent} from "./tabs/tab/tab.component";
 import {AddTabComponent} from "./tabs/add-tab/add-tab.component";
 import {TabsMusicaComponent} from "./tabs/tabs-musica/tabs-musica.component";
 import {TabCardComponent} from "./tabs/tab-card/tab-card.component";
+import {SearchMusicaComponent} from "./search-musica/search-musica.component";
 
 @NgModule({
   declarations: [
@@ -105,7 +106,8 @@ import {TabCardComponent} from "./tabs/tab-card/tab-card.component";
     TabComponent,
     AddTabComponent,
     TabsMusicaComponent,
-    TabCardComponent
+    TabCardComponent,
+    SearchMusicaComponent
   ],
   imports: [
     BrowserModule,

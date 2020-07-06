@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
+import {Tab} from "../../shared/models/Tab";
 
 @Component({
   selector: 'app-tabs-musica',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TabsMusicaComponent implements OnInit {
 
-  constructor() { }
+  tabs: Tab[];
+
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.tabs = this.route.snapshot.data.tabs;
+    console.log(this.tabs);
   }
 
 }

@@ -21,4 +21,8 @@ export class MusicaService {
   fetchMusicaById(id: number) {
     return this.http.get<Musica>(BASEURL + `musicas/id/${id}`);
   }
+
+  fetchMusicasByNome(nome: string) {
+    return this.http.get<Musica[]>(`${BASEURL}musicas?nome=${nome}`);
+  }
 }

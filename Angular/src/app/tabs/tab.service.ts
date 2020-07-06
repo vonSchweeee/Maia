@@ -23,4 +23,8 @@ export class TabService {
   fetchPopularTabs() {
     return this.http.get<Tab[]>(`${BASEURL}tabs/popular`);
   }
+
+  fetchTabById(id: number) {
+    return this.http.get<Tab>(`${BASEURL}tabs/id/${id}`);
+  }
 }

@@ -1,0 +1,105 @@
+.container {
+  margin-top: 15px;
+}
+
+.img-artista {
+  border-radius: 50%;
+  width: 90px;
+  height: 90px;
+}
+
+.row {
+  flex: 1;
+  justify-content: center;
+}
+
+.card-letra {
+  padding-top: 5px;
+  min-width: 30%;
+}
+
+.mat-card-root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.letra-traducao {
+  font-size: 1.15em;
+  text-align: center;
+  margin-left: 10px;
+}
+
+.txt-nome-musica {
+  font-size: 2.2em;
+  font-weight: 500;
+  margin: 0;
+  padding: 0;
+}
+
+.txt-artista {
+  font-size: 1.25em;
+  margin: -8px 0 0 0;
+  padding: 0;
+}
+
+.txt-nome-musica, .txt-artista {
+  text-align: start;
+}
+
+.col-img-artista {
+  flex: 0;
+}
+
+.flex-row1 {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+
+.flex-column1 {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.flex-column1.center {
+  align-items: center;
+}
+
+.flex-column0 {
+  display: flex;
+  flex-direction: column;
+  flex: 0;
+}
+
+.coluna-artista-musica {
+  margin-top: 2px;
+  margin-left: 10px;
+  align-items: stretch;
+}
+
+.mat-card-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+}
+
+.info-musica {
+  margin: 10px 0 15px;
+  justify-content: center;
+}
+
+.f-center {
+  align-self: center;
+  align-items: center;
+}
+
+* {
+  color: #FAFAFA;
+}
+
+a {
+  color: #673AB7;
+}

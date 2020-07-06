@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 
 import { AuthService } from '../shared/auth/auth.service';
 import { Usuario } from '../shared/models/Usuario';
+import {MusicaService} from "../musica/musica.service";
 
 @Component({
   selector: 'app-navbar',
@@ -18,7 +19,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   pesquisa = '';
   admin = false;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router, private mscService: MusicaService) {
     this.admin = authService.usuarioSubj.value.isAdm;
   }
 
@@ -50,10 +51,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
       }
       else {
         if (this.pesquisa.startsWith('#')) {
-          this.router.navigate([`/posts/tag/${this.pesquisa.replace('#', '')}`])
+          this.router.navigate([`/posts/tag/${this.pesquisa.replace('#', '')}`]);
         }
         else {
-          console.log('usuario');
+          this.router.navigate(['/musicas'], {queryParams: { nome: this.pesquisa }});
         }
       }
     }
@@ -63,4 +64,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.searching = false;
   }
 
+  onKeyPress($event: KeyboardEvent) {
+    if ($event.key !== "Enter")
+      return;
+    else {
+      this.onSearch();
+    }
+  }
 }

@@ -1,1 +1,12 @@
-<p>tabs-musica works!</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="content">
+        <h1>Tablaturas mais populares para {{ tabs[0].musica.titulo }}</h1>
+        <div class="row content">
+          <app-tab-card *ngFor="let tab of tabs" [tab]="tab"></app-tab-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
