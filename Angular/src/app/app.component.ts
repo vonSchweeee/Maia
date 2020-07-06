@@ -3,10 +3,13 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from './shared/auth/auth.service';
 import {NavigationEnd, Router} from '@angular/router';
 import {ToastService} from "./shared/services/toast.service";
+import {slideInAnimation} from "./shared/utils/animations";
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html'
+  templateUrl: './app.component.html',
+  // TODO:
+  // animations: [slideInAnimation]
 })
 export class AppComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router, private toast: ToastService) { }

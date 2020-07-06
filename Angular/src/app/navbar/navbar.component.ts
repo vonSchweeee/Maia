@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from '../shared/auth/auth.service';
 import { Usuario } from '../shared/models/Usuario';
 import {MusicaService} from "../musica/musica.service";
+import {SearchService} from "../search/search.service";
 
 @Component({
   selector: 'app-navbar',
@@ -16,22 +17,26 @@ export class NavbarComponent implements OnInit, OnDestroy {
   usuario: Usuario;
   usuarioSub: Subscription;
   searching = false;
+  searchSub: Subscription;
   pesquisa = '';
   admin = false;
 
-  constructor(private authService: AuthService, private router: Router, private mscService: MusicaService) {
+  constructor(private authService: AuthService, private router: Router, private searchService: SearchService) {
     this.admin = authService.usuarioSubj.value.isAdm;
   }
 
   ngOnInit() {
     this.usuarioSub = this.authService.usuarioSubj
       .subscribe(usuario => this.usuario = usuario);
+    this.searchSub = this.searchService.searchSubj.subscribe(value => this.pesquisa = value);
   }
 
   ngOnDestroy() {
-    if (this.usuarioSub) {
+    if (this.usuarioSub)
       this.usuarioSub.unsubscribe();
-    }
+    if (this.searchSub)
+      this.searchSub.unsubscribe();
+
   }
 
   onLogout() {
@@ -62,6 +67,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   onCancelSearch() {
     this.searching = false;
+    this.searchService.searchSubj.next(null);
   }
 
   onKeyPress($event: KeyboardEvent) {
@@ -70,5 +76,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
     else {
       this.onSearch();
     }
+  }
+
+  onNavigate() {
+    this.searchService.searchSubj.next(null);
+    this.searching = false;
   }
 }
