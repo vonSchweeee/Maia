@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Maia.Data;
-using Maia.Utils;
-using Maia.Utils.DTO;
+using Maia.Models;
+using Maia.Models.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Maia.Utils;
 
 namespace Maia.Controllers
 {

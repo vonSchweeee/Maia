@@ -1,9 +1,9 @@
 using System.ComponentModel;
-using Maia.Utils.Abstracts;
-using Maia.Utils.DTO;
+using Maia.Models.Abstracts;
+using Maia.Models.DTO;
 using Newtonsoft.Json;
 
-namespace Maia.Utils
+namespace Maia.Models
 {
     public class Favorito : Entidade<long>
     {

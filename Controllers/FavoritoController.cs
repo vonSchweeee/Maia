@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Maia.Data;
-using Maia.Utils.DTO;
+using Maia.Models.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

@@ -1,10 +1,10 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using Maia.Models.Abstracts;
 using Newtonsoft.Json;
-using Maia.Utils.DTO;
-using Maia.Utils.Abstracts;
+using Maia.Models.DTO;
 
-namespace Maia.Utils
+namespace Maia.Models
 {
     
     public class Usuario : Entidade<int>

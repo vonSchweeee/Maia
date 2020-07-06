@@ -3,7 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
-using Maia.Utils;
+using Maia.Models;
 using Microsoft.Extensions.Configuration;
 
 namespace Maia.Services

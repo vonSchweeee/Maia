@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using Maia.Utils;
+using Maia.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;

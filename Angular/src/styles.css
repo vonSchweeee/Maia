@@ -44,3 +44,7 @@ button {
   text-align: center;
   cursor: text;
 }
+
+#toggleEditorMode- {
+  display: none;
+}

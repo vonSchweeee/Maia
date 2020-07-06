@@ -30,6 +30,12 @@ import {AddLetraResolverService} from "./letras/add-letra/add-letra-resolver.ser
 import {LetrasResolverService} from "./letras/letras-resolver.service";
 import {TabsComponent} from "./tabs/tabs.component";
 import {TabsResolverService} from "./tabs/tabs-resolver.service";
+import {TabComponent} from "./tabs/tab/tab.component";
+import {TabsMusicaComponent} from "./tabs/tabs-musica/tabs-musica.component";
+import {AddTabComponent} from "./tabs/add-tab/add-tab.component";
+import {TabResolverService} from "./tabs/tab/tab-resolver.service";
+import {TabsMusicaResolverService} from "./tabs/tabs-musica/tabs-musica-resolver.service";
+import {AddTabResolverService} from "./tabs/add-tab/add-tab-resolver.service";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent, canActivate: [AuthGuard]},
@@ -49,7 +55,10 @@ const routes: Routes = [
   },
   {
     path: 'tabs', canActivate: [AuthGuard], children: [
-      {path: '', component: TabsComponent, resolve: {tabs: TabsResolverService}}
+      {path: '', component: TabsComponent, resolve: {tabs: TabsResolverService}},
+      {path: 'id/:id', component: TabComponent, resolve: { tab: TabResolverService }},
+      {path: 'musica/:id', component: TabsMusicaComponent, resolve: { tabs: TabsMusicaResolverService }},
+      {path: 'add/musica/:id', component: AddTabComponent, resolve: { musica: AddTabResolverService }}
     ]
   },
   {

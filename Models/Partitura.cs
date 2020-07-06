@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using Maia.Utils.Abstracts;
+using Maia.Models.Abstracts;
 using Newtonsoft.Json;
 
-namespace Maia.Utils
+namespace Maia.Models
 {
     public class Partitura : AnotacaoMusical
     {

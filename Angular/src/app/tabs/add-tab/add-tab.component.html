@@ -1,1 +1,42 @@
-<p>add-tab works!</p>
+<div class="container">
+  <div class="row">
+    <h1 class="sorry-text" *ngIf="txtSorryVisible">
+      Desculpe, infelizmente ainda não há uma letra para esta música :(
+      <br>
+      Que tal adicionar uma?
+    </h1>
+    <div class="text-editor">
+      <div class="row">
+        <h1 class="nome-musica-artista">
+          <label class="select-instrumento" style="opacity: 0; pointer-events: none;">
+            <select name="aaaaa">
+              <option value="Guitarra">Guitarra</option>
+            </select>
+          </label>
+          <input id="input-titulo" class="input-titulo" placeholder="Título" [(ngModel)]="titulo" maxlength="90">
+          <label class="select-instrumento text-size">
+            <select name="instrumento" class="instrumento" [(ngModel)]="instrumento" (ngModelChange)="onTuningChange($event)">
+              <option *ngFor="let option of options" [value]="option.replace('ã', 'a')">{{ option }}</option>
+            </select>
+          </label>
+        </h1>
+      </div>
+      <div class="flex-column1-center">
+        <input id="input-descricao" class="input-descricao" placeholder="Descrição" [(ngModel)]="descricao" maxlength="90">
+        <input class="input-afinacao" placeholder="Afinação" [ngModel]="afinacao | uppercase" maxlength="8" (ngModelChange)="afinacao=$event">
+        <div class="flex-row">
+          <label for="input-img">
+            <button type="button" (click)="inputFile.click()" mat-raised-button color="accent" class="btn-img">
+              Carregar um Arquivo de Texto
+            </button>
+          </label>
+        </div>
+        <input #inputFile type="file" id="input-img" accept="text/plain"
+               (change)="processFile(inputFile)"
+        >
+      </div>
+      <angular-editor [placeholder]="'Monte aqui sua tablatura...'" [(ngModel)]="textoTab" [config]="editorConfig" (paste)="onPaste($event)"></angular-editor>
+      <button class="btn-enviar" mat-raised-button color="accent" (click)="onSubmit()">Enviar</button>
+    </div>
+  </div>
+</div>

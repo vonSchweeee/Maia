@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Maia.Models.Abstracts;
 using Newtonsoft.Json;
-using Maia.Utils.Abstracts;
 
-namespace Maia.Utils
+namespace Maia.Models
 {
     public class Post : Entidade<int>
     {

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Maia.Utils.DTO
+namespace Maia.Models.DTO
 {
     public class UsuarioDTO
     {

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
-using Maia.Utils.Abstracts;
-using Maia.Utils.DTO;
+using Maia.Models.Abstracts;
+using Maia.Models.DTO;
 
-namespace Maia.Utils
+namespace Maia.Models
 {
     public class Comentario : Entidade<long>
     { 

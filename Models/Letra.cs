@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using Maia.Utils.Abstracts;
-using Maia.Utils.DTO;
+using Maia.Models.Abstracts;
+using Maia.Models.DTO;
 using Newtonsoft.Json;
 
-namespace Maia.Utils
+namespace Maia.Models
 {
     public class Letra : AnotacaoMusical
     {

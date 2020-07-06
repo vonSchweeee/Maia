@@ -1,4 +1,4 @@
-namespace Maia.Utils
+namespace Maia.Models
 {
     public class ArtistaMusica
     {

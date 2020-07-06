@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 
-namespace Maia.Utils.Abstracts
+namespace Maia.Models.Abstracts
 {
     public abstract class AnotacaoMusical : Entidade<int>
     {

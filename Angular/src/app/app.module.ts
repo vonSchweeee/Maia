@@ -59,6 +59,7 @@ import {UrlSpotifyPipe} from "./shared/pipes/url-spotify.pipe";
 import {TabsComponent} from "./tabs/tabs.component";
 import {TabComponent} from "./tabs/tab/tab.component";
 import {AddTabComponent} from "./tabs/add-tab/add-tab.component";
+import {TabsMusicaComponent} from "./tabs/tabs-musica/tabs-musica.component";
 
 @NgModule({
   declarations: [
@@ -101,7 +102,8 @@ import {AddTabComponent} from "./tabs/add-tab/add-tab.component";
     UrlSpotifyPipe,
     TabsComponent,
     TabComponent,
-    AddTabComponent
+    AddTabComponent,
+    TabsMusicaComponent
   ],
   imports: [
     BrowserModule,

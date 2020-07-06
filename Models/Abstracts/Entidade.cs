@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Maia.Utils.Abstracts
+namespace Maia.Models.Abstracts
 {
     public abstract class Entidade<T>
     { 

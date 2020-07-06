@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
+using Maia.Models.Abstracts;
+using Maia.Models.DTO;
 using Newtonsoft.Json;
-using Maia.Utils.Abstracts;
-using Maia.Utils.DTO;
 
-namespace Maia.Utils
+namespace Maia.Models
 {
     public class Artista : Entidade<int>
     {
