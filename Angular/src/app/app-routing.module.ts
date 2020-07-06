@@ -38,6 +38,14 @@ import {TabsMusicaResolverService} from "./tabs/tabs-musica/tabs-musica-resolver
 import {AddTabResolverService} from "./tabs/add-tab/add-tab-resolver.service";
 import {SearchMusicaComponent} from "./search-musica/search-musica.component";
 import {SearchMusicaResolverService} from "./search-musica/search-musica-resolver.service";
+import {PartiturasResolverService} from "./partituras/partituras-resolver.service";
+import {PartiturasComponent} from "./partituras/partituras.component";
+import {PartituraComponent} from "./partituras/partitura/partitura.component";
+import {PartituraResolverService} from "./partituras/partitura/partitura-resolver.service";
+import {PartiturasMusicaResolverService} from "./partituras/partituras-musica/partituras-musica-resolver.service";
+import {PartiturasMusicaComponent} from "./partituras/partituras-musica/partituras-musica.component";
+import {AddPartituraComponent} from "./partituras/add-partitura/add-partitura.component";
+import {AddPartituraResolverService} from "./partituras/add-partitura/add-partitura-resolver.service";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent, canActivate: [AuthGuard]},
@@ -61,6 +69,14 @@ const routes: Routes = [
       {path: 'id/:id', component: TabComponent, resolve: { tab: TabResolverService }},
       {path: 'musica/:id', component: TabsMusicaComponent, resolve: { tabs: TabsMusicaResolverService }},
       {path: 'add/musica/:id', component: AddTabComponent, resolve: { musica: AddTabResolverService }}
+    ]
+  },
+  {
+    path: 'partituras', canActivate: [AuthGuard], children: [
+      {path: '', component: PartiturasComponent, resolve: {partituras: PartiturasResolverService}},
+      {path: 'id/:id', component: PartituraComponent, resolve: { partitura: PartituraResolverService }},
+      {path: 'musica/:id', component: PartiturasMusicaComponent, resolve: { partituras: PartiturasMusicaResolverService }},
+      {path: 'add/musica/:id', component: AddPartituraComponent, resolve: { musica: AddPartituraResolverService }}
     ]
   },
   {

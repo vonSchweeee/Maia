@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../shared/auth/auth.service';
+import {ToastService} from "../shared/services/toast.service";
 
 @Component({
   templateUrl: './registro.component.html',
@@ -14,7 +15,7 @@ export class RegistroComponent implements OnInit {
   errorMessage: string;
   loading = false;
 
-  constructor(private authService: AuthService, private snackBar: MatSnackBar, private router: Router) { }
+  constructor(private authService: AuthService, private toast: ToastService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -27,23 +28,15 @@ export class RegistroComponent implements OnInit {
     this.errorMessage = null;
 
     this.authService.registrar(email, nome, senha).subscribe(res => {
-      this.openSnackBar(`Usuário ${res.usuario.nome} registrado com sucesso!`, 'Ok.', 1500);
+      this.toast.toast(`Usuário ${res.usuario.nome} registrado com sucesso!`, 1500, "OK").afterDismissed()
+        .subscribe(() => {
+          this.loading = false;
+          this.router.navigate(['/feed']);
+        });
     }, erro => {
       console.log(erro);
-      this.openSnackBar(`Erro ao registrar usuário!`, 'Ok.', 3500, true);
+      this.toast.toast(`Erro ao registrar usuário!`, 3500, "OK", true);
       this.loading = false;
     });
-  }
-
-  openSnackBar(message: string, action: string, duration: number, error: boolean = false) {
-    this.snackBar.open(message, action, {
-      duration,
-      panelClass: [error ? 'snackbar-error' : 'snackbar-success']
-    });
-    if (! error)
-      setTimeout(() => {
-        this.loading = false;
-        this.router.navigate(['/feed']);
-      }, 1100);
   }
 }

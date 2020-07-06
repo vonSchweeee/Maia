@@ -8,6 +8,7 @@ import { ImageSnippet } from '../../../shared/utils/ImageSnippet';
 import { DialogPreviewArtistaComponent } from './dialog-preview-artista/dialog-preview-artista.component';
 import {AdminService} from "../../admin.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {ToastService} from "../../../shared/services/toast.service";
 
 @Component({
   selector: 'app-add-artista',
@@ -20,7 +21,7 @@ export class AddArtistaComponent implements OnInit {
     public dialog: MatDialog,
     private imageService: ImageService,
     private admService: AdminService,
-    private snackBar: MatSnackBar
+    private toast: ToastService
   ) { }
   image: ImageSnippet;
   artista: Artista;
@@ -79,24 +80,17 @@ export class AddArtistaComponent implements OnInit {
       if (urlImagem) {
         this.artista.urlImagem = urlImagem;
         this.admService.addArtista(this.artista).subscribe(res => {
-          this.openSnackBar(`O artista '${res.nome}' foi salvo com sucesso!`, "Ok.", 3500);
+          this.toast.toast(`O artista '${res.nome}' foi salvo com sucesso!`, 3500);
           if (this.formArtista)
             this.formArtista.reset();
           this.image = undefined;
           this.loading = false;
         },
           erro => {
-            this.openSnackBar(`Erro: ${erro}`, "Ok.", 3500);
+            this.toast.toast(`Erro: ${erro}`, 3500, "OK", true);
             this.loading = false;
           });
       }
-    });
-  }
-
-  openSnackBar(message: string, action: string, duration: number, error: boolean = false) {
-    this.snackBar.open(message, action, {
-      duration,
-      panelClass: [error ? 'snackbar-error' : 'snackbar-success']
     });
   }
 }

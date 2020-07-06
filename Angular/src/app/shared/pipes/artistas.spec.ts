@@ -1,8 +1,8 @@
-import { AddCommaPipe } from './add-comma.pipe';
+import { ArtistasPipe } from './add-comma.pipe';
 
 describe('AddCommaPipe', () => {
   it('create an instance', () => {
-    const pipe = new AddCommaPipe();
+    const pipe = new ArtistasPipe();
     expect(pipe).toBeTruthy();
   });
 });

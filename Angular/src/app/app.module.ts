@@ -62,6 +62,11 @@ import {AddTabComponent} from "./tabs/add-tab/add-tab.component";
 import {TabsMusicaComponent} from "./tabs/tabs-musica/tabs-musica.component";
 import {TabCardComponent} from "./tabs/tab-card/tab-card.component";
 import {SearchMusicaComponent} from "./search-musica/search-musica.component";
+import {PartituraComponent} from "./partituras/partitura/partitura.component";
+import {PartiturasComponent} from "./partituras/partituras.component";
+import {AddPartituraComponent} from "./partituras/add-partitura/add-partitura.component";
+import {ResponseInterceptorService} from "./shared/services/response-interceptor.service";
+import {DialogDeletePostComponent} from "./feed/post/dialog-delete-post/dialog-delete-post.component";
 
 @NgModule({
   declarations: [
@@ -107,7 +112,11 @@ import {SearchMusicaComponent} from "./search-musica/search-musica.component";
     AddTabComponent,
     TabsMusicaComponent,
     TabCardComponent,
-    SearchMusicaComponent
+    SearchMusicaComponent,
+    PartituraComponent,
+    PartiturasComponent,
+    AddPartituraComponent,
+    DialogDeletePostComponent
   ],
   imports: [
     BrowserModule,
@@ -122,7 +131,17 @@ import {SearchMusicaComponent} from "./search-musica/search-musica.component";
     NgxMaskModule.forRoot(),
     AngularEditorModule
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ResponseInterceptorService,
+      multi: true
+    }],
   bootstrap: [
     AppComponent
   ]

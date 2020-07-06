@@ -6,6 +6,9 @@ import { Post } from '../post.model';
 import {Subject, Subscription} from "rxjs";
 import {AuthService} from "../../shared/auth/auth.service";
 import {Usuario} from "../../shared/models/Usuario";
+import {MatDialog} from "@angular/material/dialog";
+import {DialogDeletePostComponent} from "./dialog-delete-post/dialog-delete-post.component";
+import {ToastService} from "../../shared/services/toast.service";
 
 @Component({
   selector: 'app-post',
@@ -20,7 +23,7 @@ export class PostComponent implements OnInit {
   commentEditModeSubs: Subscription;
   usuarioAtual: Usuario;
 
-  constructor(private feedService: FeedService, private authService: AuthService) { }
+  constructor(private feedService: FeedService, private authService: AuthService, private dialog: MatDialog, private toast: ToastService) { }
   @Input() fullmode = false;
 
   ngOnInit(): void {
@@ -30,7 +33,16 @@ export class PostComponent implements OnInit {
   }
 
   onDelete() {
-    this.feedService.deletePost(this.post.id).subscribe(() => console.log('deletado'));
+    const dialogRef = this.dialog.open(DialogDeletePostComponent, {
+      width: '400px',
+      height: '140px',
+      data: { post: this.post}
+    });
+    dialogRef.afterClosed().subscribe(deveExcluir => {
+      if (deveExcluir) {
+        this.feedService.deletePost(this.post.id).subscribe(() => this.toast.toast());
+      }
+    });
   }
 
   onHandleComment() {
