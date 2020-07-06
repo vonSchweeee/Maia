@@ -16,7 +16,6 @@ export class AuthGuard implements CanActivate {
       const isAuth = !!usuario;
       if (isAuth) {
         if (route.url[0].path === 'login') {
-          console.log('redirect pro feed');
           return this.router.createUrlTree(['/feed']);
         }
         return isAuth;

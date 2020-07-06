@@ -1,0 +1,9 @@
+<a mat-button [routerLink]="['id/' + tab.id]">
+  <mat-card>
+    <mat-card-content class="content">
+      {{ tab.titulo }}
+      <img [src]="tab.musica.urlImagem">
+      {{ tab.musica.titulo }} - {{ tab.instrumento === 'Violao' ? 'Violão' : tab.instrumento  }}
+    </mat-card-content>
+  </mat-card>
+</a>

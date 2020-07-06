@@ -48,6 +48,30 @@ namespace Maia.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("popular")]
+        [Authorize]
+        public async Task<ActionResult<object>> GetByPopularity([FromServices] MaiaContext context)
+        {
+            try
+            {
+                return await context.Tabs
+                    .Select(t => new
+                    {
+                        t.Titulo,
+                        t.Id,
+                        t.Instrumento,
+                        t.Musica
+                    })
+                    .ToListAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
         [HttpPost]
         [Authorize]
         public async Task<ActionResult<Tab>> Post([FromBody] TabDTO dto, [FromServices] MaiaContext context)
