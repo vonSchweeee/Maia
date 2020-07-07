@@ -101,4 +101,8 @@ export class FeedService {
 
     this.http.post(BASEURL + 'favoritos', body).subscribe();
   }
+
+  editPost(post: Post) {
+    return this.http.put<Post>(BASEURL + 'posts', post);
+  }
 }

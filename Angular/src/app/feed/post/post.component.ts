@@ -9,6 +9,7 @@ import {Usuario} from "../../shared/models/Usuario";
 import {MatDialog} from "@angular/material/dialog";
 import {DialogDeletePostComponent} from "./dialog-delete-post/dialog-delete-post.component";
 import {ToastService} from "../../shared/services/toast.service";
+import {DialogEditPostComponent} from "./dialog-edit-post/dialog-edit-post.component";
 
 @Component({
   selector: 'app-post',
@@ -23,13 +24,14 @@ export class PostComponent implements OnInit {
   commentEditModeSubs: Subscription;
   usuarioAtual: Usuario;
 
-  constructor(private feedService: FeedService, private authService: AuthService, private dialog: MatDialog, private toast: ToastService) { }
+  constructor(
+    private feedService: FeedService, private authService: AuthService, private dialog: MatDialog, private toast: ToastService
+  ) { }
   @Input() fullmode = false;
 
   ngOnInit(): void {
     this.commentEditModeSubs = this.feedService.commentEditSubj.subscribe(() => this.onHandleComment());
-    if (this.fullmode)
-      this.usuarioAtual = this.authService.usuarioSubj.value;
+    this.usuarioAtual = this.authService.usuarioSubj.value;
   }
 
   onDelete() {
@@ -40,7 +42,24 @@ export class PostComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(deveExcluir => {
       if (deveExcluir) {
-        this.feedService.deletePost(this.post.id).subscribe(() => this.toast.toast());
+        this.feedService.deletePost(this.post.id).subscribe(() => this.toast.toast("Post removido com sucesso."));
+      }
+    });
+  }
+
+  onEdit() {
+    const dialogRef = this.dialog.open(DialogEditPostComponent, {
+      maxWidth: '650px',
+      width: '85%',
+      data: { post: this.post}
+    });
+    dialogRef.afterClosed().subscribe((post: Post) => {
+      if (post) {
+        this.feedService.editPost(post).subscribe(res => {
+          res.usuario = this.post.usuario;
+          this.post = res;
+          this.toast.toast();
+        });
       }
     });
   }

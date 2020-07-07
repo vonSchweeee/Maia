@@ -67,6 +67,7 @@ import {PartiturasComponent} from "./partituras/partituras.component";
 import {AddPartituraComponent} from "./partituras/add-partitura/add-partitura.component";
 import {ResponseInterceptorService} from "./shared/services/response-interceptor.service";
 import {DialogDeletePostComponent} from "./feed/post/dialog-delete-post/dialog-delete-post.component";
+import {DialogEditPostComponent} from "./feed/post/dialog-edit-post/dialog-edit-post.component";
 
 @NgModule({
   declarations: [
@@ -116,7 +117,8 @@ import {DialogDeletePostComponent} from "./feed/post/dialog-delete-post/dialog-d
     PartituraComponent,
     PartiturasComponent,
     AddPartituraComponent,
-    DialogDeletePostComponent
+    DialogDeletePostComponent,
+    DialogEditPostComponent
   ],
   imports: [
     BrowserModule,

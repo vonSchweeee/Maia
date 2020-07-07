@@ -13,7 +13,7 @@ namespace Maia.Models.DTO
         [Required]
         public int UsuarioId { get; set; }
 
-        public Post ToPost()
+        public Post ToEntity()
         {
             return new Post(Texto, Titulo, Tags, UsuarioId);
         }

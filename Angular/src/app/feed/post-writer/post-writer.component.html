@@ -30,7 +30,12 @@
       <mat-divider></mat-divider>
       <mat-card-actions>
         <div style="display: flex; flex: 1;">
-          <h5 *ngFor="let tag of tags">#{{tag}}&nbsp;</h5>
+          <div class="tag" *ngFor="let tag of tags">
+            <h5>
+              #{{tag}}
+            </h5>
+            <mat-icon type="button" class="icon-remove-tag" (click)="onRemoveTag(tag)">cancel</mat-icon>
+          </div>
           <div style="flex: 1;"></div>
           <button type="submit" mat-raised-button color="primary" class="fab" [disabled]="f.invalid || loading">
             Publicar

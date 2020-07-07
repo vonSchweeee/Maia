@@ -1,7 +1,7 @@
 <div class="row col-xs-12 col-bs">
   <mat-card class="card-post">
     <div style="flex-direction: row;">
-      <button type="button" style="float: right; box-shadow: none; outline: none;"
+      <button type="button" *ngIf="usuarioAtual.id === post.usuario.id || usuarioAtual.isAdm" style="float: right; box-shadow: none; outline: none;"
         class="fab-post-action" mat-mini-fab color="basic" [matMenuTriggerFor]="userMenu">
         <mat-icon>expand_more</mat-icon>
       </button>
@@ -84,6 +84,6 @@
 
 
 <mat-menu #userMenu="matMenu">
-  <button mat-menu-item type="button" style="outline: none">Editar</button>
+  <button mat-menu-item type="button" style="outline: none" (click)="onEdit()" *ngIf="post.usuario.id === usuarioAtual.id">Editar</button>
   <button mat-menu-item type="button" (click)="onDelete()" style="outline: none">Excluir</button>
 </mat-menu>

@@ -10,3 +10,9 @@ button {
   background-color: #F4F4F4AA;
   margin: 0;
 }
+
+.content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}

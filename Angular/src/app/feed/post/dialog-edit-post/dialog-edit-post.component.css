@@ -1,27 +1,3 @@
-.card-post {
-  min-width: 150px;
-  max-width: 650px;
-  min-height: 100px;
-  max-height: 600px;
-  height: 100%;
-  width: 90%;
-  margin-bottom: 22px;
-  padding-top: 8px;
-  padding-bottom: 0;
-}
-
-.col-bs {
-  justify-content: center;
-}
-
-.avatar {
-  width: 40px;
-  height: 40px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 1px solid #0008;
-}
-
 hr {
   margin-bottom: 0;
   float: left;
@@ -82,28 +58,18 @@ h6 {
 
 textarea {
   width: 100%;
-  min-height: 30px;
   border: 1px solid #f1f1f1;
-  border-top-right-radius: 15px;
-  border-top-left-radius: 15px;
   padding-left: 8px;
-  transform-origin: 80% left;
-    -webkit-transition: .5s ease-in-out;
-    -moz-transition: .5s ease-in-out;
-    -o-transition: .5s ease-in-out;
-    transition: .5s ease-in-out;
-  resize: none;
   background-color: #fdfdfd;
-}
-
-textarea.input-texto-focus {
   height: 100px;
   border-radius: 15px;
   margin-bottom: 8px;
+  resize: none;
 }
 
+
 .input-titulo-post {
-  width: 67%;
+  width: 64%;
   min-height: 40px;
   border: 1px solid #f2f2f2;
   border-radius: 9px;
@@ -154,15 +120,25 @@ button {
   outline: none;
 }
 
+.tags {
+  display: flex;
+  flex-direction: row;
+  margin: 10px 4px;
+}
+
+.icon-remove-dialog {
+  font-size: 14px;
+  width: 14px;
+  height: 14px;
+  user-select: none;
+  padding: 0;
+}
+
 .tag {
+  border-radius: 8px;
+  background-color: #AAA5;
+  margin-left: 6px;
   display: flex;
   flex-direction: row;
   align-items: center;
-}
-
-.icon-remove-tag {
-  font-size: 16px;
-  cursor: pointer;
-  user-select: none;
-  margin-bottom: -8px;
 }

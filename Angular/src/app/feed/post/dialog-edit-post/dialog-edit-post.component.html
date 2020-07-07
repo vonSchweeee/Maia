@@ -1,0 +1,40 @@
+<div mat-dialog-title>Editando</div>
+<div class="content">
+  <div style="display: flex;">
+    <div style="display: flex; flex: 1;"></div>
+    <textarea type="text" #inputNewPost
+              class="input-post"
+              placeholder="Edite seu post..."
+              [(ngModel)]="post.texto" name="texto" minlength="1"
+    >
+          </textarea>
+    <div style="display: flex; flex: 1;"></div>
+  </div>
+  <div>
+    <input
+      class="input-titulo-post"
+      placeholder="Título"
+      [(ngModel)]="post.titulo" name="titulo">
+    <input
+      class="input-tags-post"
+      placeholder="Tag"
+      [(ngModel)]="tag" name="tag"
+    >
+    <button type="button" mat-icon-button>
+      <mat-icon class="add-icon" (click)="onAddTag()">add_circle</mat-icon>
+    </button>
+  </div>
+  <div class="tags">
+    Tags: &nbsp;
+    <div *ngFor="let tag of post.tags" class="tag">
+      #{{ tag }} &nbsp;
+      <mat-icon type="button" class="icon-remove-dialog" (click)="onRemoveTag(tag)">cancel</mat-icon>&nbsp;
+    </div>
+    <div *ngIf="! post.tags || ! post.tags.length">&nbsp;(vazio)</div>
+  </div>
+  <mat-divider></mat-divider>
+</div>
+<div mat-dialog-actions class="actions">
+  <button mat-button (click)="onDismiss()">Cancelar</button>
+  <button mat-button [mat-dialog-close]="post">Confirmar</button>
+</div>

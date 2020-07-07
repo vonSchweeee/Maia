@@ -48,7 +48,7 @@ namespace Maia.Controllers
             if(ModelState.IsValid)
                 try 
                 {
-                    var post = model.ToPost();
+                    var post = model.ToEntity();
                     context.Add(post);
                     if(await context.SaveChangesAsync() > 0)
                     {
@@ -76,7 +76,7 @@ namespace Maia.Controllers
             var post = await context.Posts.Where(p => p.Id == postId).FirstOrDefaultAsync();
             if (post != null)
             {
-                if (post.UsuarioId == usuarioId)
+                if (post.UsuarioId == usuarioId || HttpContext.User.IsInRole("adm"))
                 {
                     context.Posts.Remove(post);
                     await context.SaveChangesAsync();
@@ -173,5 +173,31 @@ namespace Maia.Controllers
                 );
             }
         }
+
+        [HttpPut]
+        [Authorize]
+        public async Task<ActionResult<Post>> Edit([FromBody] Post post, [FromServices] MaiaContext context)
+        {
+            try
+            {
+                var usuarioId = int.Parse(
+                    HttpContext.User.Claims.Where(c => c.Type == ClaimTypes.Sid).FirstOrDefault().Value
+                );
+                if (post.UsuarioId == usuarioId)
+                {
+                    context.Posts.Update(post);
+                    await context.SaveChangesAsync();
+                    return Ok(post);
+                }
+                
+                return Forbid();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
     }
 }

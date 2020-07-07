@@ -157,9 +157,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   getAnimation(position: 'admin'| 'feed' | 'letras' | 'partituras' | 'tabs'): 'isRight' | 'isLeft' {
     const currentPos = +this.position;
-    console.log({currentPos, pos: this.pos[position]});
     this.position = this.pos[position];
-    console.log(this.pos[position] - currentPos >  0 ? 'isRight' : 'isLeft');
     return this.pos[position] - currentPos >  0 ? 'isRight' : 'isLeft';
   }
 }

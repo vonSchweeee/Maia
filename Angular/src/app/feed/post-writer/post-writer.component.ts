@@ -22,7 +22,11 @@ export class PostWriterComponent implements OnInit {
     if (this.eRef.nativeElement.contains(event.target)) {
       this.editing = true;
     } else {
-      this.editing = false;
+      if (event && event.target && event.target.classList && event.target.classList.value)
+        if (event.target.classList.value.indexOf('icon-remove-tag') > 0)
+          this.editing = true;
+      else
+        this.editing = false;
     }
   }
 
@@ -68,12 +72,18 @@ export class PostWriterComponent implements OnInit {
       else {
         tag = tag.replace(' ', '_');
       }
+
+      if (this.tags.indexOf(tag) > -1)
+        return;
+
       this.tags.push(tag);
 
-      return form.setValue({
-        'tag': ''
-      });
+      (document.querySelector('.input-tags-post') as HTMLInputElement).value = '';
     }
   }
 
+  onRemoveTag(tag: string) {
+    this.tags.splice(this.tags.indexOf(tag), 1);
+    this.editing = true;
+  }
 }
