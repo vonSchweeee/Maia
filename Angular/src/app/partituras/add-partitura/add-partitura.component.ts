@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {Musica} from "../../shared/models/Musica";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
 import {PartituraService} from "../partitura.service";
 import {AuthService} from "../../shared/auth/auth.service";
+import {Partitura} from "../../shared/models/Partitura";
+import {ToastService} from "../../shared/services/toast.service";
 
 @Component({
   selector: 'app-add-partitura',
@@ -14,13 +16,17 @@ export class AddPartituraComponent implements OnInit {
 
   musica: Musica;
   nomeArquivo = '';
+  pdf: File;
   titulo = '';
   nomeUsuario: string;
+  loading: boolean;
 
   constructor(
     private route: ActivatedRoute,
     private pttService: PartituraService,
-    private authService: AuthService
+    private authService: AuthService,
+    private toastService: ToastService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -30,15 +36,32 @@ export class AddPartituraComponent implements OnInit {
     this.titulo = `${artistas.join(', ')} - ${this.musica.titulo} por ${this.nomeUsuario}`;
   }
 
-  onSubmit(f: NgForm) {
 
+  async onSubmit() {
+    this.loading = true;
+    const idUsuario = this.authService.usuarioSubj.value.id;
+    const urlPdf = await this.pttService.uploadPdf(
+      this.pdf, this.musica.artistaMusicas, this.musica.titulo, this.nomeUsuario
+    );
+    const partitura = new Partitura(this.titulo, urlPdf, this.musica.id, idUsuario);
+
+    this.pttService.addPartitura(partitura)
+      .subscribe(res => {
+        this.toastService.toast('Partitura adicionada com sucesso!', 1400)
+          .afterDismissed().subscribe(() => this.router.navigate([`/partituras/id/${res.id}`]));
+
+      },
+      err => {
+        this.toastService.toast('Erro ao adicionar partitura.', 2600, "OK", true);
+        this.loading = false;
+      });
   }
 
   processFile(inputFile: HTMLInputElement) {
-    console.log(inputFile);
     const file: File = inputFile.files[0];
-
     this.nomeArquivo = file.name;
+    this.pdf = file;
+
 
   }
 }

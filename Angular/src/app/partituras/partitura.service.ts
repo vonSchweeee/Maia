@@ -3,6 +3,9 @@ import {v4 as uuid} from "uuid";
 import {HttpClient} from "@angular/common/http";
 import {AngularFireStorage, AngularFireUploadTask} from "@angular/fire/storage";
 import {finalize} from "rxjs/operators";
+import {ArtistaMusica} from "../shared/models/ArtistaMusica";
+import {Partitura} from "../shared/models/Partitura";
+import {BASEURL} from "../shared/settings/settings";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +14,7 @@ export class PartituraService {
 
   constructor(private http: HttpClient, private storage: AngularFireStorage) { }
 
-  uploadPdf(pdf: File, artista: string | string[], nomeMusica: string, nomeUsuario: string): Promise<string> {
+  uploadPdf(pdf: File, artista: string | ArtistaMusica[], nomeMusica: string, nomeUsuario: string): Promise<string> {
     return new Promise<string>((resolve, reject) => {
       const idArquivo = uuid();
       let task: AngularFireUploadTask;
@@ -20,7 +23,7 @@ export class PartituraService {
       if (typeof (artista) === "string")
         path = `pdf/partituras/${artista}/${nomeMusica}/${nomeUsuario}/${idArquivo}`;
       else {
-        const artistasPath = artista.join('+');
+        const artistasPath = artista.map(am => am.artista.nome).join('+');
         path = `pdf/partituras/${artistasPath}/${nomeMusica}/${nomeUsuario}/${idArquivo}`;
       }
 
@@ -39,5 +42,9 @@ export class PartituraService {
       ).subscribe();
 
     });
+  }
+
+  addPartitura(partitura: Partitura) {
+    return this.http.post<Partitura>(BASEURL + 'partituras', partitura);
   }
 }

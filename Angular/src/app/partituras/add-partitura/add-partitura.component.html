@@ -19,9 +19,12 @@
         <p class="nome-arquivo">{{ nomeArquivo }}</p>
         <input #inputFile type="file" id="input-img" accept="application/pdf"
                (change)="processFile(inputFile)">
-        <button class="btn-submit" mat-raised-button color="accent" [disabled]="titulo.length < 3 && ! nomeArquivo">
+        <button class="btn-submit" mat-raised-button color="accent"
+                [disabled]="titulo.length < 3 || ! nomeArquivo || loading"
+          (click)="onSubmit()">
           Enviar
         </button>
+        <mat-spinner style="position: absolute; bottom: 18px;" diameter="28" color="primary" *ngIf="loading"></mat-spinner>
       </mat-card-content>
     </mat-card>
   </div>
