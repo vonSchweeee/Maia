@@ -25,7 +25,7 @@
             {{ tab.titulo | shorten:50}} ({{tab.instrumento === 'Violao' ? 'Violão' : tab.instrumento}})
           </a>
           <br *ngIf="tabs && tabs.length">
-          <a class="tab add">
+          <a class="tab add" [routerLink]="['/tabs/add/musica/' + musica.id]">
             <mat-icon class="icon-add">add_cirle</mat-icon> Adicione uma tablatura para {{ musica.titulo }}!
           </a>
         </mat-card-subtitle>
@@ -37,13 +37,13 @@
             {{ partitura.titulo | shorten:50}}
           </a>
           <br *ngIf="partituras && partituras.length">
-          <a class="tab add">
+          <a class="tab add" [routerLink]="['/partituras/add/musica/' + musica.id]">
             <mat-icon class="icon-add">add_cirle</mat-icon> Adicione uma partitura para {{ musica.titulo }}!
           </a>
         </mat-card-content>
       </mat-card>
     </div>
-    <div class="flex-column0 center info-artistas" *ngIf="musica && musica.artistaMusicas">
+    <div class="flex-column0 center info-artistas" *ngIf="musica && musica.artistaMusicas && musica.artistaMusicas[0]; else contentFiller">
       <p class="txt-artistas">{{ musica.artistaMusicas.length > 1 ? 'Sobre os artistas' : 'Sobre o artista' }}</p>
       <mat-card>
         <mat-card-content>
@@ -58,5 +58,21 @@
         </mat-card-content>
       </mat-card>
     </div>
+    <ng-template #contentFiller>
+      <div class="flex-column0 center info-artistas" style="opacity: 0.001; pointer-events: none;">
+        <p class="txt-artistas">'Sobre o artista'</p>
+        <mat-card>
+          <mat-card-content>
+            <div class="flex-column1 info-artista" *ngFor="let am of musica.artistaMusicas">
+              <p class="text-center nome-artista" >artista </p>
+
+              <div class="divider-sobre"></div>
+              <p class="txt-sobre">Sobre</p>
+              <p class="txt-biografia">biografia</p>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </ng-template>
   </div>
 </div>

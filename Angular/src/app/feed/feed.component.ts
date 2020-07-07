@@ -1,5 +1,5 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { AfterViewInit, Component, OnDestroy } from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { FeedService } from './feed.service';
@@ -19,7 +19,7 @@ import { Post } from './post.model';
     ])
   ]
 })
-export class FeedComponent implements AfterViewInit, OnDestroy {
+export class FeedComponent implements OnInit, OnDestroy {
 
   constructor(private feedService: FeedService) { }
 
@@ -27,7 +27,7 @@ export class FeedComponent implements AfterViewInit, OnDestroy {
   postsSub: Subscription;
   enableAnimations = false;
 
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
     this.feedService.postsSubj.subscribe(posts => this.posts = posts);
     this.feedService.fetchPosts().subscribe(
       posts => {

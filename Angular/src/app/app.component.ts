@@ -1,15 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { RouterOutlet } from "@angular/router";
+import {fader, slider, stepper, transformer} from './route-animations';
 
 import { AuthService } from './shared/auth/auth.service';
 import {NavigationEnd, Router} from '@angular/router';
 import {ToastService} from "./shared/services/toast.service";
-import {slideInAnimation} from "./shared/utils/animations";
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  // TODO:
-  // animations: [slideInAnimation]
+  animations: [
+    // fader,
+    slider,
+    // transformer,
+    // stepper
+  ]
 })
 export class AppComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router, private toast: ToastService) { }
@@ -29,4 +33,7 @@ export class AppComponent implements OnInit {
     });
   }
 
+  prepareRoute(outlet: RouterOutlet) {
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
+  }
 }

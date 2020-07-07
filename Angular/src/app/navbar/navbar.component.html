@@ -14,12 +14,12 @@
       <mat-icon>search</mat-icon>
     </button>
     <div class="navigators-pc">
-      <a mat-button [routerLink]="['/admin']" routerLinkActive="active"  [routerLinkActiveOptions]="{exact: false}" *ngIf="admin" style="text-decoration: none;" (click)="onNavigate()"> Admin </a>
-      <a mat-button [routerLink]="['/feed']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}" style="text-decoration: none;" (click)="onNavigate()"> Feed </a>
-      <a mat-button [routerLink]="['/letras']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}" style="text-decoration: none;" (click)="onNavigate()"> Letras </a>
-      <a mat-button [routerLink]="['/partituras']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}" style="text-decoration: none;" (click)="onNavigate()"> Partituras </a>
-      <a mat-button [routerLink]="['/tabs']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}" style="text-decoration: none; margin-right: 8px" (click)="onNavigate()"> Tablaturas </a>
-      <button type="button" mat-icon-button *ngIf="! usuario.urlImagem" style="outline: none" class="btn-usuario" [matMenuTriggerFor]="userMenu" (click)="onNavigate()">
+      <a mat-button [routerLink]="['/admin']" routerLinkActive="active"  [routerLinkActiveOptions]="{exact: false}" *ngIf="admin" style="text-decoration: none;" (click)="onNavigate('admin')"> Admin </a>
+      <a mat-button [routerLink]="['/feed']"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}" style="text-decoration: none;" (click)="onNavigate('feed')"> Feed </a>
+      <a mat-button [routerLink]="['/letras']"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}" style="text-decoration: none;" (click)="onNavigate('letras')"> Letras </a>
+      <a mat-button [routerLink]="['/partituras']"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}" style="text-decoration: none;" (click)="onNavigate('partituras')"> Partituras </a>
+      <a mat-button [routerLink]="['/tabs']"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}" style="text-decoration: none; margin-right: 8px" (click)="onNavigate('tabs')"> Tablaturas </a>
+      <button type="button" mat-icon-button *ngIf="! usuario.urlImagem" style="outline: none" class="btn-usuario" [matMenuTriggerFor]="userMenu">
         <mat-icon class="user-icon">person</mat-icon>
       </button>
       <button type="button" mat-icon-button *ngIf="usuario.urlImagem" style="outline: none" class="btn-usuario" [matMenuTriggerFor]="userMenu">
