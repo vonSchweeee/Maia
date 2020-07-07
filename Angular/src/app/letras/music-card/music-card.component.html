@@ -9,7 +9,7 @@
       <mat-card-subtitle>
         {{ musica.artistaMusicas | artistas:'string' }}
       </mat-card-subtitle>
-      <img [src]="musica.album.urlImagem" alt="Daft Punk - Homework">
+      <img [src]="musica.album.urlImagem" alt="{{ musica.artistaMusicas | artistas:'string' }} - {{ musica.titulo }}">
     </div>
   </mat-card>
 </a>

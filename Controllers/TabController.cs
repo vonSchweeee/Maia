@@ -64,7 +64,7 @@ namespace Maia.Controllers
         {
             try
             {
-                return await context.Tabs
+                var tab = await context.Tabs
                     .Where(t => t.Id == id)
                     .Include(t => t.Usuario)
                     .Include(t => t.Musica)
@@ -73,6 +73,12 @@ namespace Maia.Controllers
                     .ThenInclude(m => m.ArtistaMusicas)
                     .ThenInclude(am => am.Artista)
                     .FirstOrDefaultAsync();
+                tab.QuantAcessos += 1;
+
+                await context.SaveChangesAsync();
+
+                return tab;
+
             }
             catch (Exception e)
             {

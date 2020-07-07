@@ -1,1 +1,28 @@
-<p>add-partitura works!</p>
+<div class="container">
+  <div class="content">
+    <h1>Adicionando Partitura para {{ musica.artistaMusicas | artistas:'string' }} - {{ musica.titulo }}</h1>
+    <mat-card class="card-material">
+      <mat-card-content class="card-content">
+        <div class="flex-row">
+          <mat-form-field class="input input-titulo" appearance="outline">
+            <mat-label>Titulo</mat-label>
+            <input matInput [(ngModel)]="titulo" required minlength="5" maxlength="90">
+          </mat-form-field>
+          <label for="input-img" class="lb-btn-img">
+            <div class="flex-row1"></div>
+            <button type="button" (click)="inputFile.click()" mat-raised-button color="primary" type="button" class="btn-pdf">
+              <mat-icon>picture_as_pdf</mat-icon>
+            </button>
+            <div class="flex-row1"></div>
+          </label>
+        </div>
+        <p class="nome-arquivo">{{ nomeArquivo }}</p>
+        <input #inputFile type="file" id="input-img" accept="application/pdf"
+               (change)="processFile(inputFile)">
+        <button class="btn-submit" mat-raised-button color="accent" [disabled]="titulo.length < 3 && ! nomeArquivo">
+          Enviar
+        </button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

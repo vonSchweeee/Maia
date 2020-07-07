@@ -68,6 +68,7 @@ import {AddPartituraComponent} from "./partituras/add-partitura/add-partitura.co
 import {ResponseInterceptorService} from "./shared/services/response-interceptor.service";
 import {DialogDeletePostComponent} from "./feed/post/dialog-delete-post/dialog-delete-post.component";
 import {DialogEditPostComponent} from "./feed/post/dialog-edit-post/dialog-edit-post.component";
+import {PdfViewerModule} from "ng2-pdf-viewer";
 
 @NgModule({
   declarations: [
@@ -131,7 +132,8 @@ import {DialogEditPostComponent} from "./feed/post/dialog-edit-post/dialog-edit-
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     NgxMaskModule.forRoot(),
-    AngularEditorModule
+    AngularEditorModule,
+    PdfViewerModule
   ],
   providers: [
     {

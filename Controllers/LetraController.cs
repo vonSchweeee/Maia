@@ -112,7 +112,7 @@ namespace Maia.Controllers
             }
             catch (Exception e)
             {
-                throw;
+                throw e;
             }
         }
 
