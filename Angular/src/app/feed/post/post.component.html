@@ -11,7 +11,7 @@
           : 'assets/img/user-default.png'" [ngStyle]="{'border': post && post.usuario &&
            post.usuario.urlImagem ? 'initial' : 'none'}"
              style="justify-self: flex-start;" class="avatar more-size">
-        <div style="display: flex; flex: 1; flex-direction: column">
+        <div style="display: flex; flex: 1; flex-direction: column" class="info-post">
           <div class="username">
             {{ post.usuario && post.usuario.nome }}
           </div>
