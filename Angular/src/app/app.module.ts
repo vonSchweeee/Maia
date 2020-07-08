@@ -70,6 +70,7 @@ import {DialogDeletePostComponent} from "./feed/post/dialog-delete-post/dialog-d
 import {DialogEditPostComponent} from "./feed/post/dialog-edit-post/dialog-edit-post.component";
 import {PdfViewerModule} from "ng2-pdf-viewer";
 import {UrlYoutubePipe} from "./shared/pipes/url-youtube.pipe";
+import {ProfileComponent} from "./profile/profile.component";
 
 @NgModule({
   declarations: [
@@ -121,7 +122,8 @@ import {UrlYoutubePipe} from "./shared/pipes/url-youtube.pipe";
     AddPartituraComponent,
     DialogDeletePostComponent,
     DialogEditPostComponent,
-    UrlYoutubePipe
+    UrlYoutubePipe,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

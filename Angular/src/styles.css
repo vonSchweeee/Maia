@@ -54,3 +54,7 @@ button {
 main {
   position: relative;
 }
+
+button {
+  outline: none !important;
+}

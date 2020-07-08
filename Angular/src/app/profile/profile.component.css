@@ -1,0 +1,60 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  justify-content: center;
+}
+
+.content {
+  margin-top: 20px;
+  flex: 1;
+}
+
+.img-perfil {
+  min-width: 400px;
+  max-width: 400px;
+  width: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+h1 {
+  font-size: 2.4em;
+  color: #FFF;
+  text-align: center;
+  margin-top: 4px;
+}
+
+.icon-camera {
+  position: absolute;
+  font-size: 250px;
+  top: 100px;
+  right: 55.4vw;
+  display: none;
+}
+
+@media (max-width: 1255px) {
+  .icon-camera {
+    right: 60vw;
+  }
+}
+
+@media (max-width: 525px) {
+  .icon-camera {
+    right: 69.5vw;
+  }
+}
+
+a {
+  padding: 0;
+}
+
+.propic-container:hover>mat-icon {
+  display: initial;
+}
+
+.file-selector {
+  width: 0 !important;
+  height: 0 !important;
+  opacity: 0.01 !important;
+}

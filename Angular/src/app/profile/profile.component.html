@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="content">
+        <div class="propic-container" style="cursor: pointer" (click)="fileSelector.click()">
+          <input type="file" accept="image/x-png,image/jpeg" class="file-selector" #fileSelector (change)="onSelectPropic(fileSelector)">
+          <img class="img-perfil" [src]="usuario.urlImagem || 'assets/img/user-default.png'">
+          <mat-icon style="user-select: none; pointer-events: none;" class="icon-camera" size="250px">camera_alt</mat-icon>
+        </div>
+        <h1>{{ usuario.nome }}</h1>
+      </div>
+    </div>
+  </div>
+</div>

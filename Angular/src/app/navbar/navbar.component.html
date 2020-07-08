@@ -31,6 +31,6 @@
 
 
 <mat-menu #userMenu="matMenu">
-  <button mat-menu-item type="button" style="outline: none; cursor: default; background-color: initial; pointer-events: none;"> {{ usuario.nome }}</button>
+  <button mat-menu-item type="button" style="outline: none" [routerLink]="['/perfil']"> {{ usuario.nome }}</button>
   <button mat-menu-item type="button" style="outline: none" (click)="onLogout()" tabindex="-1">Sair</button>
 </mat-menu>

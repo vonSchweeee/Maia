@@ -46,6 +46,7 @@ import {PartiturasMusicaResolverService} from "./partituras/partituras-musica/pa
 import {PartiturasMusicaComponent} from "./partituras/partituras-musica/partituras-musica.component";
 import {AddPartituraComponent} from "./partituras/add-partitura/add-partitura.component";
 import {AddPartituraResolverService} from "./partituras/add-partitura/add-partitura-resolver.service";
+import {ProfileComponent} from "./profile/profile.component";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent, canActivate: [AuthGuard]},
@@ -106,6 +107,7 @@ const routes: Routes = [
       },
     ]
   },
+  {path: 'perfil', component: ProfileComponent, canActivate: [AuthGuard]},
   {path: 'registro', component: RegistroComponent},
   {path: 'musicas', canActivate: [AuthGuard], component: SearchMusicaComponent, resolve: {musicas: SearchMusicaResolverService}},
   {path: 'musica/:id', canActivate: [AuthGuard], component: MusicaComponent},

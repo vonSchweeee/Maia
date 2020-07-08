@@ -6,6 +6,8 @@ import { catchError, tap } from 'rxjs/operators';
 
 import { Usuario } from '../models/Usuario';
 import { BASEURL } from '../settings/settings';
+import {ImageSnippet} from "../utils/ImageSnippet";
+import {ImageService} from "../services/image.service";
 
 interface ILoginResponse {
   usuario: {
@@ -28,7 +30,8 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private imageService: ImageService
     ) { }
 
   login(email: string, senha: string) {
@@ -113,4 +116,12 @@ export class AuthService {
   }
 
 
+  updatePropic(image: ImageSnippet) {
+    this.imageService.uploadPropicUsuario(image, this.usuarioSubj.value.nome).then(urlImagem => {
+      this.http.patch(`${BASEURL}usuarios/propic`, {
+        id: this.usuarioSubj.value.id,
+        urlImagem
+      });
+    });
+  }
 }

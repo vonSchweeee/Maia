@@ -97,4 +97,33 @@ export class ImageService {
       .replace(/[^a-zA-Z ]/g, "")
       .trim().replace(/\s+/g, '-').toLowerCase();
   }
+
+  uploadPropicUsuario(image: ImageSnippet, nomeUsuario: string) {
+    return new Promise((resolve, reject) => {
+      try {
+        let task: AngularFireUploadTask;
+
+        const idImagem = uuid();
+        nomeUsuario = this.normalizarString(nomeUsuario);
+        const path = `img/usuarios/${nomeUsuario}/${idImagem}`;
+        const ref = this.storage.ref(path);
+        task = this.storage.upload(path, image.file);
+
+        task.snapshotChanges().pipe(
+          finalize(async () => {
+            const url = await ref.getDownloadURL().toPromise();
+            if (typeof (url) === "string")
+              return resolve(url);
+            else {
+              reject("Não foi possível obter a url.");
+            }
+          }),
+        ).pipe(catchError(erro => throwError(erro)))
+          .subscribe();
+      }
+      catch (e) {
+        reject(e);
+      }
+    });
+  }
 }
