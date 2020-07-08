@@ -170,7 +170,7 @@ export class AddAlbumComponent implements OnInit {
     if (! this.validate(musicas))
       return;
 
-    if (! confirm(`Deseja adicionar o álbum ${this.album.titulo}?`))
+    if (! confirm(`Deseja adicionar o álbum ${titulo}?`))
       return;
     this.album = new Album(titulo, new Date(), urlSpotify, this.image.src, musicas, this.artista.id);
     this.openDialog();

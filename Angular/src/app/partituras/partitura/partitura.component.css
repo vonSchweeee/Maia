@@ -1,0 +1,11 @@
+.container-pdf {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+pdf-viewer {
+  min-height: 90vh;
+  height: 94.5vh;
+  width: 55vw;
+}

@@ -51,11 +51,11 @@
                 <div class="row-musicas">
                   <mat-form-field appearance="outline" class="input-titulo-musica">
                     <mat-label>URL do Embed do Spotify</mat-label>
-                    <input id="input-url-spotify-musica" matInput name="urlSpotify" formControlName="urlSpotify" placeholder="https://open.spotify.com/embed/...">
+                    <input id="input-url-spotify-musica" matInput [ngModel]="urlSpotify" name="urlSpotify" formControlName="urlSpotify">
                   </mat-form-field>
                   <mat-form-field appearance="outline" class="input-titulo-musica">
                     <mat-label>URL para ouvir no YouTube</mat-label>
-                    <input id="input-url-youtube" matInput name="urlYoutube" formControlName="urlSpotify" placeholder="https://www.youtube.com/watch?v=...">
+                    <input id="input-url-youtube" matInput name="urlYoutube" formControlName="urlYoutube">
                   </mat-form-field>
                 </div>
               </div>

@@ -47,4 +47,8 @@ export class PartituraService {
   addPartitura(partitura: Partitura) {
     return this.http.post<Partitura>(BASEURL + 'partituras', partitura);
   }
+
+  fetchPartituraById(id: any) {
+    return this.http.get<Partitura>(`${BASEURL}partituras/id/${id}`);
+  }
 }
