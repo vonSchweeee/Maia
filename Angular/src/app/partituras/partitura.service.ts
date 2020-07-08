@@ -51,4 +51,12 @@ export class PartituraService {
   fetchPartituraById(id: any) {
     return this.http.get<Partitura>(`${BASEURL}partituras/id/${id}`);
   }
+
+  fetchPartiturasPopulares() {
+    return this.http.get<Partitura[]>(`${BASEURL}partituras/popular`);
+  }
+
+  fetchPartituraByMusicaId(musicaId: number) {
+    return this.http.get<Partitura[]>(`${BASEURL}partituras/popular?musicaId=${musicaId}`);
+  }
 }

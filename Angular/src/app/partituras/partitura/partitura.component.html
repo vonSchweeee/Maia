@@ -1,7 +1,25 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="container-pdf">
-      <pdf-viewer [src]="partitura.urlPdf"></pdf-viewer>
+    <div class="flex-column1">
+      <div class="container-pdf">
+        <pdf-viewer [src]="partitura.urlPdf" [stick-to-page]="true" [zoom]="1.25"></pdf-viewer>
+      </div>
+    </div>
+    <div class="flex-column1 information">
+      <h1 class="titulo-partitura">{{ partitura.titulo }}</h1>
+      <div class="flex-row0 row-info-usuario">
+        <img class="img-usuario" [src]="partitura.usuario.urlImagem || 'assets/img/user-default.png'">
+        <div class="flex-column1 info-usuario">
+          <h1>{{ partitura.usuario.nome }}</h1>
+        </div>
+      </div>
+      <div class="flex-row1 row-info-musica">
+        <img class="img-musica" [src]="partitura.musica.urlImagem">
+        <div class="flex-column1 info-musica">
+          <h1>{{ partitura.musica.titulo }}</h1>
+          <h2>{{ partitura.musica.artistaMusicas | artistas:'string' }}</h2>
+        </div>
+      </div>
     </div>
   </div>
 </div>

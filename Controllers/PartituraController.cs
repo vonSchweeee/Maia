@@ -86,6 +86,8 @@ namespace Maia.Controllers
                 return await context.Partituras
                     .Where(m => m.Id == id)
                     .Include(p => p.Musica)
+                    .ThenInclude(m => m.ArtistaMusicas)
+                    .ThenInclude(am => am.Artista)
                     .Include(p => p.Usuario)
                     .FirstOrDefaultAsync();
             }
