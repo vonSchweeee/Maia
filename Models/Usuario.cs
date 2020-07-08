@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Maia.Models.Abstracts;
 using Newtonsoft.Json;
 using Maia.Models.DTO;
+using Maia.Services;
 
 namespace Maia.Models
 {
@@ -27,12 +28,14 @@ namespace Maia.Models
         public string Role { get; set; } = "user";
         
         public string UrlImagem { get; set; }
+        
+        public Usuario() { }
 
-        public Usuario(string email, string senha, string nome)
+        public Usuario(UsuarioDTO dto, HasherService service)
         {
-            this.Email = email;
-            this.Nome = nome;
-            this.Senha = senha;
+            this.Email = dto.Email;
+            this.Nome = dto.Nome;
+            this.Senha = service.HashPassword(dto.Senha);
         }
     }
 }

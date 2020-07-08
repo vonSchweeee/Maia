@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Maia.Services;
 
 namespace Maia.Models.DTO
 {
@@ -15,5 +16,10 @@ namespace Maia.Models.DTO
         [MinLength(6)]
         [DataType(DataType.Password)]
         public string Senha { get; set; }
+
+        public Usuario ToEntity(HasherService hasherService)
+        {
+            return new Usuario(this, hasherService);
+        }
     }
 }

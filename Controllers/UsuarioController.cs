@@ -17,10 +17,12 @@ namespace Maia.Controllers
     public class UsuarioController : ControllerBase
     {
         private readonly ITokenService _tokenService;
+        private readonly HasherService _hasherService;
 
         public UsuarioController(ITokenService tokenService)
         {
             _tokenService = tokenService;
+            _hasherService = new HasherService();
         }
 
         [HttpGet]
@@ -38,7 +40,7 @@ namespace Maia.Controllers
         {
             if(ModelState.IsValid)
             {
-                var usuario = new Usuario(model.Email, model.Senha, model.Nome);
+                var usuario = model.ToEntity(_hasherService);
                 context.Usuarios.Add(usuario);
                 var res = await context.SaveChangesAsync();
                 string token = _tokenService.GenerateToken(usuario);
@@ -53,15 +55,15 @@ namespace Maia.Controllers
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
-        public async Task<ActionResult<string>> Login([FromServices] MaiaContext context, [FromBody] UsuarioDTO model)
+        public async Task<ActionResult<string>> Login([FromServices] MaiaContext context, [FromBody] UsuarioDTO dto)
         {
-            if(model.Email != null && model.Senha != null)
+            if(dto.Email != null && dto.Senha != null)
             {   
                 var usuario = await context.Usuarios
-                    .Where(usuario => usuario.Email == model.Email).FirstOrDefaultAsync();
+                    .Where(usuario => usuario.Email == dto.Email).FirstOrDefaultAsync();
 
                 if(usuario != null) {
-                    if(usuario.Senha == model.Senha) 
+                    if(_hasherService.VerifyPassword(usuario.Senha, dto.Senha)) 
                     {
                         string token = _tokenService.GenerateToken(usuario);
                         return Ok(new {usuario, token});

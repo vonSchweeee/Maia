@@ -1,0 +1,16 @@
+.actions {
+  flex: 1;
+  flex-direction: column;
+  margin-top: -20px;
+}
+
+button {
+  outline: none;
+  margin: 10px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}

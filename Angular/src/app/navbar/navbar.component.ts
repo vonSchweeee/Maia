@@ -1,11 +1,14 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import { Subscription } from 'rxjs';
+import {Subscription} from 'rxjs';
 
-import { AuthService } from '../shared/auth/auth.service';
-import { Usuario } from '../shared/models/Usuario';
+import {AuthService} from '../shared/auth/auth.service';
+import {Usuario} from '../shared/models/Usuario';
 import {MusicaService} from "../musica/musica.service";
 import {SearchService} from "../search/search.service";
+import {DialogDeletePostComponent} from "../feed/post/dialog-delete-post/dialog-delete-post.component";
+import {MenuDialogComponent} from "./menu-dialog/menu-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
 
 type positions = {
   admin: number;
@@ -38,8 +41,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
     tabs: 4
   };
 
-  constructor(private authService: AuthService,
-              private router: Router, private searchService: SearchService) {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private searchService: SearchService,
+    private dialog: MatDialog
+  ) {
     this.admin = authService.usuarioSubj.value.isAdm;
     if (this.admin) {
       this.maxPos = 5;
@@ -68,8 +75,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
           this.position = 5;
           break;
       }
-    }
-    else {
+    } else {
       this.maxPos = 4;
       switch (router.url.split('/')[0]) {
         case 'feed':
@@ -107,22 +113,19 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   onSearch() {
-    if (! this.searching) {
-      this.searching = ! this.searching;
+    if (!this.searching) {
+      this.searching = !this.searching;
       setTimeout(() => {
         (document.querySelector('.input-pesquisa') as HTMLInputElement).focus();
       }, 250);
-    }
-    else {
-      if (! this.pesquisa) {
-        this.searching = ! this.searching;
-      }
-      else {
+    } else {
+      if (!this.pesquisa) {
+        this.searching = !this.searching;
+      } else {
         if (this.pesquisa.startsWith('#')) {
           this.router.navigate([`/posts/tag/${this.pesquisa.replace('#', '')}`]);
-        }
-        else {
-          this.router.navigate(['/musicas'], {queryParams: { nome: this.pesquisa }});
+        } else {
+          this.router.navigate(['/musicas'], {queryParams: {nome: this.pesquisa}});
         }
       }
     }
@@ -141,23 +144,31 @@ export class NavbarComponent implements OnInit, OnDestroy {
     }
   }
 
-  onNavigate(route: 'admin'| 'feed' | 'letras' | 'partituras' | 'tabs') {
+  onNavigate(route: 'admin' | 'feed' | 'letras' | 'partituras' | 'tabs') {
     const animation = this.getAnimation(route);
 
     const nextRoute = this.router.config.find(r => r.path === `${route}`);
     const previousRoute = this.router.config.find(r => r.path === `${this.router.url.split('/')[1]}`);
 
 
-    nextRoute.data = { animation };
+    nextRoute.data = {animation};
     this.router.navigate([`/${route}`]);
 
     this.searchService.searchSubj.next(null);
     this.searching = false;
   }
 
-  getAnimation(position: 'admin'| 'feed' | 'letras' | 'partituras' | 'tabs'): 'isRight' | 'isLeft' {
+  getAnimation(position: 'admin' | 'feed' | 'letras' | 'partituras' | 'tabs'): 'isRight' | 'isLeft' {
     const currentPos = +this.position;
     this.position = this.pos[position];
-    return this.pos[position] - currentPos >  0 ? 'isRight' : 'isLeft';
+    return this.pos[position] - currentPos > 0 ? 'isRight' : 'isLeft';
+  }
+
+  onMobileMenuClick() {
+    this.dialog.open(MenuDialogComponent, {
+      width: '400px',
+      maxHeight: '320px',
+      data: {admin: this.admin}
+    });
   }
 }

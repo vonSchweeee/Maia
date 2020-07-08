@@ -1,0 +1,7 @@
+<div mat-dialog-actions class="actions">
+  <button mat-button *ngIf="admin" [routerLink]="['/admin']" routerLinkActive="active" (click)="onDismiss()" [routerLinkActiveOptions]="{exact: false}">Admin</button>
+  <button mat-button [routerLink]="['/feed']" routerLinkActive="active" (click)="onDismiss()" [routerLinkActiveOptions]="{exact: false}">Feed</button>
+  <button mat-button [routerLink]="['/letras']" routerLinkActive="active" (click)="onDismiss()" [routerLinkActiveOptions]="{exact: false}">Letras</button>
+  <button mat-button [routerLink]="['/partituras']" routerLinkActive="active" (click)="onDismiss()" [routerLinkActiveOptions]="{exact: false}">Partituras</button>
+  <button mat-button [routerLink]="['/tabs']" routerLinkActive="active" (click)="onDismiss()" [routerLinkActiveOptions]="{exact: false}">Tablaturas</button>
+</div>
