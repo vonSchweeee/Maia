@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, throwError } from 'rxjs';
+import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 import { Usuario } from '../models/Usuario';
@@ -116,12 +116,20 @@ export class AuthService {
   }
 
 
-  updatePropic(image: ImageSnippet) {
-    this.imageService.uploadPropicUsuario(image, this.usuarioSubj.value.nome).then(urlImagem => {
-      this.http.patch(`${BASEURL}usuarios/propic`, {
-        id: this.usuarioSubj.value.id,
-        urlImagem
-      });
-    });
+  async updatePropic(image: ImageSnippet): Promise<Usuario> {
+    return new Promise(((resolve, reject) => {
+      this.imageService.uploadPropicUsuario(image, this.usuarioSubj.value.nome)
+        .then(urlImagem => {
+          this.http.patch<Usuario>(`${BASEURL}usuarios/propic`,
+            {
+              id: this.usuarioSubj.value.id,
+              urlImagem
+            }
+          ).pipe(tap(res => {
+            this.usuarioSubj.next(res);
+            return resolve(res);
+          })).subscribe();
+        });
+    }));
   }
 }

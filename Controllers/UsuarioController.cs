@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Maia.Data;
 using Maia.Models;
@@ -77,6 +78,36 @@ namespace Maia.Controllers
             else
             {
                 return BadRequest("E-mail ou senha não informado!");
+            }
+        }
+        
+        [HttpPatch]
+        [Route("usuarios/propic")]
+        [Authorize]
+        public async Task<ActionResult<Usuario>> UpdatePropic([FromBody] UsuarioPropicDTO dto, [FromServices] MaiaContext context)
+        {
+            try
+            {
+                var usuarioId = int.Parse(
+                    HttpContext.User.Claims.Where(c => c.Type == ClaimTypes.Sid).FirstOrDefault().Value
+                );
+                if (usuarioId != dto.Id)
+                    return Forbid();
+
+                var usuario = await context.Usuarios.Where(u => u.Id == dto.Id).FirstOrDefaultAsync();
+                usuario.UrlImagem = dto.UrlImagem;
+
+                if (await context.SaveChangesAsync() > 0)
+                {
+                    return Ok(usuario);
+                }
+
+                return BadRequest();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
             }
         }
     }
