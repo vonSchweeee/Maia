@@ -23,8 +23,10 @@ export class RegistroComponent implements OnInit {
   registrar(f: NgForm) {
     this.loading = true;
     const { email, nome, senha, confirmSenha } = f.value;
-    if (senha !== confirmSenha)
+    if (senha !== confirmSenha) {
+      this.loading = false;
       return this.errorMessage = "As senhas não coincidem.";
+    }
     this.errorMessage = null;
 
     this.authService.registrar(email, nome, senha).subscribe(res => {

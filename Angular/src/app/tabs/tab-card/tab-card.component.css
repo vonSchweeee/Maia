@@ -1,6 +1,8 @@
 .mat-card {
   width: 345px;
   height: 290px;
+  margin-right: 20px;
+  margin-bottom: 20px;
 }
 
 .content {
@@ -14,6 +16,7 @@ img {
   width: 210px;
   height: 210px;
   object-fit: contain;
+  border-radius: 10%;
 }
 
 a {

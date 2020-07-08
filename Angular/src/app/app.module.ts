@@ -69,6 +69,7 @@ import {ResponseInterceptorService} from "./shared/services/response-interceptor
 import {DialogDeletePostComponent} from "./feed/post/dialog-delete-post/dialog-delete-post.component";
 import {DialogEditPostComponent} from "./feed/post/dialog-edit-post/dialog-edit-post.component";
 import {PdfViewerModule} from "ng2-pdf-viewer";
+import {UrlYoutubePipe} from "./shared/pipes/url-youtube.pipe";
 
 @NgModule({
   declarations: [
@@ -119,7 +120,8 @@ import {PdfViewerModule} from "ng2-pdf-viewer";
     PartiturasComponent,
     AddPartituraComponent,
     DialogDeletePostComponent,
-    DialogEditPostComponent
+    DialogEditPostComponent,
+    UrlYoutubePipe
   ],
   imports: [
     BrowserModule,

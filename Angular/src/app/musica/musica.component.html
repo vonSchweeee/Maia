@@ -22,7 +22,7 @@
         <mat-card-title>Tablaturas</mat-card-title>
         <mat-card-subtitle>
           <a class="tab" *ngFor="let tab of tabs" [routerLink]="'/tabs/id/' + tab.id">
-            {{ tab.titulo | shorten:50}} ({{tab.instrumento === 'Violao' ? 'Violão' : tab.instrumento}})
+            {{ tab.titulo | shorten:49}} ({{tab.instrumento === 'Violao' ? 'Violão' : tab.instrumento}})
           </a>
           <br *ngIf="tabs && tabs.length">
           <a class="tab add" [routerLink]="['/tabs/add/musica/' + musica.id]">
@@ -34,7 +34,7 @@
         <mat-card-title>Partituras</mat-card-title>
         <mat-card-content>
           <a class="tab" *ngFor="let partitura of partituras" [routerLink]="'/partituras/id/' + partitura.id">
-            {{ partitura.titulo | shorten:50}}
+            {{ partitura.titulo | shorten:49}}
           </a>
           <br *ngIf="partituras && partituras.length">
           <a class="tab add" [routerLink]="['/partituras/add/musica/' + musica.id]">

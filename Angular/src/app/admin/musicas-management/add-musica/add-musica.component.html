@@ -55,7 +55,7 @@
               </mat-form-field>
               <mat-form-field class="input-url-youtube" appearance="outline">
                 <mat-label>URL do Youtube</mat-label>
-                <input id="input-url-youtube" matInput name="urlYoutube" ngModel>
+                <input id="input-url-youtube" matInput name="urlYoutube" [ngModel]="urlYoutube" (ngModelChange)="urlYoutube=$event">
               </mat-form-field>
             </div>
             <img class="img-preview-single" *ngIf="image && single" [src]="image.src">
