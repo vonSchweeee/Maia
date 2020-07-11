@@ -72,6 +72,7 @@ import {PdfViewerModule} from "ng2-pdf-viewer";
 import {UrlYoutubePipe} from "./shared/pipes/url-youtube.pipe";
 import {ProfileComponent} from "./profile/profile.component";
 import {MenuDialogComponent} from "./navbar/menu-dialog/menu-dialog.component";
+import {GenericDialogDeleteComponent} from "./shared/components/generic-dialog-delete/generic-dialog-delete.component";
 
 @NgModule({
   declarations: [
@@ -125,7 +126,8 @@ import {MenuDialogComponent} from "./navbar/menu-dialog/menu-dialog.component";
     DialogEditPostComponent,
     UrlYoutubePipe,
     ProfileComponent,
-    MenuDialogComponent
+    MenuDialogComponent,
+    GenericDialogDeleteComponent
   ],
   imports: [
     BrowserModule,

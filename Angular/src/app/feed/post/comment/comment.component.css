@@ -68,7 +68,7 @@
 }
 .ver-mais-full {
   float: left;
-  margin-left: -14px;
+  margin-left: -12px;
 }
 button {
   outline: none;
@@ -81,8 +81,17 @@ button {
   display: none;
 }
 
+.btns-acoes-edit {
+  position: absolute;
+  margin-top: -10px;
+  right: 4%;
+  background-color: #FAFAFA;
+}
+
 .txt-horario-pub {
-  display: initial;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 mat-card-subtitle:hover .btns-acoes {
@@ -91,4 +100,16 @@ mat-card-subtitle:hover .btns-acoes {
 
 mat-card-subtitle:hover .txt-horario-pub {
   display: none;
+}
+
+.input-edit {
+  border: 1px solid #DDD;
+  border-radius: 10px;
+  margin-top: -4px;
+  background-color: #FFFD;
+}
+
+.txt-comentario {
+  margin-left: 30px;
+  padding-right: 15px;
 }

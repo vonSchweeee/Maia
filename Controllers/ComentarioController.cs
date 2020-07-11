@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Maia.Data;
 using Maia.Models;
@@ -65,6 +66,31 @@ namespace Maia.Controllers
 
             }
             return BadRequest();
+        }
+
+        [HttpPatch]
+        [Authorize]
+        public async Task<ActionResult> Update([FromBody] Comentario comentario, [FromServices] MaiaContext context)
+        {
+            try
+            {
+                var usuarioId = int.Parse(
+                    HttpContext.User.Claims.Where(c => c.Type == ClaimTypes.Sid).FirstOrDefault().Value
+                );
+                if (comentario.UsuarioId == usuarioId)
+                {
+                    context.Comentarios.Update(comentario);
+                    await context.SaveChangesAsync();
+                    return Ok();
+                }
+                
+                return Forbid();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
     }
 }

@@ -16,7 +16,6 @@ export class PostScreenComponent implements OnInit {
 
   ngOnInit(): void {
     this.post = this.route.snapshot.data.post;
-    console.log(this.post);
   }
 
 }

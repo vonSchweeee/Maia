@@ -110,3 +110,30 @@ a {
 .title {
   flex: 1;
 }
+
+.card-musica {
+  padding: 5px 8px;
+}
+
+.actions {
+  margin-top: -8px;
+  margin-left: -4px;
+}
+
+.icon-action {
+  user-select: none;
+  margin: 0;
+  padding: 0;
+}
+
+.container-icon-action {
+  padding: 5px;
+  border-radius: 50%;
+  height: 33px;
+  width: 33px;
+  cursor: pointer;
+}
+
+.container-icon-action:hover {
+  background-color: #DDD;
+}

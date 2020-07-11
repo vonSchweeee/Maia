@@ -48,4 +48,8 @@ export class AdminService {
   addSingle(musica: Musica) {
     return this.http.post<Musica>(`${BASEURL}musicas/single`, musica);
   }
+
+  excluirMusica(musica: Musica) {
+    return this.http.delete(`${BASEURL}musicas/id/${musica.id}`);
+  }
 }

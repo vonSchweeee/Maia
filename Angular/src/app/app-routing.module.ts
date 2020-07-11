@@ -47,6 +47,8 @@ import {PartiturasMusicaComponent} from "./partituras/partituras-musica/partitur
 import {AddPartituraComponent} from "./partituras/add-partitura/add-partitura.component";
 import {AddPartituraResolverService} from "./partituras/add-partitura/add-partitura-resolver.service";
 import {ProfileComponent} from "./profile/profile.component";
+import {resolve} from "@angular/compiler-cli/src/ngtsc/file_system";
+import {MusicaEditResolverService} from "./admin/musicas-management/musica-edit-resolver.service";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent, canActivate: [AuthGuard]},
@@ -102,7 +104,8 @@ const routes: Routes = [
         path: 'musicas', children: [
           {path: '', component: MusicasManagementComponent},
           {path: 'lista', component: ListaMusicaManagementComponent},
-          {path: 'add', component: AddMusicaComponent}
+          {path: 'add', component: AddMusicaComponent},
+          {path: 'editar/:id', component: AddMusicaComponent, resolve: { musica: MusicaEditResolverService}}
         ]
       },
     ]

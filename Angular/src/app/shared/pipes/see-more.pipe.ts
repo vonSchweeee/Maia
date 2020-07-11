@@ -10,9 +10,11 @@ export class SeeMorePipe implements PipeTransform {
       return value;
 
     if (value.length < 100)
-      return value.substr(0, characters - 3).replace(/ ([^ ]*)$/, '') + '...';
+      return value.substr(0, characters - 3).replace(/ ([^ ]*)$/, '')
+        .replace(/(^[\s]+|[\s]+$)/g, '') + '...';
 
-    return value.substr(0, charactersFull - 3).replace(/ ,([^ ,]*)$/, '') + '...';
+    return value.substr(0, charactersFull - 3).replace(/ ,([^ ,]*)$/, '')
+      .replace(/(^[\s]+|[\s]+$)/g, '') + '...';
   }
 
 }

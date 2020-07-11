@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ImageSnippet} from "../../../shared/utils/ImageSnippet";
 import {ImageService} from "../../../shared/services/image.service";
 import {MatCheckboxChange} from "@angular/material/checkbox";
@@ -7,9 +7,9 @@ import {AdminService} from "../../admin.service";
 import {Artista} from "../../../shared/models/Artista";
 import {Album} from "../../../shared/models/Album";
 import {Musica} from "../../../shared/models/Musica";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {ArtistaMusica} from "../../../shared/models/ArtistaMusica";
 import {ToastService} from "../../../shared/services/toast.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-add-musica',
@@ -32,14 +32,23 @@ export class AddMusicaComponent implements OnInit {
   resultsAlbumClosed = false;
   urlSpotify: string;
   urlYoutube: string;
+  musica: Musica;
 
   constructor(
     private imageService: ImageService,
     private admService: AdminService,
-    private toast: ToastService
+    private toast: ToastService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+    // TODO: terminar implementação da edição de música
+    if (this.route.snapshot.data) {
+      if (! this.route.snapshot.data.musica)
+        return;
+
+      this.musica = this.route.snapshot.data.musica;
+    }
   }
 
   async processFile(imageInput: any) {

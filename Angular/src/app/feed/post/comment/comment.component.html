@@ -7,30 +7,41 @@
       {{ comentario.usuario.nome }}
     </div>
     <div class="data-pub right-content" *ngIf="fullmode">
-      <div class="btns-acoes" *ngIf="usuarioAtual.id == comentario.usuario.id">
-        <button mat-icon-button>
+      <span class="btns-acoes" *ngIf="usuarioAtual.id == comentario.usuario.id && ! editMode">
+        <button mat-icon-button (click)="handleEdit()">
           <mat-icon>create</mat-icon>
         </button>
         <button mat-icon-button>
           <mat-icon>delete</mat-icon>
         </button>
-      </div>
+      </span>
+      <span class="btns-acoes-edit" *ngIf="editMode">
+        <button mat-icon-button (click)="handleEdit()">
+          <mat-icon>cancel</mat-icon>
+        </button>
+        <button mat-icon-button (click)="onCommentChanged()">
+          <mat-icon>check_circle</mat-icon>
+        </button>
+      </span>
       <div class="txt-horario-pub">
         {{ comentario.dataPub | timeAgo }}
       </div>
-      <br>
-      <a class="ver-mais-full" (click)="onSeeMoreClick($event)" *ngIf="comentario.texto.length >= 147 && ! comentario.dontPipe">
-        ver mais
-      </a>
+<!--      <br>-->
+<!--      <a class="ver-mais-full" (click)="onSeeMoreClick($event)" *ngIf="comentario.texto.length >= 139 && ! comentario.dontPipe">-->
+<!--        ver mais-->
+<!--      </a>-->
     </div>
     <div class="comment-text" [ngStyle]="{'margin-left': comentario.texto.length > 62 ? '8px' : '0'}">
-      <div *ngIf="! comentario.dontPipe">
-        {{ comentario.texto | seeMore:62:147 }}
-        <a class="ver-mais" (click)="onSeeMoreClick($event)" *ngIf="comentario.texto.length > 62 && comentario.texto.length < 147 && ! comentario.dontPipe">
-          ver mais
-        </a>
+      <div *ngIf="! comentario.dontPipe && ! editMode">
+          <p class="txt-comentario">
+            {{ comentario.texto | seeMore:62:206 }}
+            <a class="ver-mais" (click)="onSeeMoreClick($event)" *ngIf="comentario.texto.length > 62 && ! comentario.dontPipe">
+              ver mais
+            </a>
+          </p>
       </div>
-      <div *ngIf="comentario.dontPipe" style="margin-left: 30px; text-align: justify;">{{ comentario.texto }}</div>
+      <input *ngIf="editMode" [(ngModel)]="comentario.texto" class="input-edit" [size]="comentario.texto.length * 1.14" cdkAutoFocus (keypress)="onKeyEditPress($event)">
+      <div *ngIf="comentario.dontPipe && ! editMode" style="margin-left: 30px; text-align: justify; padding-right: 20px;">{{ comentario.texto }}</div>
     </div>
   </div>
 </mat-card-subtitle>

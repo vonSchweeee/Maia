@@ -11,6 +11,7 @@ import {DialogDeletePostComponent} from "./dialog-delete-post/dialog-delete-post
 import {ToastService} from "../../shared/services/toast.service";
 import {DialogEditPostComponent} from "./dialog-edit-post/dialog-edit-post.component";
 import {ActivatedRoute, Router} from "@angular/router";
+import {Comentario} from "../comentario.model";
 
 @Component({
   selector: 'app-post',

@@ -106,4 +106,8 @@ export class FeedService {
   editPost(post: Post) {
     return this.http.put<Post>(BASEURL + 'posts', post);
   }
+
+  updateComentario(comentario: Comentario) {
+    return this.http.patch(BASEURL + 'comentarios' , comentario);
+  }
 }

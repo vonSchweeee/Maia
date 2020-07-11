@@ -16,7 +16,6 @@ namespace Maia.Models
         public int UsuarioId { get; set;}
         public Usuario Usuario { get; set;}
         
-        [JsonIgnore]
         public int PostId { get; set; }
 
         public DateTime DataPub { get; set; } = DateTime.Now;

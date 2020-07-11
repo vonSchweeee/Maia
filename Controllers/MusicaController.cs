@@ -87,6 +87,28 @@ namespace Maia.Controllers
             }
         }
 
+        [HttpDelete]
+        [Route("id/{id}")]
+        [Authorize(Roles = "adm")]
+        public async Task<ActionResult> Delete([FromRoute] long id, [FromServices] MaiaContext context)
+        {
+            try
+            {
+                var musica = new Musica()
+                {
+                    Id = id
+                };
+                context.Musicas.Remove(musica);
+                await context.SaveChangesAsync();
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
         [HttpPost]
         [Route("single")]
         [Authorize(Roles = "adm")]
