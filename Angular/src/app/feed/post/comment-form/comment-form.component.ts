@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {FeedService} from "../../feed.service";
 import {NgForm} from "@angular/forms";
 import {Comentario} from "../../comentario.model";
@@ -15,6 +15,7 @@ export class CommentFormComponent implements AfterViewInit {
   @ViewChild('inputComment') inputComment: ElementRef<HTMLInputElement>;
   @Input() idPost: number;
   @Input() post: Post;
+  @Output() commentMade = new EventEmitter();
 
   constructor(private feedService: FeedService, private authService: AuthService) { }
 
@@ -28,7 +29,9 @@ export class CommentFormComponent implements AfterViewInit {
     const comentario = new Comentario(commentText, usuario.id, this.idPost);
     form.reset();
     this.feedService.makeComment(comentario, usuario, this.post)
-      .subscribe();
+      .subscribe(() => {
+        this.commentMade.emit('comentado');
+      });
   }
 
 }

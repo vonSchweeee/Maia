@@ -12,6 +12,7 @@ export class CommentComponent implements OnInit {
   @Input() comentario: Comentario;
   @Input() usuarioAtual: Usuario;
   @Input() fullmode = false;
+  editMode = false;
 
   constructor() { }
 

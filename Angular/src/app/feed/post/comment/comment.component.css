@@ -17,11 +17,11 @@
 .comment-user {
   color: #000;
   font-weight: bolder;
-  padding-left: 4px;
-  margin: 5px 4px -2px -2px;
+  padding-left: 5px;
+  margin: 5px 4px -2px -4px;
   padding-right: 5px;
   position: relative;
-  background-color: #BBB6;
+  background-color: #DDD9;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
 }
@@ -49,15 +49,8 @@
   cursor: pointer;
   position: relative;
   background-color: #FAFAFA;
-}
-
-.greybg {
-  background-color: #BBB6;
-  position: absolute;
-  border-radius: 20px;
-  height: 22px;
-  margin-top: 8px;
-  margin-left: 4px;
+  z-index: 5;
+  margin-bottom: 4px;
 }
 
 .right-content {

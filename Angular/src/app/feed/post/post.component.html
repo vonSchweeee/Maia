@@ -5,7 +5,7 @@
         class="fab-post-action" mat-mini-fab color="basic" [matMenuTriggerFor]="userMenu">
         <mat-icon>expand_more</mat-icon>
       </button>
-      <h5 *ngFor="let tag of post.tags" class="tag-text">#{{tag}} </h5>
+      <h5 *ngFor="let tag of post.tags" class="tag-text" (click)="onTagClick(tag)">#{{tag}} </h5>
       <mat-card-subtitle style="display: flex; flex: 1;">
         <img [src]="post && post.usuario && post.usuario.urlImagem ? post.usuario.urlImagem
           : 'assets/img/user-default.png'" [ngStyle]="{'border': post && post.usuario &&
@@ -17,7 +17,7 @@
           </div>
           <div class="datetime" style="display: flex; flex-direction: row;">
             <a [routerLink]="['/posts/id/' + post.id]" class="txtHorario">
-              {{ post.dataPub && post.dataPub | date: 'HH:mm'}}
+              {{ post.dataPub && post.dataPub | timeAgo}}
             </a>
             <div>
               <mat-icon class="public-icon">public</mat-icon>
@@ -74,11 +74,11 @@
         <div class="divider-comentario" *ngIf="i > 0">
           <mat-divider></mat-divider>
         </div>
-        <app-comment [usuarioAtual]="usuarioAtual" [fullmode]="fullmode" [comentario]="comentario" ></app-comment>
+        <app-comment [usuarioAtual]="usuarioAtual" [fullmode]="fullmode" [comentario]="comentario"></app-comment>
       </div>
     </div>
     </mat-card-content>
-    <app-comment-form [post]="post" [idPost]="post.id" *ngIf="commentMode || fixedCommentMode"></app-comment-form>
+    <app-comment-form [post]="post" [idPost]="post.id" *ngIf="commentMode || fixedCommentMode" (commentMade)="onCommentMade()"></app-comment-form>
   </mat-card>
 </div>
 

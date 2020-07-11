@@ -113,6 +113,7 @@ namespace Maia.Controllers
             {
                 return await context.Posts
                     .FromSqlRaw($"SELECT * FROM maia.posts WHERE FIND_IN_SET('{tag}', Tags)")
+                    .Include(p => p.Usuario)
                     .OrderByDescending(p => p.DataPub)
                     .Skip((pageParameters.Page - 1) * pageParameters.Size)
                     .Take(pageParameters.Size)

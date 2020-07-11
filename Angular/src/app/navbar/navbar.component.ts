@@ -45,7 +45,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private router: Router,
     private searchService: SearchService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private route: ActivatedRoute
   ) {
     this.admin = authService.usuarioSubj.value.isAdm;
     if (this.admin) {
@@ -115,15 +116,22 @@ export class NavbarComponent implements OnInit, OnDestroy {
   onSearch() {
     if (!this.searching) {
       this.searching = !this.searching;
-      setTimeout(() => {
-        (document.querySelector('.input-pesquisa') as HTMLInputElement).focus();
-      }, 250);
+      // setTimeout(() => {
+      //   (document.querySelector('.input-pesquisa') as HTMLInputElement).focus();
+      // }, 250);
     } else {
       if (!this.pesquisa) {
         this.searching = !this.searching;
       } else {
+        console.log('aa');
         if (this.pesquisa.startsWith('#')) {
-          this.router.navigate([`/posts/tag/${this.pesquisa.replace('#', '')}`]);
+          this.router.navigate(
+            [],
+            {
+              relativeTo: this.route,
+              queryParams: { tag: this.pesquisa.replace('#', '') },
+              queryParamsHandling: 'merge', // remove to replace all query params by provided
+            });
         } else {
           this.router.navigate(['/musicas'], {queryParams: {nome: this.pesquisa}});
         }

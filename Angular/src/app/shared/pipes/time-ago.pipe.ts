@@ -28,7 +28,7 @@ export class TimeAgoPipe implements PipeTransform {
       return `${((diffMin + 60) / 1440).toFixed(0)}d atrás`;
     }
     if (diffMin >= 525.600) {
-      return `${moment().diff(data, 'years')}a atrás`;
+      return moment(data).format('DD/MM/yyyy');
     }
 
     return '';

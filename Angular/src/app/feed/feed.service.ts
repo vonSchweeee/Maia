@@ -50,6 +50,7 @@ export class FeedService {
       .pipe(tap(res => {
         res.usuario = usuario;
         post.comentarios.push(res);
+        post.quantCmt++;
         this.commentEditSubj.next('aa');
       }));
   }

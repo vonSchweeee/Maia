@@ -10,6 +10,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {DialogDeletePostComponent} from "./dialog-delete-post/dialog-delete-post.component";
 import {ToastService} from "../../shared/services/toast.service";
 import {DialogEditPostComponent} from "./dialog-edit-post/dialog-edit-post.component";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-post',
@@ -25,7 +26,12 @@ export class PostComponent implements OnInit {
   usuarioAtual: Usuario;
 
   constructor(
-    private feedService: FeedService, private authService: AuthService, private dialog: MatDialog, private toast: ToastService
+    private feedService: FeedService,
+    private authService: AuthService,
+    private dialog: MatDialog,
+    private toast: ToastService,
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
   @Input() fullmode = false;
 
@@ -37,7 +43,6 @@ export class PostComponent implements OnInit {
   onDelete() {
     const dialogRef = this.dialog.open(DialogDeletePostComponent, {
       width: '400px',
-      height: '140px',
       data: { post: this.post}
     });
     dialogRef.afterClosed().subscribe(deveExcluir => {
@@ -75,5 +80,16 @@ export class PostComponent implements OnInit {
     else {
       this.feedService.favoritar(this.post.id);
     }
+  }
+
+  onCommentMade() {
+    this.commentMode = false;
+  }
+
+  onTagClick(tag: string) {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { tag }
+    });
   }
 }
