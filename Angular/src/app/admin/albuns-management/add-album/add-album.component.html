@@ -12,7 +12,7 @@
             <mat-form-field appearance="outline">
               <mat-label>Artista *</mat-label>
               <input id="input-artista" matInput name="artista" formControlName="artista" (input)="onArtistaTxtChange()">
-              <img [src]="artista.urlImagem" class="img-artista" *ngIf="artista.urlImagem">
+              <img [src]="artista.urlImagem" class="img-artista" *ngIf="artista && artista.urlImagem">
               <div class="list-results" *ngIf="artistas && ! resultsClosed">
                 <div *ngFor="let artista of artistas; let i = index;" class="result"
                   [ngClass]="{'result-text-last': i === artistas.length - 1}"
@@ -40,7 +40,7 @@
                     <mat-label>Faixa</mat-label>
                     <input id="input-faixa-musica" type="number" matInput name="Faixa" formControlName="faixa">
                   </mat-form-field>
-                  <mat-form-field appearance="outline" class="input-duracao-musica" style="width: 85px;">
+                  <mat-form-field appearance="outline" class="input-duracao-musica" style="width: 90px;">
                     <mat-label>Duração</mat-label>
                     <input id="input-duracao-musica" matInput name="duracao" formControlName="duracao" mask="Hh:m0:s0" [dropSpecialCharacters]="false">
                   </mat-form-field>

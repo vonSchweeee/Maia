@@ -153,6 +153,8 @@ export class AddAlbumComponent implements OnInit {
               this.form.reset();
             this.image = undefined;
             this.loading = false;
+            this.artista = undefined;
+            this.musicasForm.clear();
           },
           erro => {
             this.toast.toast(`Erro: ${erro}`, 3500);
