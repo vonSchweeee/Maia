@@ -13,7 +13,7 @@
                 <img class="img-musica" [src]="musica.urlImagem">
                 <div class="card-column">
                   <div>
-                    <mat-card-title>{{ musica.titulo }}</mat-card-title>
+                    <mat-card-title>{{ musica.titulo | shorten:16 }}</mat-card-title>
                     <mat-card-subtitle>{{ musica.artistaMusicas | artistas:'string' }}</mat-card-subtitle>
                   </div>
                 </div>
