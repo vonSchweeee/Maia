@@ -18,6 +18,7 @@ export class MusicaComponent implements OnInit {
 
   musica: Musica;
   urlSpotify: SafeResourceUrl;
+  urlYoutube: SafeResourceUrl;
   biografia: string;
   tabs: Tab[];
   partituras: Partitura[];
@@ -46,6 +47,7 @@ export class MusicaComponent implements OnInit {
       this.mscService.fetchDetailedMusicaById(id).subscribe(res => {
         this.musica = res;
         this.urlSpotify = this.sanitizer.bypassSecurityTrustResourceUrl('https://open.spotify.com/embed/track/' + this.musica.urlSpotify);
+        this.urlYoutube = this.sanitizer.bypassSecurityTrustResourceUrl('http://www.youtube.com/embed/' + this.musica.urlYoutube);
         this.biografia = this.musica.artistaMusicas[0].artista.biografia.replace(/\n/g, '<br><br>');
         this.tabService.fetchTabsByMusicaId(this.musica.id).subscribe(tabs => this.tabs = tabs);
         this.pttService.fetchPartituraByMusicaId(this.musica.id).subscribe(partituras => this.partituras = partituras);

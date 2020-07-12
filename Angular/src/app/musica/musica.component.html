@@ -42,6 +42,9 @@
           </a>
         </mat-card-content>
       </mat-card>
+      <iframe id="ytplayer" type="text/html" width="400" height="360"
+              [src]="urlYoutube"
+              frameborder="0" *ngIf="musica.urlYoutube"></iframe>
     </div>
     <div class="flex-column0 center info-artistas" *ngIf="musica && musica.artistaMusicas && musica.artistaMusicas[0]; else contentFiller">
       <p class="txt-artistas">{{ musica.artistaMusicas.length > 1 ? 'Sobre os artistas' : 'Sobre o artista' }}</p>
