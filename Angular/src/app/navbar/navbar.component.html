@@ -7,7 +7,7 @@
     <div style="flex: 1;"></div>
     <input class="input-pesquisa" #inputPesquisa *ngIf="searching|| pesquisa" cdkAutoFocus
       placeholder="Insira uma #tag ou procure por uma música." [(ngModel)]="pesquisa" (keypress)="onKeyPress($event)">
-    <button type="button" mat-icon-button aria-label="cancelar" *ngIf="searching || pesquisa" (click)="onCancelSearch()" style="outline: none">
+    <button type="button" mat-icon-button aria-label="cancelar" *ngIf="searching || pesquisa" (click)="onCancelSearch()" class="btn-cancel" style="outline: none">
       <mat-icon>cancel</mat-icon>
     </button>
     <button type="button" mat-icon-button aria-label="pesquisar" (click)="onSearch()" style="outline: none">

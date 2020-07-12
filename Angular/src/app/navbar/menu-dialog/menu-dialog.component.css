@@ -14,3 +14,7 @@ button {
   flex-direction: column;
   flex: 1;
 }
+
+.active {
+  background-color: #FFBF00FF;
+}
