@@ -1,5 +1,6 @@
 using System.Text;
 using Maia.Data;
+using Maia.HubConfig;
 using Maia.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -62,6 +63,7 @@ namespace Maia
             });
 
             services.AddScoped<ITokenService, TokenService>();
+            services.AddSignalR();
 
         }
 
@@ -99,9 +101,12 @@ namespace Maia
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
+
+                endpoints.MapHub<PostHub>("/postHub");
+
             });
 
-            // TODO: Descomentar para a apresentação :)
+            // TODO: Descomentar para a apresentação :), ou não
             // app.UseSpa(spa =>
             // {
             //     // To learn more about options for serving an Angular SPA from ASP.NET Core,
