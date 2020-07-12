@@ -4,14 +4,11 @@ using Maia.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 
 namespace Maia
 {
@@ -62,6 +59,7 @@ namespace Maia
             });
 
             services.AddScoped<ITokenService, TokenService>();
+            services.AddSignalR();
 
         }
 
@@ -101,7 +99,7 @@ namespace Maia
                     pattern: "{controller}/{action=Index}/{id?}");
             });
 
-            // TODO: Descomentar para a apresentação :)
+            // TODO: Descomentar para a apresentação :), ou não
             // app.UseSpa(spa =>
             // {
             //     // To learn more about options for serving an Angular SPA from ASP.NET Core,

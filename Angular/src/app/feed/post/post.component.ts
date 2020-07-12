@@ -1,5 +1,4 @@
 import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import moment from 'moment';
 
 import { FeedService } from '../feed.service';
 import { Post } from '../post.model';
@@ -11,7 +10,6 @@ import {DialogDeletePostComponent} from "./dialog-delete-post/dialog-delete-post
 import {ToastService} from "../../shared/services/toast.service";
 import {DialogEditPostComponent} from "./dialog-edit-post/dialog-edit-post.component";
 import {ActivatedRoute, Router} from "@angular/router";
-import {Comentario} from "../comentario.model";
 
 @Component({
   selector: 'app-post',

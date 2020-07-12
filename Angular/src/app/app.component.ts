@@ -1,10 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from "@angular/router";
 import {fader, slider, stepper, transformer} from './route-animations';
-
 import { AuthService } from './shared/auth/auth.service';
 import {NavigationEnd, Router} from '@angular/router';
 import {ToastService} from "./shared/services/toast.service";
+
+
+/*
+ * NÃO REMOVA ISSO, é referente a um erro de compilação de origem desconhecida.
+ * TODO: Remover isso e ver se continua funcionando, depois de atualizar.
+ */
+declare const Buffer;
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

@@ -8,7 +8,8 @@
     "build:ssr": "ng run Maia:server:dev",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "hamachi": "ng serve --host 25.6.83.187"
   },
   "private": true,
   "dependencies": {
