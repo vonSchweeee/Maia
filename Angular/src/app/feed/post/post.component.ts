@@ -88,9 +88,16 @@ export class PostComponent implements OnInit {
   }
 
   onTagClick(tag: string) {
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: { tag }
-    });
+    if (this.fullmode) {
+      this.router.navigate(['/feed'], {
+        queryParams: { tag }
+      });
+    }
+    else {
+      this.router.navigate([], {
+        relativeTo: this.route,
+        queryParams: {tag}
+      });
+    }
   }
 }

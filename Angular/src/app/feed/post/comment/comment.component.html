@@ -7,7 +7,7 @@
       {{ comentario.usuario.nome }}
     </div>
     <div class="data-pub right-content" *ngIf="fullmode">
-      <span class="btns-acoes" *ngIf="usuarioAtual.id == comentario.usuario.id && ! editMode">
+      <span class="btns-acoes" *ngIf="usuarioAtual.id === comentario.usuario.id && ! editMode;">
         <button mat-icon-button (click)="handleEdit()">
           <mat-icon>create</mat-icon>
         </button>
@@ -23,7 +23,10 @@
           <mat-icon>check_circle</mat-icon>
         </button>
       </span>
-      <div class="txt-horario-pub">
+      <div class="txt-horario-pub"  *ngIf="usuarioAtual.id === comentario.usuario.id">
+        {{ comentario.dataPub | timeAgo }}
+      </div>
+      <div class="txt-horario-pub-2" *ngIf="usuarioAtual.id !== comentario.usuario.id ">
         {{ comentario.dataPub | timeAgo }}
       </div>
 <!--      <br>-->

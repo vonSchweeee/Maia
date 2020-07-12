@@ -68,3 +68,7 @@ button {
   font-family: "Ballet Harmony";
   src: url("./assets/fonts/Ballet-Harmony.ttf");
 }
+
+mat-icon {
+  user-select: none;
+}

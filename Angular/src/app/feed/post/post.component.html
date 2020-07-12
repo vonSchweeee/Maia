@@ -68,7 +68,7 @@
       </div>
     </mat-card-actions>
     <mat-card-content>
-    <mat-divider></mat-divider>
+    <mat-divider *ngIf="post.comentarios && post.comentarios.length"></mat-divider>
     <div style="display: flex; flex-direction: column; margin-bottom: -8px">
       <div *ngFor="let comentario of post.comentarios; let i = index;">
         <div class="divider-comentario" *ngIf="i > 0">
