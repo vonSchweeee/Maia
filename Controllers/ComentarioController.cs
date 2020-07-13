@@ -92,5 +92,32 @@ namespace Maia.Controllers
                 throw;
             }
         }
+
+        [HttpDelete]
+        [Authorize]
+        [Route("id/{id}")]
+        public async Task<ActionResult> Delete([FromRoute] long id, [FromQuery] int postId, [FromServices] MaiaContext context)
+        {
+            if (postId == 0)
+                return BadRequest();
+            try
+            {
+                Comentario comentario = new Comentario()
+                {
+                    Id = id
+                };
+
+                var post = await context.Posts.Where(p => p.Id == postId).FirstOrDefaultAsync();
+                post.QuantCmt--;
+                context.Remove(comentario);
+                await context.SaveChangesAsync();
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }

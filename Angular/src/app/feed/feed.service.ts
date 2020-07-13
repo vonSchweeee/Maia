@@ -114,4 +114,8 @@ export class FeedService {
   fetchPostsByUsuarioId(usuarioId: number) {
     return this.http.get<Post[]>(`${BASEURL}posts/usuario/${usuarioId}`);
   }
+
+  excluirComentario(comentario: Comentario, postId: number) {
+    return this.http.delete(`${BASEURL}comentarios/id/${comentario.id}?postId=${postId}`);
+  }
 }

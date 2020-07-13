@@ -198,6 +198,9 @@ a {
   .info-artistas {
     margin-bottom: 10px;
   }
+  .img-musica {
+    display: initial !important;
+  }
 }
 
 a.tab {

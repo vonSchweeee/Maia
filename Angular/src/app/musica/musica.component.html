@@ -1,7 +1,7 @@
 <div class="root">
   <div class="flex-row0 content-root" *ngIf="musica">
     <div class="flex-column0 center info-musica">
-      <img [src]="musica.urlImagem" class="img-musica">
+      <img [src]="musica.urlImagem" class="img-musica" [ngStyle]="{'display': musica.urlSpotify ? 'none' : 'initial'}">
       <p class="text-center nome-musica"> {{ musica.titulo }}</p>
       <p class="nome-album-musica" >{{ musica.album && musica.album.titulo || "Single" }}</p>
       <p class="text-center duracao-musica"> {{ musica.duracao | shortenTime }}</p>

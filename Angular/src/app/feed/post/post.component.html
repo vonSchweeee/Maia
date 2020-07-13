@@ -75,7 +75,7 @@
           <div class="divider-comentario" *ngIf="i > 0">
             <mat-divider></mat-divider>
           </div>
-          <app-comment [usuarioAtual]="usuarioAtual" [fullmode]="fullmode" [comentario]="comentario"></app-comment>
+          <app-comment (comentarioDeleted)="onComentarioDeleted($event)" [postId]="post.id" [usuarioAtual]="usuarioAtual" [fullmode]="fullmode" [comentario]="comentario"></app-comment>
         </div>
       </div>
       </mat-card-content>

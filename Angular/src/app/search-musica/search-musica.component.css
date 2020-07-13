@@ -96,10 +96,6 @@ a {
   margin: 0;
 }
 
-.lista-musicas {
-  margin-left: 35px;
-}
-
 @media (max-width: 1160px) {
   .row {
     justify-content: center;
