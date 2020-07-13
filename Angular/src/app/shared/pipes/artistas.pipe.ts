@@ -12,6 +12,9 @@ export class ArtistasPipe implements PipeTransform {
   }
 
   transform(am: ArtistaMusica[], type: 'string' | 'link' = 'link'): SafeHtml {
+    if (! am) {
+      return '';
+    }
     if (type === 'link') {
       if (am.length === 1) {
         const link = `/artistas/id/${am[0].artista.id}`;

@@ -1,7 +1,7 @@
 <div class="row col-xs-12 col-bs">
-  <mat-card class="card-post">
+  <mat-card class="card-post" [ngStyle]="{'padding-bottom': (commentMode || fixedCommentMode || ! showActions) ? '8px' : '0'}">
     <div style="flex-direction: row;">
-      <button type="button" *ngIf="usuarioAtual.id === post.usuario.id || usuarioAtual.isAdm" style="float: right; box-shadow: none; outline: none;"
+      <button type="button" *ngIf="usuarioAtual && usuarioAtual.id === (post.usuario && post.usuario.id) || usuarioAtual.isAdm" style="float: right; box-shadow: none; outline: none;"
         class="fab-post-action" mat-mini-fab color="basic" [matMenuTriggerFor]="userMenu">
         <mat-icon>expand_more</mat-icon>
       </button>
@@ -12,9 +12,9 @@
            post.usuario.urlImagem ? 'initial' : 'none'}"
              style="justify-self: flex-start;" class="avatar more-size">
         <div style="display: flex; flex: 1; flex-direction: column" class="info-post">
-          <div class="username">
+          <a class="username" [routerLink]="['/perfil/id/' + post.usuarioId]">
             {{ post.usuario && post.usuario.nome }}
-          </div>
+          </a>
           <div class="datetime" style="display: flex; flex-direction: row;">
             <a [routerLink]="['/posts/id/' + post.id]" class="txtHorario">
               {{ post.dataPub && post.dataPub | timeAgo}}
@@ -44,46 +44,48 @@
           <h5 class="comment-count">{{post.quantCmt}}</h5>
         </div>
       </div>
-    <mat-divider></mat-divider>
-    <mat-card-actions>
-      <div class="display-flex-row actions-card">
-        <div class="display-flex-row">
-          <button type="button" mat-mini-fab class="fab" style="outline: none" (click)="handleFavorite()">
-            <mat-icon class="btn-heart">{{ post.favoritado ? 'favorite' : 'favorite_border' }}</mat-icon>
-          </button>
-          <h3>Favoritar</h3>
+    <mat-divider *ngIf="showActions"></mat-divider>
+    <div id="actions" *ngIf="showActions">
+      <mat-card-actions>
+        <div class="display-flex-row actions-card">
+          <div class="display-flex-row">
+            <button type="button" mat-mini-fab class="fab" style="outline: none" (click)="handleFavorite()">
+              <mat-icon class="btn-heart">{{ post.favoritado ? 'favorite' : 'favorite_border' }}</mat-icon>
+            </button>
+            <h3>Favoritar</h3>
+          </div>
+
+          <div class="divider-like-comments"></div>
+          <!-- <button type="button" mat-mini-fab class="fab" style="background-color: #F005;">
+            <mat-icon>arrow_downwards</mat-icon>
+          </button> -->
+          <div class="display-flex-row">
+            <button type="button" mat-mini-fab class="fab" color="basic" (click)="onHandleComment()" style="outline: none">
+              <mat-icon>chat</mat-icon>
+            </button>
+
+            <h3>Comentar</h3>
+          </div>
         </div>
-
-        <div class="divider-like-comments"></div>
-        <!-- <button type="button" mat-mini-fab class="fab" style="background-color: #F005;">
-          <mat-icon>arrow_downwards</mat-icon>
-        </button> -->
-        <div class="display-flex-row">
-          <button type="button" mat-mini-fab class="fab" color="basic" (click)="onHandleComment()" style="outline: none">
-            <mat-icon>chat</mat-icon>
-          </button>
-
-          <h3>Comentar</h3>
+      </mat-card-actions>
+      <mat-card-content>
+      <mat-divider *ngIf="post.comentarios && post.comentarios.length"></mat-divider>
+      <div style="display: flex; flex-direction: column; margin-bottom: -8px">
+        <div *ngFor="let comentario of post.comentarios; let i = index;">
+          <div class="divider-comentario" *ngIf="i > 0">
+            <mat-divider></mat-divider>
+          </div>
+          <app-comment [usuarioAtual]="usuarioAtual" [fullmode]="fullmode" [comentario]="comentario"></app-comment>
         </div>
       </div>
-    </mat-card-actions>
-    <mat-card-content>
-    <mat-divider *ngIf="post.comentarios && post.comentarios.length"></mat-divider>
-    <div style="display: flex; flex-direction: column; margin-bottom: -8px">
-      <div *ngFor="let comentario of post.comentarios; let i = index;">
-        <div class="divider-comentario" *ngIf="i > 0">
-          <mat-divider></mat-divider>
-        </div>
-        <app-comment [usuarioAtual]="usuarioAtual" [fullmode]="fullmode" [comentario]="comentario"></app-comment>
-      </div>
+      </mat-card-content>
+      <app-comment-form [post]="post" [idPost]="post.id" *ngIf="commentMode || fixedCommentMode" (commentMade)="onCommentMade()"></app-comment-form>
     </div>
-    </mat-card-content>
-    <app-comment-form [post]="post" [idPost]="post.id" *ngIf="commentMode || fixedCommentMode" (commentMade)="onCommentMade()"></app-comment-form>
   </mat-card>
 </div>
 
 
 <mat-menu #userMenu="matMenu">
-  <button mat-menu-item type="button" style="outline: none" (click)="onEdit()" *ngIf="post.usuario.id === usuarioAtual.id">Editar</button>
+  <button mat-menu-item type="button" style="outline: none" (click)="onEdit()" *ngIf="post.usuario && post.usuario.id === usuarioAtual.id">Editar</button>
   <button mat-menu-item type="button" (click)="onDelete()" style="outline: none">Excluir</button>
 </mat-menu>

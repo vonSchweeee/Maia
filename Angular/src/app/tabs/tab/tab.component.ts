@@ -15,7 +15,6 @@ export class TabComponent implements OnInit {
 
   ngOnInit(): void {
     this.tab = this.route.snapshot.data.tab;
-    console.log(this.tab);
   }
 
 }

@@ -8,15 +8,21 @@
     <div class="flex-column1 information">
       <h1 class="titulo-partitura">{{ partitura.titulo }}</h1>
       <div class="flex-row0 row-info-usuario">
-        <img class="img-usuario" [src]="partitura.usuario.urlImagem || 'assets/img/user-default.png'">
+        <a [routerLink]="'/perfil/id/' + partitura.usuarioId">
+          <img class="img-usuario" [src]="partitura.usuario.urlImagem || 'assets/img/user-default.png'">
+        </a>
         <div class="flex-column1 info-usuario">
-          <h1>{{ partitura.usuario.nome }}</h1>
+          <a [routerLink]="'/perfil/id/' + partitura.usuarioId">
+            <h1>{{ partitura.usuario.nome }}</h1>
+          </a>
         </div>
       </div>
       <div class="flex-row1 row-info-musica">
-        <img class="img-musica" [src]="partitura.musica.urlImagem">
+        <a [routerLink]="'/musicas/id/' + partitura.musicaId">
+          <img class="img-musica" [src]="partitura.musica.urlImagem">
+        </a>
         <div class="flex-column1 info-musica">
-          <h1>{{ partitura.musica.titulo }}</h1>
+          <a [routerLink]="'/musicas/id/' + partitura.musicaId"><h1 [routerLink]="'/musicas/id/' + partitura.musicaId">{{ partitura.musica.titulo }}</h1></a>
           <h2>{{ partitura.musica.artistaMusicas | artistas:'string' }}</h2>
         </div>
       </div>

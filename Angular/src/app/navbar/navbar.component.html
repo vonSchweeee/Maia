@@ -5,7 +5,7 @@
     </button>
     <h1 [routerLink]="['/feed']" style="cursor: pointer;">Maia</h1>
     <div style="flex: 1;"></div>
-    <input class="input-pesquisa" #inputPesquisa *ngIf="searching|| pesquisa" cdkAutoFocus
+    <input class="input-pesquisa" *ngIf="searching || pesquisa"
       placeholder="Insira uma #tag ou procure por uma música." [(ngModel)]="pesquisa" (keypress)="onKeyPress($event)">
     <button type="button" mat-icon-button aria-label="cancelar" *ngIf="searching || pesquisa" (click)="onCancelSearch()" class="btn-cancel" style="outline: none">
       <mat-icon>cancel</mat-icon>
@@ -31,6 +31,6 @@
 
 
 <mat-menu #userMenu="matMenu">
-  <button mat-menu-item type="button" style="outline: none" [routerLink]="['/perfil']"> {{ usuario.nome }}</button>
+  <button mat-menu-item type="button" style="outline: none" [routerLink]="['/perfil/id/' + usuario.id]"> {{ usuario.nome }}</button>
   <button mat-menu-item type="button" style="outline: none" (click)="onLogout()" tabindex="-1">Sair</button>
 </mat-menu>

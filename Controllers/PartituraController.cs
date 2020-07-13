@@ -27,7 +27,7 @@ namespace Maia.Controllers
                 {
                     return await context.Partituras
                         .Include(p => p.Musica)
-                        .OrderBy(p => p.QuantAcessos)
+                        .OrderByDescending(p => p.QuantAcessos)
                         .ToListAsync();
                 }
                 catch (Exception e)
@@ -43,6 +43,7 @@ namespace Maia.Controllers
                     return await context.Partituras
                         .Where(p => p.MusicaId == musicaId)
                         .Include(p => p.Musica)
+                        .OrderByDescending(p => p.QuantAcessos)
                         .ToListAsync();
                 }
                 catch (Exception e)
@@ -83,13 +84,19 @@ namespace Maia.Controllers
         {
             try
             {
-                return await context.Partituras
+                var partitura = await context.Partituras
                     .Where(m => m.Id == id)
                     .Include(p => p.Musica)
                     .ThenInclude(m => m.ArtistaMusicas)
                     .ThenInclude(am => am.Artista)
                     .Include(p => p.Usuario)
                     .FirstOrDefaultAsync();
+
+                partitura.QuantAcessos++;
+                await context.SaveChangesAsync();
+                
+                
+                return partitura;
             }
             catch (Exception e)
             {

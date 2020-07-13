@@ -21,6 +21,7 @@ export class PostComponent implements OnInit {
   @Input() post: Post;
   commentMode = false;
   @Input() fixedCommentMode = false;
+  @Input() showActions = true;
   commentEditModeSubs: Subscription;
   usuarioAtual: Usuario;
 
@@ -86,16 +87,8 @@ export class PostComponent implements OnInit {
   }
 
   onTagClick(tag: string) {
-    if (this.fullmode) {
-      this.router.navigate(['/feed'], {
-        queryParams: { tag }
-      });
-    }
-    else {
-      this.router.navigate([], {
-        relativeTo: this.route,
-        queryParams: {tag}
-      });
-    }
+    this.router.navigate(['/feed'], {
+      queryParams: { tag }
+    });
   }
 }

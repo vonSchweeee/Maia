@@ -108,7 +108,7 @@ export class AddLetraComponent implements OnInit {
         this.finished = true;
         this.toast.toast(`Letra em ${res.idioma} de ${this.musica.titulo} adicionada`,  1500);
         setTimeout(() => {
-          this.router.navigate([`/letras/id/${res.id}`]);
+          this.router.navigate([`/letras/id/${res.musicaId}`]);
         }, 1500);
       }, erro => this.toast.toast("Erro", 2000, "OK", false));
   }

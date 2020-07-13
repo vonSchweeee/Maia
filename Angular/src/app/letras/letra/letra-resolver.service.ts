@@ -19,7 +19,6 @@ export class LetraResolverService implements Resolve<Letra[]> {
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Letra[]> | Promise<Letra[]> | Letra[] {
     return this.letraService.fetchLetrasByMusicaId(route.params.id)
       .pipe(tap(letras => {
-        console.log(letras);
         if (! letras || ! letras.length)
           this.router.navigate([`/letras/add/id/${route.params.id}`]);
       }), catchError(erro => this.handleError(erro, route)));

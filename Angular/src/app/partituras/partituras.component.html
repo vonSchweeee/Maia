@@ -4,7 +4,7 @@
     <div class="content">
       <a mat-button *ngFor="let partitura of partituras" [routerLink]="['id/' + partitura.id]">
         <mat-card>
-          <mat-card-title>{{ partitura.titulo }}</mat-card-title>
+          <mat-card-title>{{ partitura.titulo | shorten:45 }}</mat-card-title>
           <mat-card-content>
             <img [src]="partitura.musica.urlImagem">
           </mat-card-content>

@@ -110,7 +110,7 @@ const routes: Routes = [
       },
     ]
   },
-  {path: 'perfil', component: ProfileComponent, canActivate: [AuthGuard]},
+  {path: 'perfil/id/:id', component: ProfileComponent, canActivate: [AuthGuard]},
   {path: 'registro', component: RegistroComponent},
   {path: 'musicas', canActivate: [AuthGuard], component: SearchMusicaComponent, resolve: {musicas: SearchMusicaResolverService}},
   {path: 'musica/:id', canActivate: [AuthGuard], component: MusicaComponent},

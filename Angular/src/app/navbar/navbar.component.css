@@ -64,7 +64,7 @@ h1 {
     display: none;
   }
 }
-@media (max-width: 635px) {
+@media (max-width: 700px) {
   .input-pesquisa {
     margin-left: 8px;
   }

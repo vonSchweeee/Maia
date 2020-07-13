@@ -24,7 +24,7 @@ namespace Maia.Controllers
                 try
                 {
                     return await context.Tabs
-                        .OrderBy(t => t.QuantAcessos)
+                        .OrderByDescending(t => t.QuantAcessos)
                         .Take(10)
                         .ToListAsync();
                 }
@@ -100,8 +100,10 @@ namespace Maia.Controllers
                         t.Titulo,
                         t.Id,
                         t.Instrumento,
-                        t.Musica
+                        t.Musica,
+                        t.QuantAcessos
                     })
+                    .OrderByDescending(t => t.QuantAcessos)
                     .ToListAsync();
             }
             catch (Exception e)

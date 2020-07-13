@@ -30,10 +30,11 @@
   align-items: center;
 }
 
-.letra-traducao {
-  font-size: 1.15em;
-  text-align: center;
+.tab {
+  font-size: 1vw;
   margin-left: 10px;
+  font-family: monospace;
+  text-align: center;
 }
 
 .txt-nome-musica {
@@ -117,6 +118,7 @@ a {
   flex: 1;
   align-items: center;
   margin: 20px 0 20px 0;
+  cursor: pointer;
 }
 
 .autor {
@@ -136,4 +138,31 @@ a {
 
 .afinacao {
   margin-bottom: 0;
+}
+
+.tab-container {
+  display: flex;
+  justify-content: center;
+}
+
+pre {
+  color: #FFF !important;
+}
+
+@media (max-width: 1600px) {
+  .tab {
+    font-size: 1.2vw;
+  }
+}
+
+@media (max-width: 1200px) {
+  .tab {
+    font-size: 1.3vw;
+  }
+}
+
+@media (max-width: 900px) {
+  .tab {
+    font-size: 1.7vw;
+  }
 }

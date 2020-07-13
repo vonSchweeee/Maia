@@ -4,6 +4,7 @@ using Maia.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -99,14 +100,14 @@ namespace Maia
                     pattern: "{controller}/{action=Index}/{id?}");
             });
 
-            // TODO: Descomentar para a apresentação :), ou não
+            // TODO: Descomentar caso queira utilizar o Angular integrado ao ASP
             // app.UseSpa(spa =>
             // {
             //     // To learn more about options for serving an Angular SPA from ASP.NET Core,
             //     // see https://go.microsoft.com/fwlink/?linkid=864501
-
+            //
             //     spa.Options.SourcePath = "Angular";
-
+            //
             //     if (env.IsDevelopment())
             //     {
             //         spa.UseAngularCliServer(npmScript: "start");

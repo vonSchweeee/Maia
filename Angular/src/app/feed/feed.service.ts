@@ -110,4 +110,8 @@ export class FeedService {
   updateComentario(comentario: Comentario) {
     return this.http.patch(BASEURL + 'comentarios' , comentario);
   }
+
+  fetchPostsByUsuarioId(usuarioId: number) {
+    return this.http.get<Post[]>(`${BASEURL}posts/usuario/${usuarioId}`);
+  }
 }

@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 
@@ -46,7 +46,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private router: Router,
     private searchService: SearchService,
     private dialog: MatDialog,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private cdRef: ChangeDetectorRef
   ) {
     this.admin = authService.usuarioSubj.value.isAdm;
     if (this.admin) {
@@ -98,7 +99,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.usuarioSub = this.authService.usuarioSubj
       .subscribe(usuario => this.usuario = usuario);
-    this.searchSub = this.searchService.searchSubj.subscribe(value => this.pesquisa = value);
+    this.searchSub = this.searchService.searchSubj.subscribe(value => {
+      this.pesquisa = value;
+      this.cdRef.detectChanges();
+    });
   }
 
   ngOnDestroy() {

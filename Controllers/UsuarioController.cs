@@ -32,6 +32,17 @@ namespace Maia.Controllers
         {
             return await context.Usuarios.ToListAsync();
         }
+        
+        [HttpGet]
+        [Route("usuario/id/{id}")]
+        [Authorize]
+        public async Task<ActionResult<Usuario>> GetById([FromRoute] int id, [FromServices] MaiaContext context)
+        {
+            return await
+                context.Usuarios
+                    .Where(u => u.Id == id)
+                    .FirstOrDefaultAsync();
+        }
 
         [HttpPost]
         [Route("registro")]

@@ -15,7 +15,10 @@ export class DialogEditPostComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public data: { post: Post }) { }
 
   ngOnInit(): void {
-    this.post = {...this.data.post, tags: [...this.data.post.tags]};
+    if (this.data.post.tags)
+      this.post = {...this.data.post, tags: [...this.data.post.tags]};
+    else
+      this.post = {...this.data.post};
 
     // Evitar erros de persistência no EF ao enviar a resposta
     delete this.post.usuario;

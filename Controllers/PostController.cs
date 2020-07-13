@@ -89,13 +89,16 @@ namespace Maia.Controllers
 
 
         [HttpGet]
-        [Route("usuario/{UsuarioId}")]
+        [Route("usuario/{usuarioId}")]
         [Authorize]
-        public async Task<ActionResult<List<Post>>> GetByUsuarioId([FromRoute] int UsuarioId, [FromServices] MaiaContext context)
+        public async Task<ActionResult<List<Post>>> GetByUsuarioId([FromRoute] int usuarioId, [FromServices] MaiaContext context)
         {
             try
             {
-                return await context.Posts.Where(p => p.UsuarioId == UsuarioId).ToListAsync();
+                return await context.Posts
+                    .Where(p => p.UsuarioId == usuarioId)
+                    .Take(2)
+                    .ToListAsync();
             }
             catch(Exception)
             {

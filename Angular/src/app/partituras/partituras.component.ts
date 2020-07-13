@@ -15,7 +15,6 @@ export class PartiturasComponent implements OnInit {
 
   ngOnInit(): void {
     this.partituras = this.route.snapshot.data.partituras;
-    console.log(this.partituras);
   }
 
 }

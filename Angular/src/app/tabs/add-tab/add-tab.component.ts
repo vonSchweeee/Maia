@@ -24,6 +24,7 @@ export class AddTabComponent implements OnInit {
   instrumento: instrumento = 'Guitarra';
   afinacao = 'EADGBE';
   options = ['Guitarra', 'Violão', 'Baixo'];
+
   editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -36,9 +37,10 @@ export class AddTabComponent implements OnInit {
     enableToolbar: true,
     showToolbar: true,
     defaultParagraphSeparator: '',
-    defaultFontName: '',
+    defaultFontName: 'monospace',
     defaultFontSize: '',
-    fonts: [],
+    // @ts-ignore
+    fonts: ['monospace'],
     customClasses: [],
     uploadUrl: 'v1/image',
     uploadWithCredentials: false,
@@ -75,7 +77,11 @@ export class AddTabComponent implements OnInit {
   }
 
   onSubmit() {
-    this.textoTab = this.textoTab.replace(/<div>/g, '<br>').replace(/<\/div>/g, '');
+    const textoHtml = this.textoTab
+      .replace(/<div>/g, '<br>')
+      .replace(/<\/div>/g, '')
+      .replace('<pre><font face="monospace">', '')
+      .replace('</font></pre>', '');
     const textoTabRaw = this.textoTab.replace(/<br>/g, '\n');
     const usuario = this.authService.usuarioSubj.value;
     const tab =
@@ -84,7 +90,7 @@ export class AddTabComponent implements OnInit {
         usuario.id,
         this.titulo,
         textoTabRaw,
-        this.textoTab,
+        textoHtml,
         this.afinacao,
         this.descricao,
         this.instrumento
@@ -103,8 +109,10 @@ export class AddTabComponent implements OnInit {
     $event.preventDefault();
 
     // Pega o texto e substitui as quebras de linha pela tag em html
-    const text = ($event).clipboardData.getData('text/plain').replace(/\n/g, '<br>');
-
+    let text = ($event).clipboardData.getData('text/plain');
+    text = text.replace(' ', '&nbsp;');
+    text = '<font face="monospace">' + text + '</font>';
+    text = '<pre>' + text + '</pre>';
     // Insere o texto
     document.execCommand("insertHTML", false, text);
   }
@@ -139,8 +147,11 @@ export class AddTabComponent implements OnInit {
 
       reader.onload = (e: any) => {
 
-        this.textoTab = e.target.result.replace(/\n/g, '<br>');
-
+        let text = e.target.result;
+        console.log(text);
+        text = '<font face="monospace">' + text + '</font>';
+        text = '<pre>' + text + '</pre>';
+        this.textoTab = text;
       };
       reader.onerror = error => reject(error);
 

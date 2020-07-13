@@ -8,8 +8,9 @@
             <div class="flex-column1 coluna-artista-musica">
               <div class="txt-nome-musica">
                 <a [routerLink]="['/musica/' + tab.musica.id]" style="color: #FAFAFA;" class="nome-musica">
-                  {{ tab.musica.titulo }} ({{ tab.instrumento !== 'Violao' ? tab.instrumento : 'Violão' }})
+                  {{ tab.musica.titulo }}
                 </a>
+                ({{ tab.instrumento !== 'Violao' ? tab.instrumento : 'Violão' }})
               </div>
               <div class="txt-artista">
                 <div [innerHTML]="tab.musica.artistaMusicas | artistas"></div>
@@ -22,10 +23,13 @@
       <div class="flex-column1 center">
         <p class="titulo">{{ tab.titulo }}</p>
         <p class="afinacao">Afinação: {{ tab.afinacao }}</p>
+        <br>
         <p *ngIf="tab.descricao">{{ tab.descricao }}</p>
-        <p class="letra-traducao" [innerHTML]="tab.textoHtml"></p>
+        <div class="tab-container">
+          <pre style="color: #FFF" class="tab" [innerHTML]="tab.textoHtml"></pre>
+        </div>
       </div>
-      <mat-card class="card-autor">
+      <mat-card class="card-autor" [routerLink]="['/perfil/id/' + tab.usuarioId]">
         <p class="autor">Autor</p>
         <img class="img-autor" [src]="tab.usuario.urlImagem || 'assets/img/user-default.png'">
         <p class="nome-autor">{{ tab.usuario.nome }}</p>
