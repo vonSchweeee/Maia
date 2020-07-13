@@ -1,0 +1,27 @@
+<div class="container-fluid">
+  <div class="col-xs-12">
+    <div class="root-content">
+      <div class="title">
+        <h1>Lista de Administradores</h1>
+      </div>
+      <div class="lista-adms">
+        <div class="add-adm">
+          <button class="icon-add" mat-icon-button color="accent" (click)="handleAddAdm()">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+        <div class="item-adm" *ngFor="let adm of adms">
+          <mat-card>
+            <div class="card-row">
+              <img class="img-adm" [src]="adm.urlImagem || 'assets/img/user-default.png'">
+              <div class="card-column">
+                <mat-card-title>{{ adm.nome }}</mat-card-title>
+                <mat-card-subtitle>{{ adm.email }}</mat-card-subtitle>
+              </div>
+            </div>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

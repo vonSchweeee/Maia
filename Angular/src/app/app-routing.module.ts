@@ -49,6 +49,8 @@ import {AddPartituraResolverService} from "./partituras/add-partitura/add-partit
 import {ProfileComponent} from "./profile/profile.component";
 import {resolve} from "@angular/compiler-cli/src/ngtsc/file_system";
 import {MusicaEditResolverService} from "./admin/musicas-management/musica-edit-resolver.service";
+import {AdminListComponent} from "./admin/admin-list/admin-list.component";
+import {AdminListResolverService} from "./admin/admin-list/admin-list-resolver.service";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent, canActivate: [AuthGuard]},
@@ -108,6 +110,7 @@ const routes: Routes = [
           {path: 'editar/:id', component: AddMusicaComponent, resolve: { musica: MusicaEditResolverService}}
         ]
       },
+      {path: 'list', component: AdminListComponent, resolve: {adms: AdminListResolverService}}
     ]
   },
   {path: 'perfil/id/:id', component: ProfileComponent, canActivate: [AuthGuard]},

@@ -5,6 +5,7 @@ import { Artista } from '../shared/models/Artista';
 import {BASEURL} from "../shared/settings/settings";
 import {Album} from '../shared/models/Album';
 import {Musica} from '../shared/models/Musica';
+import {Usuario} from "../shared/models/Usuario";
 
 @Injectable({
   providedIn: 'root'
@@ -51,5 +52,17 @@ export class AdminService {
 
   excluirMusica(musica: Musica) {
     return this.http.delete(`${BASEURL}musicas/id/${musica.id}`);
+  }
+
+  fetchAdms() {
+    return this.http.get<Usuario[]>(`${BASEURL}usuarios/admin`);
+  }
+
+  fetchUsuariosByNome(nome: string) {
+    return this.http.get<Usuario[]>(`${BASEURL}usuarios?nome=${nome}`);
+  }
+
+  setUsuarioAsAdm(usuario: Usuario) {
+    return this.http.patch(`${BASEURL}usuarios/adm/id/${usuario.id}`, {});
   }
 }

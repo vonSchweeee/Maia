@@ -1,0 +1,29 @@
+<div class="root">
+  <div>
+    <h1 mat-dialog-title>Adicionando Administradores</h1>
+    <div mat-dialog-content class="content">
+      <mat-form-field class="field-pesquisa">
+        <input matInput [(ngModel)]="pesquisa" placeholder="Procure por um usuario..." (keypress)="onInputKeyPress($event)">
+      </mat-form-field>
+      <div class="lista-usuarios">
+        <div class="container-usuario" *ngFor="let usuario of usuarios">
+          <div class="d-flex flex-column info-usuario">
+            <div class="d-flex flex-row">
+              <img class="img-usuario" [src]="usuario.urlImagem || 'assets/img/user-default.png'">
+              <h4 class="nome-usuario">{{ usuario.nome }}</h4>
+            </div>
+          </div>
+          <div class="d-flex flex-column add">
+            <button (click)="onAddAdm(usuario)"  [disabled]="loading" class="btn-add" color="primary" mat-icon-button size="24" >
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+      <h4 *ngIf="nenhumResultado">Nenhum resultado encontrado.</h4>
+    </div>
+  </div>
+  <div mat-dialog-actions class="actions">
+    <button [disabled]="loading" mat-button (click)="onDismiss()">Cancelar</button>
+  </div>
+</div>

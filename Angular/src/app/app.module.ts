@@ -73,6 +73,8 @@ import {UrlYoutubePipe} from "./shared/pipes/url-youtube.pipe";
 import {ProfileComponent} from "./profile/profile.component";
 import {MenuDialogComponent} from "./navbar/menu-dialog/menu-dialog.component";
 import {GenericDialogDeleteComponent} from "./shared/components/generic-dialog-delete/generic-dialog-delete.component";
+import { AdminListComponent } from './admin/admin-list/admin-list.component';
+import { DialogAddAdmComponent } from './admin/admin-list/dialog-add-adm/dialog-add-adm.component';
 
 @NgModule({
   declarations: [
@@ -127,7 +129,9 @@ import {GenericDialogDeleteComponent} from "./shared/components/generic-dialog-d
     UrlYoutubePipe,
     ProfileComponent,
     MenuDialogComponent,
-    GenericDialogDeleteComponent
+    GenericDialogDeleteComponent,
+    AdminListComponent,
+    DialogAddAdmComponent
   ],
   imports: [
     BrowserModule,

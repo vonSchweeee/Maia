@@ -34,6 +34,17 @@ namespace Maia.Controllers
         }
         
         [HttpGet]
+        [Route("usuarios/admin")]
+        [Authorize(Roles = "adm")]
+        public async Task<ActionResult<List<Usuario>>> GetAdms([FromServices] MaiaContext context)
+        {
+            return await context
+                .Usuarios
+                .Where(u => u.Role == "adm")
+                .ToListAsync();
+        }
+        
+        [HttpGet]
         [Route("usuario/id/{id}")]
         [Authorize]
         public async Task<ActionResult<Usuario>> GetById([FromRoute] int id, [FromServices] MaiaContext context)
@@ -122,6 +133,32 @@ namespace Maia.Controllers
                 Console.WriteLine(e);
                 throw;
             }
+        }
+
+        [HttpGet]
+        [Route("usuarios")]
+        [Authorize(Roles = "adm")]
+        public async Task<ActionResult<List<Usuario>>> GetByNome([FromQuery] string nome, [FromServices] MaiaContext context)
+        {
+            return await context.Usuarios
+                .FromSqlRaw($"SELECT * FROM maia.usuarios WHERE Nome LIKE '%{nome}%' AND Role != 'adm'")
+                .ToListAsync();
+        }
+
+        [HttpPatch]
+        [Route("usuarios/adm/id/{id}")]
+        [Authorize(Roles = "adm")]
+        public async Task<ActionResult> SetAsAdm([FromRoute] int id, [FromServices] MaiaContext context)
+        {
+            var usuario = await context.Usuarios
+                .Where(u => u.Id == id)
+                .FirstOrDefaultAsync();
+
+            usuario.Role = "adm";
+
+            context.Update(usuario);
+            await context.SaveChangesAsync();
+            return Ok();
         }
     }
 }

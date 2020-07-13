@@ -1,0 +1,74 @@
+.root {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+* {
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  margin: 0 35px 15px 35px;
+}
+
+.actions {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+}
+
+.field-pesquisa {
+  width: 85%;
+}
+
+.lista-usuarios {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.container-usuario {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.img-usuario {
+  width: 30px;
+  height: 30px;
+}
+
+.nome-usuario {
+  margin-top: 4px;
+  margin-left: 4px;
+}
+
+.btn-add {
+  height: 26px;
+  width: 26px;
+  padding: 1px;
+  margin-left: 8px;
+  background-color: #0002;
+}
+
+.info-usuario {
+  width: 80%;
+}
+
+.add {
+  width: 20%;
+}
